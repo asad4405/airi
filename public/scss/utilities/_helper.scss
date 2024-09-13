@@ -1,0 +1,1460 @@
+/*****************************
+02. Helper CSS
+*****************************/
+
+
+ 
+// Layout
+
+.wrapper{
+	position: relative;
+}
+.container{
+	@include breakpoint(small){
+		max-width: 100%;
+	}
+}
+.container-fluid{
+	padding-left: 7.5rem;
+	padding-right: 7.5rem;
+	@include breakpoint(xlarge){
+		padding-left: 3rem;
+		padding-right: 3rem;
+	}
+	@include breakpoint(large){
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+
+	&-stretch{
+		padding-left: 6.5rem;
+		padding-right: 6.5rem;	
+		@include breakpoint(xlarge){
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
+		}
+	}
+} 
+.container-1500{
+	max-width: 1500px;
+	padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.full-img{
+	img{
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
+.row-5{
+	margin-left: -5px !important;
+	margin-right: -5px !important;
+	& > [class^="col"]{
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+}
+@for $i from 0 through 20{
+	.grid-space-#{$i * 5}{
+		margin-left: -#{($i/2)/2}rem;
+		margin-right: -#{($i/2)/2}rem;
+		& > [class^="col"],
+		& > div,
+		& > li{
+			padding-left: #{($i / 2)/2}rem;
+			padding-right: #{($i / 2)/2}rem;
+		}
+	}
+}
+@for $i from 1 through 12{
+	@include breakpoint(xxlupper){
+		.xxl-block-grid{
+			&-#{($i*12)/12}{
+				& > [class^="col"]{
+					@include flex-basis(#{percentage(100 / $i) / 100}); 
+					max-width: #{percentage(100 / $i) / 100};
+				}
+			}
+		}
+	}
+}
+.home-11-custom-grid-8{
+	@include flex-basis(63.54%); 
+	max-width: 63.54%;
+	@include breakpoint(medium){
+		@include flex-basis(100%);
+		max-width: 100%;
+	}	
+}
+.home-11-custom-grid-4{
+	@include flex-basis(36.46%); 
+	max-width: 36.46%;	
+	@include breakpoint(medium){
+		@include flex-basis(100%);
+		max-width: 100%;
+	}
+}
+
+.container-full{
+	max-width: auto;
+	padding: 0 3rem;
+}
+
+.enable-page-sidebar{
+	.row.shop-sidebar{
+		#primary-sidebar{
+			max-width: 33rem;
+			@include flex-basis(33rem);
+			@include breakpoint(xlarge){
+				max-width: 27rem;
+				@include flex-basis(27rem);
+			}
+			@include breakpoint(medium){
+				max-width: 100%;
+				@include flex-basis(100%);
+			}
+		}
+		#main-content{
+			max-width: calc(100% - 33rem);
+			@include flex-basis(calc(100% - 33rem));
+			@include breakpoint(xlarge){
+				max-width: calc(100% - 27rem);
+				@include flex-basis(calc(100% - 27rem));
+			}
+			@include breakpoint(medium){
+				max-width: 100%;
+				@include flex-basis(100%);
+			}
+		}
+	}
+}
+.blog-page-sidebar{
+	.row{
+		#main-content{
+			padding-left: 4.5rem;
+			@include breakpoint(medium){
+				padding-left: 15px;
+			}
+		}
+	}
+}
+
+.center{
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+.center-sm{
+	@include breakpoint(small){
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+}
+.left{
+	margin-left: 0 !important;
+	margin-right: auto !important;
+}
+.right{
+	margin-left: auto !important;
+	margin-right: 0 !important;
+}
+.section-padding{
+	padding: 4rem 0;
+}
+.section-sm-padding{
+	@include breakpoint(small){
+		padding: 3rem 0;
+	}
+}
+
+.line{
+	border-color: $border-color;
+	margin: 0;
+	&-black{
+		border-color: rgba(0,0,0,.1);
+	}
+}
+.text-block {
+	p{
+		&:last-child{
+			margin-bottom: 0;
+		} 
+	}
+}
+
+.hide-in-default{
+	display: none;
+}
+.hide-in-default-md{
+	@include breakpoint(medium){
+		display: none;
+	}
+}
+.ov-hidden{
+	overflow: hidden;
+}
+.regular-price{
+	text-decoration: line-through;
+}
+.regular-price, .sale-price{
+	display: inline-block;
+}
+.no-radius{
+	@include border-radius(0);
+}
+
+.border{
+	&-top,
+	&-bottom, 
+	&-left, 
+	&-right{
+		border-color: $border-color-2 !important;
+	}
+}
+
+.zoom-out-effect{
+	overflow: hidden;
+	img{
+	    @include transform(scale(1.05));
+	    @include transition(transform 0.5s ease-out);
+	}
+	&:hover{
+		img{
+			@include transform(scale(1));
+		}
+	}
+}
+.link-overlay{
+	@extend %posabsolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	text-indent: -99999px;
+	&:after{
+		@extend %itemoverlay;
+	}
+	&:hover{
+		&:after{
+			background-color: rgba(0,0,0,.1);
+			@extend %visible;
+		}
+	}
+}
+
+.two-column-list{
+	@extend %flexbox;
+	@extend %flex-wrap;
+
+	& > li, & > div{
+		@include flex-basis(50%);
+	}
+}
+.sm-one-column{
+	& > li, & > div{
+		@include breakpoint(medium){
+			@include flex-basis(100%);
+		}
+	}
+}
+
+
+/****************
+Bootstrap Dropdown
+****************/
+
+%dropdowncommon{
+	border-radius: 4px;	
+	padding: 0 2rem;
+	margin: 0;
+	border: none;
+	@include box-shadow(0 0 50px 0 rgba(0, 0, 0, 0.1));	
+    right: 0 !important;
+    left: auto !important;
+	min-width: 16rem;
+	background: $color-dark-7;
+}
+
+/*-- Banner Effect --*/
+
+%bannergradient{
+    @extend %pseudo;
+    top: 0;
+    left: -100%;
+    z-index: 1;
+    display: block;
+    width: 50%;
+    height: 100%;
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+    @include transform(skewX(-25deg));
+}
+%banneroverlay{
+    background-color: rgba(0, 0, 0, 0);
+    @extend %pseudo;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    @extend %basetransition;	
+}
+%banneroverlayhover{
+	background-color: rgba(0, 0, 0, 0.2);
+}
+%bannergradienthover{
+	@include animation(effect_shine 1s);
+}
+
+%itemoverlay{
+	@extend %pseudo;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.3);
+	@extend %basetransition;
+	@extend %invisible;
+}
+%itemoverlayhover{
+	@extend %visible;
+}
+%font{
+	font-family: $body-font;
+}
+%font-2{
+	font-family: $font-2;
+}
+%imagezommin{
+	@include transform(scale3d(1.05, 1.05, 1.05));
+}
+
+
+%cursorPointer{
+	cursor: pointer;
+}
+%posrelative{
+	position: relative;
+}
+%posabsolute{
+	position: absolute;
+}
+%posfixed{
+	position: fixed;
+}
+%pseudo{
+	position: absolute;
+	content: "";
+}
+%absCenter{
+	@extend %posabsolute;
+	left: 50%;
+	top: 50%;
+	@include transform(translate(-50%, -50%));
+}
+%vCenter{
+	top: 50%;
+	@include transform(translate(0, -50%));
+}
+%hCenter{
+	left: 50%;
+	@include transform(translate(-50%, 0));
+}
+%lefttop{
+	left: 0;
+	top: 0;
+}
+%left-0{
+	left: 0;
+}
+%right-0{
+	right: 0;
+}
+%top-0{
+	top: 0;
+}
+%bottom-0{
+	bottom: 0;
+}
+%fullwidth{
+	@extend %lefttop;
+	@extend %width100;
+	@extend %height100;
+}
+%basetransition{
+	@include transition($baseTransition);
+}
+%invisible{
+	visibility: hidden;
+	opacity: 0;
+}
+%visible{
+	visibility: visible;
+	opacity: 1;
+}
+
+%fontAwesome{
+	position: absolute;
+	font-family: fontAwesome;
+	line-height: 1;
+}
+%verticalCenter{
+	@extend %posabsolute;
+	top: 50%;
+	@include transform(translateY(-50%));
+	z-index: 1;
+}
+%overflowHidden{
+	overflow: hidden;
+}
+%overflowVisible{
+	overflow: visible;
+}
+%brand-color{
+	color: $brand-color;
+}
+%brand-bg-color{
+	background-color: $brand-color;
+}
+%brand-border-color{
+	border-color: $brand-color;
+}
+%roundicon{
+	border-radius: 50%;
+	border-width: 1px;
+	border-style: solid;
+	text-align: center;
+	display: inline-block;
+}
+
+%tableborder{
+	border-left: 1px solid $border-color;
+	border-bottom: 1px solid $border-color; 
+}
+%tablecolborder{
+	border-right: 1px solid $border-color;
+	border-top: 1px solid $border-color;
+}
+
+%fontAwesome{
+	position: absolute;
+	font-family: fontAwesome;
+	line-height: 1;
+}
+
+%regular-price{
+	text-decoration: line-through;
+}
+%sale-price-common{
+	font-weight: 500;
+	margin-right: .5rem;
+}
+%sale-price-1{
+	font-size: 1.8rem;
+}
+%sale-price-2{
+	font-size: 1.4rem;
+}
+%sale-price-3{
+	font-size: 2.4rem;
+}
+%regular-price-common{
+	font-weight: 400;
+	color: $body-color;
+}
+%regular-price-1{
+	font-size: 1.4rem;
+}
+%regular-price-2{
+	font-size: 1.8rem;
+}
+
+
+// Border
+
+%borderRadius{
+	@include border-radius($border-radius);
+}
+%borderRadius0{
+	@include border-radius(0);
+}
+%borderRadius50{
+	@include border-radius(50%);
+}
+%border{
+	border: 1px solid $border-color;
+}
+%border-left{
+	border-left: 1px solid $border-color;
+}
+%border-right{
+	border-right: 1px solid $border-color;
+}
+%border-top{
+	border-top: 1px solid $border-color;
+}
+%border-bottom{
+	border-bottom: 1px solid $border-color;
+}
+%border-none{
+	border: none;
+}
+%border-color{
+	border-color: $border-color;
+}
+%border-color-transparent{
+	border-color: transparent;
+}
+%border-style-solid{
+	border-style: solid;
+}
+%border-style-dashed{
+	border-style: dashed;
+}
+%border-style-dotted{
+	border-style: dotted;
+}
+%border-width-1{
+	border-width: 1px;
+}
+%border-width-2{
+	border-width: 2px;
+}
+
+// Margin & Padding
+
+%margin0Auto{
+	margin: 0 auto;
+}
+%marginLeftAuto{
+	margin-left: auto;
+}
+%marginRightAuto{
+	margin-right: auto;
+}
+
+%margin-0{
+	margin: 0;
+}
+%marginTop-0{
+	margin-top: 0;
+}
+%marginLeft-0{
+	margin-left: 0;
+}
+%marginRight-0{
+	margin-right: 0;
+}
+%marginBottom-0{
+	margin-bottom: 0;
+}
+%padding-0{
+	padding: 0;
+}
+%paddingTop-0{
+	padding-top: 0;
+}
+%paddingLeft-0{
+	padding-left: 0;
+}
+%paddingRight-0{
+	padding-right: 0;
+}
+%paddingBottom-0{
+	padding-bottom: 0;
+}
+
+
+
+/*-- Font --*/
+
+%bodyFont{
+	font-family: $body-font;
+}
+%headingFont{
+	font-family: $heading-font;
+}
+%fontSize24{
+	font-size: 24px;
+}
+%fontSize20{
+	font-size: 20px;
+}
+%fontSize18{
+	font-size: 18px;
+}
+%fontSize16{
+	font-size: $body-font-size;
+}
+%fontSize15{
+	font-size: 15px;
+}
+%fontSize14{
+	font-size: 14px;
+}
+%fontSize13{
+	font-size: 13px; 
+}
+%fontSize12{
+	font-size: 12px;
+}
+%fontSize11{
+	font-size: 11px;
+}
+%fontWeight900{
+	font-weight: 900;
+}
+%fontWeight800{
+	font-weight: 800;
+}
+%fontWeight700{
+	font-weight: 700;
+}
+%fontWeight600{
+	font-weight: 600;
+}
+%fontWeight500{
+	font-weight: 500;
+}
+%fontWeight400{
+	font-weight: 400;
+}
+%fontWeight300{
+	font-weight: 300;
+}
+%fontStyleNormal{
+	font-style: Normal;
+}
+%fontStyleItalic{
+	font-style: italic;
+}
+
+// Line Height
+
+%lineheight1{
+	line-height: 1;
+}
+
+// Width
+
+%widthAuto{
+	width: auto;
+}
+%heightAuto{
+	height: auto;
+}
+%width100{
+	width: 100%;
+}
+%height100{
+	height: 100%;
+}
+%widthInherit{
+	width: inherit;
+}
+%heightInherit{
+	height: inherit;
+}
+%maxWidth100{
+	max-width: 100%;
+}
+%maxHeight100{
+	max-height: 100%;
+}
+
+// Text Align
+
+%textAleft{
+	text-align: left;
+}
+%textAright{
+	text-align: right;
+}
+%textAcenter{
+	text-align: center;
+}
+
+// Text Transform
+
+%textTupper{
+	text-transform: uppercase;
+}
+%textTcap{
+	text-transform: capitalize;
+}
+%textTnone{
+	text-transform: none;
+}
+
+// Text Decoration
+
+%textDnone{
+	text-decoration: none;
+}
+%textDunder{
+	text-decoration: underline;
+}
+%textDline{
+	text-decoration: line-through;
+}
+
+
+// Display
+
+%displayBlock{
+	display: block;
+}
+%displayInline{
+	display: inline;
+}
+%displayInlineBlock{
+	display: inline-block;
+}
+
+// Inherit
+
+%lineHeightInherit{
+	line-height: inherit;
+}
+%fontSizeInherit{
+	font-size: inherit;
+} 
+
+
+
+
+// Flexbox Extend
+
+%flexbox{
+	@include flexbox;
+}
+%justify-center{
+	@include justify-content(center);
+}
+%justify-around{
+	@include justify-content(space-around);
+}
+%justify-between{
+	@include justify-content(space-between);
+}
+%justify-start{
+	@include justify-content(flex-start);
+}
+%justify-end{
+	@include justify-content(flex-end);
+}
+%align-start{
+	@include align-items(flex-start);
+}
+%align-end{
+	@include align-items(flex-end);
+}
+%align-center{
+	@include align-items(center);
+}
+%align-stretch{
+	@include align-items(stretch);
+}
+%align-baseline{
+	@include align-items(baseline);
+}
+%flex-wrap{
+	@include flex-wrap(wrap);
+}
+%flex-nowrap{
+	@include flex-wrap(nowrap);
+}
+
+%flex-column{
+	@include flex-direction(column);
+}
+%flex-column-reverse{
+	@include flex-direction(column-reverse);
+}
+
+%flex-row{
+	@include flex-direction(row);
+}
+%flex-row-reverse{
+	@include flex-direction(row-reverse);
+}
+
+%absFlexCenter{
+	@include flexbox;
+	@include justify-content(center);
+	@include align-items(center);
+}
+%horizontalFlexCenter{
+	@include flexbox;
+	@include justify-content(center);
+}
+%verticalFlexCenter{
+	@include flexbox;
+	@include align-items(center);
+}
+
+
+// Side Navigation Common CSS
+
+
+%sideNavCloseBtn{
+    right: 4rem;
+    top: 2rem;
+    font-size: 4rem;
+}
+
+%sideNavWrapper{
+	position: fixed;
+	top: 0;
+	width: 47rem;
+	min-height: 100vh;
+	bottom: 0;
+	z-index: 9999;
+	right: 0;
+	@extend %invisible;
+	@extend %heading-color;
+	@include transition(all 400ms ease-out);
+	@include transform(translate(200px, 0));
+	@include box-shadow(0px 0px 87px 0px rgba(0, 0, 0, 0.09));
+    background-color: #fff;
+
+    @include breakpoint(xlarge){
+    	width: 35rem;
+    }
+    @include breakpoint(xsmall){
+    	width: 30rem;
+    }
+}
+%sideNavOpen{
+    @extend %visible;
+    @include transform(translate(0, 0));
+}
+%sideNavInner{
+	overflow: auto;
+	height: 100%;
+	padding: 7rem;
+	@include breakpoint(xlarge){
+		padding: 5rem 3rem;
+	}
+}
+
+
+%slickDotButton{
+	background: none;
+	border: 1px solid $color-light-1;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	display: block;
+	text-indent: -999999px;
+	padding: 0;
+}
+%slickDotButtonActive{
+	@extend %primary-border-color;
+	@extend %primary-bg-color;
+}
+
+%tab-link-style-1{
+	color: $color-white-light;
+	font-size: 4.2rem;
+	line-height: 1.2;
+	border-width: 0 0 0;
+	border-style: solid;
+	border-color: transparent;
+	margin: 0 2.7rem;
+	padding: 0;
+	text-align: center;
+}
+%tab-link-span-style-1{
+	border-width: 0 0 3px;
+	border-style: solid;
+	border-color: transparent;
+	padding:0 0 .6rem;
+	display: inline-block;
+}
+
+
+// Background Image
+
+.bg-image{
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center;
+	background-size: cover;
+}
+
+.max-w-250{
+	max-width: 250px;
+}
+.max-width-280{
+	max-width: 280px;
+	width: 100%;
+}
+@for $i from 1 through 20{
+	.max-w-#{($i * 5)}{
+		max-width: #{percentage(($i*5)/100)};
+	}
+}
+@for $i from 1 through 20{
+	@include breakpoint(xlarge){
+		.max-w-xl-#{($i * 5)}{
+			max-width: #{percentage(($i*5)/100)};
+		}
+	}
+}
+@for $i from 1 through 20{
+	@include breakpoint(large){
+		.max-w-lg-#{($i * 5)}{
+			max-width: #{percentage(($i*5)/100)};
+		}
+	}
+}
+@for $i from 1 through 20{
+	@include breakpoint(medium){
+		.max-w-md-#{($i * 5)}{
+			max-width: #{percentage(($i*5)/100)};
+		}
+	}
+}
+@for $i from 1 through 20{
+	@include breakpoint(small){
+		.max-w-sm-#{($i * 5)}{
+			max-width: #{percentage(($i*5)/100)};
+		}
+	}
+}
+
+@for $i from 1 through 20{
+	@include breakpoint(xsmall){
+		.max-w-xs-#{($i * 5)}{
+			max-width: #{percentage(($i*5)/100)};
+		}
+	}
+}
+
+
+
+
+
+
+/*Padding Top and Bottom*/ 
+
+@for $i from 1 through 60{
+	.ptb--#{$i * 5}{
+		padding: #{($i * 5)*.1}rem 0 !important;
+	}
+}
+
+/*Padding Top and Bottom for Extra large*/ 
+@for $i from 1 through 30{
+	@include breakpoint(xlarge){
+		.ptb-xl--#{$i * 5}{
+			padding: #{($i * 5)*.1}rem 0 !important;
+		}
+	}
+}
+
+/*Padding Top and Bottom for large*/ 
+@for $i from 1 through 40{
+	@include breakpoint(large){
+		.ptb-lg--#{$i * 5}{
+			padding: #{($i * 5)*.1}rem 0 !important;
+		}
+	}
+}
+
+/*Padding Top and Bottom for Medium*/ 
+@for $i from 1 through 40{
+	@include breakpoint(medium){
+		.ptb-md--#{$i * 5}{
+			padding: #{($i * 5)*.1}rem 0 !important;
+		}
+	}
+}
+
+/*Padding Top and Bottom for small*/ 
+@for $i from 1 through 40{
+	@include breakpoint(small){
+		.ptb-sm--#{$i * 5}{
+			padding: #{($i * 5)*.1}rem 0 !important;
+		}
+	}
+}
+
+// Padding Bottom
+ 
+@for $i from 1 through 60{
+	.pb--#{$i * 5}{
+		padding-bottom: #{($i * 5)*.1}rem !important;
+	}
+} 
+
+// Padding Bottom for Extra large
+ 
+@for $i from 1 through 60{
+	@include breakpoint(xlarge){
+		.pb-xl--#{$i * 5}{
+			padding-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+} 
+// Padding Bottom for large
+ 
+@for $i from 1 through 60{
+	@include breakpoint(large){
+		.pb-lg--#{$i * 5}{
+			padding-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+} 
+
+// Padding Bottom for Medium
+ 
+@for $i from 1 through 60{
+	@include breakpoint(medium){
+		.pb-md--#{$i * 5}{
+			padding-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+} 
+
+// Padding Bottom Small
+ 
+@for $i from 1 through 60{
+	@include breakpoint(small){
+		.pb-sm--#{$i * 5}{
+			padding-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+} 
+ 
+// Padding Bottom Extra Small
+ 
+@for $i from 1 through 40{
+	@include breakpoint(xsmall){
+		.pb-xs--#{$i * 5}{
+			padding-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+} 
+ 
+// Padding top
+ 
+@for $i from 1 through 60{
+	.pt--#{$i * 5}{
+		padding-top: #{($i * 5)*.1}rem !important;
+	}
+}
+ 
+// Padding top for Extra large
+ 
+@for $i from 1 through 60{
+	@include breakpoint(xlarge){
+		.pt-xl--#{$i * 5}{
+			padding-top: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+ 
+// Padding top for large
+ 
+@for $i from 1 through 60{
+	@include breakpoint(large){
+		.pt-lg--#{$i * 5}{
+			padding-top: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+// Padding top for medium
+ 
+@for $i from 1 through 60{
+	@include breakpoint(medium){
+		.pt-md--#{$i * 5}{
+			padding-top: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Padding top for small
+ 
+@for $i from 1 through 40{
+	@include breakpoint(small){
+		.pt-sm--#{$i * 5}{
+			padding-top: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Padding top for Extra Small
+
+@include breakpoint(xsmall){
+	.pt-xs--50{
+		padding-top: 50px !important;
+	}
+}
+
+// Padding Right
+ 
+@for $i from 1 through 40{
+	.pr--#{$i * 5}{
+		padding-right: #{($i * 5)*.1}rem !important;
+	}
+}
+
+ 
+// Padding Right for Large Device
+ 
+@for $i from 1 through 40{
+	@include breakpoint(large){
+		.pr-lg--#{$i * 5}{
+			padding-right: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+ 
+// Padding Right for Medium Device
+ 
+@for $i from 1 through 40{
+	@include breakpoint(medium){
+		.pr-md--#{$i * 5}{
+			padding-right: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Padding Right for Small Device
+ 
+@for $i from 1 through 40{
+	@include breakpoint(small){
+		.pr-sm--#{$i * 5}{
+			padding-right: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Padding Right for Extra Small Device
+ 
+@for $i from 1 through 40{
+	@include breakpoint(xsmall){
+		.pr-xs--#{$i * 5}{
+			padding-right: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+ 
+// Padding Left
+ 
+@for $i from 1 through 40{
+	.pl--#{$i * 5}{
+		padding-left: #{($i * 5)*.1}rem !important;
+	}
+}
+
+// Padding Left for Large Device
+ 
+@for $i from 1 through 40{
+	@include breakpoint(large){
+		.pl-lg--#{$i * 5}{
+			padding-left: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+// Padding Left for Medium Device
+ 
+@for $i from 1 through 40{
+	@include breakpoint(medium){
+		.pl-md--#{$i * 5}{
+			padding-left: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+// Padding Left for Small Device
+ 
+@include breakpoint(small){
+	.pl-sm--0{
+		padding-left: 0 !important;
+	}
+}
+@for $i from 1 through 40{
+	@include breakpoint(small){
+		.pl-sm--#{$i * 5}{
+			padding-left: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+ 
+// Padding Left for Extra Small Device
+ 
+@for $i from 1 through 40{
+	@include breakpoint(xsmall){
+		.pl-xs--#{$i * 5}{
+			padding-left: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Padding Left right
+ 
+@for $i from 0 through 40{
+	.plr--#{$i * 5}{
+		padding-left: #{($i * 5)*.1}rem !important;
+		padding-right: #{($i * 5)*.1}rem !important;
+	}
+}
+
+// Padding Left right for large device
+ 
+@for $i from 0 through 40{
+	.plr-lg--#{$i * 5}{
+		@include breakpoint(large){
+			padding-left: #{($i * 5)*.1}rem !important;
+			padding-right: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Padding Left right for Extra Small device
+
+@include breakpoint(large){
+	.plr-xs--30{
+		padding-left: 30px !important;
+		padding-right: 30px !important;
+	}
+}
+
+
+// Margin Top and Bottom
+
+@for $i from 1 through 40{
+	.mtb--#{$i * 5}{
+		margin: #{($i * 5)*.1}rem 0 !important;
+	}
+}
+
+// Margin Bottom
+
+@for $i from 1 through 40{
+	.mb--#{$i * 5}{
+		margin-bottom: #{($i * 5)*.1}rem !important;
+	}
+}
+.mb--67{
+	margin-bottom: 67px !important;
+}
+.mb--92{
+	margin-bottom: 92px !important;
+}
+// Margin Bottom large only
+
+@for $i from 1 through 40{
+	@include breakpoint(largeonly){
+		.mb-lgo--#{$i * 5}{
+			margin-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Margin Bottom from medium to large
+
+@for $i from 1 through 40{
+	@include breakpoint(mediumtoxlarge){
+		.mb-mdlg--#{$i * 5}{
+			margin-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Margin Bottom from medium to large
+
+@for $i from 1 through 40{
+	@include breakpoint(mediumonly){
+		.mb-mdsm--#{$i * 5}{
+			margin-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Margin Bottom large
+
+@for $i from 1 through 40{
+	@include breakpoint(large){
+		.mb-lg--#{$i * 5}{
+			margin-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+@include breakpoint(large){
+	.mb-lg--37{
+		margin-bottom: 37px !important;
+	}
+	.mb-lg--63{
+		margin-bottom: 63px !important;
+	}
+}
+
+// Margin Bottom medium
+
+@for $i from 1 through 40{
+	@include breakpoint(medium){
+		.mb-md--#{$i * 5}{
+			margin-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Margin Bottom small
+
+@for $i from 1 through 40{
+	@include breakpoint(small){
+		.mb-sm--#{$i * 5}{
+			margin-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Margin Bottom small
+
+@for $i from 1 through 40{
+	@include breakpoint(xsmall){
+		.mb-xs--#{$i * 5}{
+			margin-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Margin Bottom small to large
+
+@for $i from 1 through 40{
+	@include breakpoint(mediumonly){
+		.mb-smlg--#{$i * 5}{
+			margin-bottom: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Margin top
+
+@for $i from 1 through 40{
+	.mt--#{$i * 5}{
+		margin-top: #{($i * 5)*.1}rem !important;
+	}
+}
+
+// Margin top for large device
+
+@for $i from 1 through 40{
+	@include breakpoint(large){
+		.mt-lg--#{$i * 5}{
+			margin-top: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+
+// Margin top for medium device
+
+@for $i from 1 through 40{
+	@include breakpoint(medium){
+		.mt-md--#{$i * 5}{
+			margin-top: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+// Margin top for small device
+
+@for $i from 1 through 40{
+	@include breakpoint(small){
+		.mt-sm--#{$i * 5}{
+			margin-top: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+// Margin top for xsmall device
+
+@for $i from 1 through 40{
+	@include breakpoint(xsmall){
+		.mt-xs--#{$i * 5}{
+			margin-top: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Margin Left
+
+@for $i from 1 through 20{
+	.ml--#{$i * 5}{
+		margin-inline-start: #{($i * 5)*.1}rem !important;
+	}
+}
+
+@include breakpoint(large){
+	.ml-lg--20{
+		margin-inline-start: 20px !important;
+	}
+}
+
+// Margin right
+
+@for $i from 0 through 10{
+	.mr--#{$i * 10}{
+		margin-inline-end: #{($i * 10)*.1}rem !important;
+	}
+}
+@for $i from 0 through 10{
+	@include breakpoint(large){
+		.mr-lg--#{$i * 5}{
+			margin-inline-end: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+@for $i from 0 through 10{
+	@include breakpoint(medium){
+		.mr-md--#{$i * 5}{
+			margin-inline-end: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+@for $i from 0 through 10{
+	@include breakpoint(small){
+		.mr-sm--#{$i * 5}{
+			margin-inline-end: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+@for $i from 0 through 10{
+	@include breakpoint(xsmall){
+		.mr-xs--#{$i * 5}{
+			margin-inline-end: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+
+
+// Carousel dots Margin Top
+
+@for $i from 1 through 20{
+	.cs-mt--#{$i * 5}{
+		.slick-dots{
+			margin-top: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+

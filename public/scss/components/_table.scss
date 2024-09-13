@@ -1,0 +1,235 @@
+/*****************************
+33. Table CSS
+*****************************/
+
+.table{
+	margin-bottom: 0;
+	thead th, th{
+		text-transform: uppercase;
+		padding: 1.3rem 0;
+		letter-spacing: 1px;
+		font-weight: 400;
+    	font-size: 11px;
+		border: 0px solid $border-color;
+		vertical-align: middle;
+	}
+	td{
+		vertical-align: middle;
+		border: 0px solid $border-color;
+	}
+	tbody{
+		td{
+			padding: 1.5rem 0;
+
+			&.product{
+				&-remove{
+					width: 3rem;
+					min-width: 3rem;
+				}
+				&-thumbnail{
+					width: 9rem;
+					min-width: 9rem;
+				}
+				&-name{
+					h3{
+						font-size: 1.2rem;
+						@extend %body-color;
+					}
+				}
+				&-stock{
+					display: table-cell;
+					top: 0;
+				}
+				&-quantity{
+					.quantity{
+						margin-right: auto;
+						margin-left: auto;
+						&-input{
+							border-color: transparent;
+						}
+					}
+				}
+				&-action-btn{
+					a{
+						border: 1px solid $border-color;
+					    font-size: 12px;
+					    padding: 8px 20px;
+					    display: inline-block;
+					    &:hover{
+							border-color: $primary-color;
+					    }
+					}
+				}
+			}
+		}
+	}
+
+	&.order-table{
+		th, td{
+			padding-top: 5px;
+			padding-bottom: 1.5rem;
+			vertical-align: top;
+			@extend %heading-color;
+			font-size: inherit;
+			text-transform: capitalize;
+			letter-spacing: 0;
+		}
+		th{
+			min-width: 9rem;
+			width: 9rem;
+			@include breakpoint(medium){
+				width: 25rem;
+			}
+			@include breakpoint(small){
+				width: 20rem;
+			}
+			@include breakpoint(xsmall){
+				width: auto;
+			}
+			strong{
+				font-weight: 400;
+				padding-left: 5px;
+				@extend %body-color;
+				span{
+					font-size: .8rem;
+					display: inline-block;
+					padding: 0 5px;
+				}
+			}
+		}
+		td{
+			span, a{
+				display: block;
+				margin-bottom: 5px;
+			}
+		}
+		tr{
+			&.order-total{
+				border-top: 1px solid $border-color;
+				td, th{
+					padding-top: 1.5rem;
+				}
+			}
+		}
+		.shipping-calculator-wrap{
+			@include breakpoint(large){
+				margin-left: -9rem;
+			}
+			@include breakpoint(medium){
+				margin-left: 0rem;
+			}
+		}
+
+		&-2{
+			th, td{
+				padding: 1.5rem 0;
+			}
+			tr th{
+				width: auto;
+			}
+			thead tr, tbody, tfoot tr{
+				border-bottom: 1px solid $border-color;
+			}
+		}
+	}
+	&.compare-table{
+		tbody{
+			th, td{
+				border-width: 1px;
+				padding: 10px;
+			}
+			th{
+			    min-width: 200px;
+			    background-color: $color-white-light-1;
+			    vertical-align: middle;
+			    border-color: $color-light-4;
+			    font-weight: bold;
+			    border-left: 0;
+			    @extend %heading-color;
+			    font-weight: 700;
+			    text-transform: capitalize;
+			    letter-spacing: 0;
+			    font-size: 1.4rem;
+			}
+			td{
+			    min-width: 250px;
+			    border-color: $color-white-light-1;
+			    text-align: center;
+			    vertical-align: middle;
+			    font-size: 1.3rem;
+			    line-height: 1.4;
+			}
+			.remove{
+				padding-bottom: 5px;
+				a{
+					font-size: 1.2rem;
+					line-height: 1.6;
+				}
+			}
+			.product-name{
+			    font-size: 14px;
+			    margin: 2rem 0;
+			}
+		}
+	}
+	&.wishlist-table{
+		td:nth-last-child(-n+3){
+			@include breakpoint(small){
+				min-width: 11rem;
+			}
+		}
+	}
+	&-style-2{
+		thead{
+			th{
+				font-size: 1.4rem;
+				background: $color-white-dark-1;
+				text-transform: capitalize;
+			}
+		}
+	}
+}
+.group-product-table{
+	tr{
+	    width: 100%;
+	    &:not(:last-child){
+	    	td{
+	    		padding-bottom: 2rem;
+	    	}
+	    }
+	}
+	td{
+		padding: 0;
+		border: none;    
+		&:first-child{
+		    width: 18%;
+		}
+	}
+	tbody{
+		td{
+			&.product{
+				&-quantity{
+					.quantity{
+						margin-right: 1rem;
+						@extend %heading-color;
+						width: 8rem;
+						height: 6rem;
+						&-input{
+							border-color: $border-color;
+							border-width: 1px;
+							color: inherit;
+						}
+						.qtybutton{
+							height: 6rem;
+							line-height: 5.8rem;
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+.wide-column{
+	min-width: 25rem;
+}

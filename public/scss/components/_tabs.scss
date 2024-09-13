@@ -1,0 +1,413 @@
+/*****************************
+34. Tabs CSS
+*****************************/
+
+/*-- 34.00 - tab style 1 --*/
+
+.tab-style-1{
+	.nav{
+		&-tabs{
+			border-bottom: 0;
+			@include justify-content(center);
+		}
+		&-link{
+			@extend %tab-link-style-1;
+			span{
+				@extend %tab-link-span-style-1;
+			}
+			@include breakpoint(xlarge){
+				font-size: 3rem;
+				line-height: 1.4;
+			}
+			@include breakpoint(small){
+				font-size: 2rem;
+				margin: 0 2rem;
+			}
+			@include breakpoint(xxsmall){
+				margin-left: 0;
+				margin-right: 0;
+				border-bottom: none;
+				margin-bottom: 5px;
+				span{
+					padding: 0 10px .5rem;
+					border-width: 0 0 2px;
+				}
+			}
+			&:first-child{
+				margin-left: 0;
+			}
+			&:last-child{
+				margin-right: 0;
+			}
+			&.active{
+				border-color: transparent;
+				@extend %heading-color;
+				@include border-radius(0);
+				span{
+					border-color: $primary-color;
+				}
+				&:hover{
+					border-color: transparent;
+					span{
+						border-color: $primary-color;
+					}
+				}
+			}
+			&:hover{
+				border-color: transparent;
+				@include border-radius(0);
+			}
+		}
+	}
+	&-2{
+		.nav{
+			&-link{
+				span{
+					border: none;
+					padding-bottom: 0;
+				}
+			}
+		}
+	}
+	&-3{
+		.nav{
+			&-link{
+				font-size: 36px;
+				line-height: 1.23;
+				letter-spacing: 3px;
+				@include breakpoint(large){
+					font-size: 32px;
+					letter-spacing: 2px;
+				}
+				@include breakpoint(medium){
+					font-size: 25px;
+				}
+				@include breakpoint(small){
+					font-size: 20px;
+					margin: 0 15px;
+				}
+				@include breakpoint(xsmall){
+					font-size: 16px;
+					margin: 0 12px;
+					letter-spacing: 1px;
+				}
+				&:first-child{
+					@include breakpoint(xsmall){
+						margin-left: 12px;
+					}
+				}
+				&:last-child{
+					@include breakpoint(xsmall){
+						margin-right: 12px;
+					}
+				}
+				span{
+					border: none;
+					@extend %paddingBottom-0;
+					@extend %textTupper;
+					@extend %fontWeight700;
+				}
+			}
+		}
+	}
+}
+
+/*-- 34.01 - tab style 2 --*/
+
+.tab-style-2{
+	.nav{
+		&-tabs{
+			border-bottom: 0;
+			@include justify-content(center);
+			@include breakpoint(xxsmall){
+				@include flex-direction(column);
+			}
+		}
+		&-link{
+			@extend %tab-link-style-1;
+			@extend %heading-color;
+			font-size: 1.4rem;
+			font-weight: 400;
+			margin: 0;
+			@include breakpoint(small){
+				@include flex-basis(100%);
+				text-align: center;
+				font-size: 1.5rem;
+				&:not(:last-child){
+					margin-bottom: 0;
+				}
+			}
+			span{
+				@extend %tab-link-span-style-1;
+				padding: 1.8rem 3rem;
+				border-width: 2px;
+				border-style: solid;
+				border-color: transparent;
+				display: block;
+				@include breakpoint(medium){
+					padding: 1rem 1.8rem;
+				}
+				@include breakpoint(small){
+					padding: 0 .5rem .5rem;
+					border-width: 0 0 2px;
+					display: inline-block;
+					font-size: 1.8rem;
+				}
+				@include breakpoint(xsmall){
+					font-size: 1.6rem;
+					margin-bottom: .5rem;
+				}
+			}
+			&:not(:last-child){
+				span{
+					@include breakpoint(small){
+						margin-bottom: 1rem;	
+					}
+					@include breakpoint(xsmall){
+						margin-bottom: .5rem;	
+					}
+				}
+			}
+			&.active{
+				span{
+					border-color: $primary-color;
+				}
+			}
+		}
+	}
+}
+
+/*-- 34.02 - tab style 3 --*/
+
+.tab-style-3{
+	.nav{
+		&-tabs{
+			border-bottom: 0;
+		}
+		&-link{
+		    font-size: 1.4rem;
+		    font-weight: 400;
+		    margin: 0;
+			padding: 0;
+			border: 0px solid transparent;
+			@include border-radius(0);
+			@include breakpoint(small){
+				margin-bottom: 4px;
+			}
+			span{
+			    padding: 1.8rem 3rem;
+			    border-width: 2px;
+			    border-style: solid;
+			    border-color: transparent;
+			    display: block;
+			    @extend %heading-color;
+			    @include breakpoint(medium){
+			    	padding: 1.4rem 2rem;
+			    }
+			    @include breakpoint(small){
+				    padding: 0 10px 2px;
+				    border-width: 0 0 2px;
+				    display: inline-block;
+				    font-size: 1.8rem;
+			    }
+			    @include breakpoint(xsmall){
+					font-size: 1.6rem;
+			    }
+			}
+			&.active{
+				span{
+					border-color: #cf987e;
+				}
+			}
+		}
+	}
+	&-1{
+		.nav{
+			&-link{
+				span{
+					@include breakpoint(large){
+						padding: 15px 25px;
+					}
+				}
+			}
+		}
+	}
+}
+
+/*-- 34.02 - tab style 4 --*/
+
+.tab-style-4{
+	.nav{
+		&-tabs{
+			border-bottom: 0;
+		}
+		&-link{
+			padding: 0;
+			margin: 0 !important;
+			border: 0px solid transparent;
+			@include border-radius(0);
+			span{
+				display: block;
+			    padding: 15px 30px !important;
+			    line-height: 20px;
+			    font-size: 14px;
+			    @extend %body-color;
+			}
+			&.active{
+				border: 0px solid transparent;
+				background-color: $color-white-light-4;
+				@extend %heading-color;
+			}
+			&:hover{
+
+			}
+		}
+	}
+}
+
+/*-- 34.03 - tab Content --*/
+
+.tab-content{
+	.tab-pane{
+		&.active{
+			.airi-product{
+				animation: airiFadeInUp .5s linear .1s;
+			}
+		}
+	}
+}
+
+/*-- 34.04 - Product Data tab --*/
+
+.tab-style-1.product-data-tab{
+	.product-data-tab{
+		&__link{
+			&.nav-link{
+				color: $body-color;
+				font-size: 2.4rem;
+				margin: 0 2rem;
+				span{
+					padding:0 0 1rem;
+				}
+				@include breakpoint(large){
+					font-size: 1.8rem;
+					line-height: 1.4;
+				}
+				@include breakpoint(xsmall){
+					margin: 0;
+				}
+				&.active{
+					color: $heading-color;
+				}
+			}
+		}
+		&__content{
+		    width: 1070px !important;
+		    margin-left: auto;
+		    margin-right: auto;
+		    max-width: 100%;
+		}
+	}	
+}
+
+/*-- 34.05 - User Dashboard tab --*/
+
+.user-dashboard-tab{
+	@extend %flexbox;
+	@extend %align-start;
+	&__head{
+		background-color: $color-white-dark-1;
+		padding: 1.5rem 0;
+		@include flex-basis(19rem);
+		max-width: 19rem;
+		margin-right: 3rem;
+		@include breakpoint(small){
+			@include flex-basis(100%);
+			max-width: 100%;
+			width: 100%;
+			margin-right: 0;
+			margin-bottom: 3rem;
+			padding: 0;
+		}
+		.nav-link{
+		    display: block;
+		    padding: 1rem 3rem;
+		    @include breakpoint(small){
+		    	padding: 1.2rem;
+		    }
+			&.active, 
+			&:hover{
+				background-color: $primary-color;
+				@extend %white-color;
+			}
+		}
+	}
+
+	&__content{
+		@include flex-basis(calc(100% - 22rem));
+		max-width: calc(100% - 22rem);
+		@include breakpoint(small){
+			@include flex-basis(100%);
+			max-width: 100%;
+			width: 100%;
+		}
+		p{
+			a{
+				&:hover{
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}
+
+
+/*-- 34.06 - tab style 5 --*/
+
+.tab-style-5{
+	.nav{
+		&-tabs{
+			border-bottom: 0;
+		}
+		&-link{
+			margin: 0 10px;
+			padding: 0;
+			border: 0px solid transparent;
+			@include border-radius(0);
+			@include breakpoint(medium){
+				margin: 0 5px;
+			}
+			@include breakpoint(small){
+				margin: 10px;
+			}
+			@include breakpoint(xsmall){
+				margin: 5px;
+			}
+			span{
+				display: block;
+				padding: 19px 30px;
+				border: 1px solid #D8D8D8;
+				font-size: 12px;
+				line-height: 20px;
+				font-weight: 700;
+				text-transform: uppercase;
+				@extend %body-color;
+				@include breakpoint(large){
+					padding: 15px 20px;
+				}
+				@include breakpoint(medium){
+					padding: 14px;
+				}
+				@include breakpoint(xsmall){
+					padding: 10px;
+				}
+			}
+			&.active{
+				span{
+					border: 1px solid $heading-color;
+					@extend %heading-color;
+				}
+			}
+		}
+	}
+}

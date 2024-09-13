@@ -1,0 +1,60 @@
+/*****************************
+35. Team CSS
+*****************************/
+
+.team-member{
+	&__thumbnail{
+		@extend %posrelative;
+		img{
+			width: 100%;
+		} 
+	}
+	&__overlay{
+		@extend %posabsolute;
+	    width: 100%;
+	    text-align: center;
+	    z-index: 2;
+	    left: 0;
+	    top: 50%;
+	    @extend %invisible;
+	    transition: all 0.4s 0.1s;
+	    margin-top: 30px;
+	    @include transform(translate(0, -50%));
+	}
+	&__info{
+	    text-align: center;
+	    padding: 2rem 0 0;
+	}
+	&__name{
+		font-size: 1.8rem;
+		margin-bottom: .5rem;
+		a{
+			@extend %heading-color;
+		}
+	}
+	&__designation{
+		font-size: 1.2rem;
+		line-height: 1;
+		color: $primary-color;
+	}
+	&__desc{
+		font-size: 12px;
+		line-height: 1.5;
+		margin: 15px 0 0;
+	}
+	&:hover{
+		.team-member{
+			&__overlay{
+				@extend %visible;
+				margin-top: 0;
+			}
+		}
+		.link-overlay{
+			&:after{
+				background-color: rgba(0,0,0,.4);
+				@extend %visible;
+			}
+		}
+	}
+}
+

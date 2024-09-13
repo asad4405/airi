@@ -1,0 +1,622 @@
+/*****************************
+25. Form CSS
+*****************************/
+
+/*-- 25.00 - Global Form --*/
+
+.form{
+	&-row{
+		margin-left: -1rem;
+		margin-right: -1rem;
+		[class*="col-"]{
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+	}
+	&__label{
+	    @extend %displayBlock;
+	    margin-bottom: 5px;
+	    &--2{
+	    	@extend %heading-color;
+	    	margin-bottom: 8px;
+	    	font-size: 1.2rem;
+	    }
+	    &--3{
+	    	@extend %heading-color;
+	    	margin-bottom: 8px;
+	    	font-size: 1.4rem;
+	    }
+	    &.checkbox-label{
+	    	@extend %marginBottom-0;
+	    	margin-left: 3rem;
+	    	@extend %heading-color;
+	    	span{
+	    		@extend %displayInlineBlock;
+	    		padding-left: 5px;
+	    	}
+	    }
+	}
+	&__input{
+		background-color: transparent;
+		color: $body-color;
+		padding-left: 2rem;
+		padding-right: 2rem;
+		@extend %width100;
+		height: 5rem;
+		line-height: 1.6rem;
+		border: 1px solid $border-color;
+		&:focus{
+			border-color: #555;
+		}
+		&--textarea{
+			height: 15rem;
+			padding: 1rem 2rem;
+		}
+		&--2{
+			height: 6rem;
+			color: $heading-color;
+			&.nice-select{
+				line-height: 6rem;
+			}
+			@include placeholder{
+				color: $heading-color;
+			}
+		}
+		&--3{
+			height: 7rem;
+			line-height: 6.8rem;
+			@include breakpoint(xsmall){
+				height: 5rem;
+				line-height: 4.8rem;
+			}
+		}
+		&.nice-select{
+			.list{
+				@extend %width100;
+			    height: 400px;
+			    overflow-y: auto;
+			    padding-top: 7rem !important;
+			}
+		}
+	}
+	&__output{
+		text-align: right;
+		margin-top: .5rem;
+		&.success{
+			color: $color-green;
+		}
+		&.error{
+			color: $color-red;
+		}
+	}
+	&__fieldset{
+	    border: 1px solid $border-color-2;
+	    @extend %margin-0;
+	    padding: 15px;
+	}
+	&__legend{
+		border: 0;
+		padding: 0 10px;
+		display: inline-block;
+		font-size: inherit;
+		width: auto;
+	}
+	.suggestion{
+		@extend %displayInlineBlock;
+		margin-top: 4px;
+	}
+	.help-block{
+		font-size: 1.4rem;
+		span{
+			color: $color-red-light
+		}
+	}
+	.forgot-pass{
+		@extend %margin-0;
+		color: $primary-color;
+		font-size: 1.2rem;
+		&:hover{
+			@extend %textDunder;
+		}
+	}
+	.privacy-text{
+		font-size: 1.2rem;
+	}
+	.nice-select{
+		@extend %width100;
+		@extend %border-color;
+		@extend %borderRadius0;
+		@extend %heading-color;
+	}
+	&--checkout{
+		.form{
+			&__label{
+				font-size: 1.4rem;
+				&.shipping-label{
+					@extend %displayInlineBlock;
+				}
+			}
+			&__input{
+				&--textarea{
+					height: 12rem;
+					background-color: $color-white-dark-1;
+					border-color: $color-white-dark-1;
+				}
+			}
+		}
+	}
+	&--track{
+		.form{
+			&__input{
+				@include placeholder{
+					color: $heading-color;
+				}
+			}
+		}
+	}
+}
+.reply-title{
+	@extend %heading-color;
+	font-size: 1.4rem;
+	margin-bottom: 1rem;
+	@extend %displayInlineBlock;
+}
+.required{
+	color: $color-red;
+}
+.nice-select{
+	padding-left: 0;
+	padding-right: 0;
+	&-search{
+		margin: 0 !important;
+	}
+	.list{
+		width: 100%;
+	}
+	.current{
+		padding-left: 18px;
+	}
+} 
+
+/*-- 25.01 - Rating --*/ 
+.stars{
+	[class*="star-"] {
+	    @extend %displayInlineBlock;
+	    text-indent: -9999em;
+	    @extend %overflowHidden;
+	    height: 1.6rem;
+	    line-height: 1.6rem;
+	    margin-left: 1rem;
+	    padding-left: 1rem;
+	    vertical-align: middle;
+
+	    &:first-child{
+		    @extend %marginLeft-0;
+		    @extend %paddingLeft-0;
+	    }
+
+	    &:hover,
+	    &.active{
+	    	color: #f5b324;
+	    }
+	    &:before{
+		    font-family: 'dl-icon';
+		    direction: ltr;
+		    content: '\29';
+		    text-transform: none;
+		    @extend %displayBlock;
+		    text-indent: 0;
+	    }
+	}	
+	.star-2:before {
+	    content: '\29\29';
+	}
+	.star-3:before {
+	    content: "\29\29\29";
+	}
+	.star-4:before {
+	    content: "\29\29\29\29";
+	}
+	.star-5:before {
+	     content: "\29\29\29\29\29"; 
+	}
+}
+
+/*-- 25.02 - Search Form --*/ 
+
+.searchform{
+    width: 800px;
+    @extend %maxWidth100;
+    margin: 0 auto;
+    @extend %posrelative;
+
+	&__input{
+		width: 800px;
+		background-color: transparent;
+		border: 0;
+		border-bottom: 2px solid $color-dark-2;
+		@extend %textAcenter;
+		font-size: 3rem;
+		padding: 1rem 5rem 1rem 1rem;
+		transition: all .3s ease-out;
+		@extend %fontWeight300;
+		@extend %maxWidth100;
+		color: $color-dark-2;;
+		@include placeholder{
+			color: $color-dark-2;
+		}
+		@include breakpoint(small){
+			font-size: 2rem;
+			padding: 1rem 4rem 1rem 1rem;
+		}
+	}
+	&__submit{
+		@extend %posabsolute;
+		@extend %displayBlock;
+		@extend %border-none;
+		@extend %padding-0;
+	    right: 5px;
+	    color: #000;
+	    background: none;
+		font-size: 3rem;
+		height: 3rem;
+		@extend %vCenter;
+		@include breakpoint(small){
+			font-size: 2rem;
+			height: 2rem;
+		}
+	}
+
+	&-2{
+		width: auto;
+		margin-left: auto;
+		@extend %marginRight-0;
+		@extend %absFlexCenter;
+		padding-right: 5px;
+		.searchform{
+			&__input{
+				height: 3rem;
+				font-size: 1.2rem;
+				border-bottom: 1px solid $border-color;
+				width: 16.5rem;
+				text-align: left;
+				padding: 1rem 0;
+			}
+			&__submit{
+			    text-align: right;
+			    font-size: 16px;
+			    width: 30px;
+			    position: static;
+			    @include transform(translateY(0));
+			}
+		}
+	}
+	&-3{
+		@extend %margin-0;
+		@extend %height100;
+		@extend %posrelative;
+		z-index: 3;
+		@include flexbox;
+		.searchform{
+			&__input{
+				font-size: 12px;
+				transition: all 0.2s ease-in-out 0s;
+				@extend %margin-0;
+				@extend %height100;
+				@extend %width100;
+				padding: 15px 10px 15px 0px;
+				background: transparent;
+				-webkit-appearance: none;
+				@extend %borderRadius0;
+				@extend %textAleft;
+				@extend %border-none;
+				color: $color-dark-5;
+				font-family: $font-4;
+				@include placeholder{
+					color: $color-dark-5;
+				};
+			}
+			&__submit{
+				font-size: 16px;
+				@extend %displayBlock;
+				right: 5px;
+				@extend %border-none;
+				color: #000;
+				background: none;
+				@extend %padding-0;
+				@extend %posabsolute;
+				@extend %vCenter;
+			}
+		}
+	}
+}
+
+/*-- 25.03 - Newsletter Form --*/ 
+
+.newsletter-form{
+	@extend %posrelative;
+	&__input{
+	    background: transparent;
+	    border-width: 0 0 1px;
+	    @extend %border-style-solid;
+	    @extend %border-color;
+	    @extend %width100;
+	    line-height: 32px;
+	    padding: 6px 100px 6px 10px;
+	    @extend %margin-0;
+	    color: $heading-color;
+
+		&:focus{
+		    @include placeholder{
+		    	color: $heading-color;
+		    }
+		}
+	    @include placeholder{
+	    	color: $body-color;
+	    }
+
+		&.input--2{
+			border: 1px solid $color-light-6;
+			padding: 18px 60px 18px 20px;
+			color: #fff;
+			@include placeholder{
+				color: #fff;
+			}
+		}
+	}
+	&__submit{
+		@extend %posabsolute;
+		color: $heading-color;
+		@extend %border-none;
+		background: none;
+		line-height: 32px;
+		top: 5px;
+		@extend %right-0;
+		font-size: 1.6rem;
+		@extend %fontWeight700;
+		&.submit--2{
+			width: 6rem;
+			padding: 2rem;
+			color: #fff;
+			font-size: 2.2rem;
+			line-height: 3.6rem;
+			@extend %top-0;
+			height: 6.8rem;
+		}
+	}
+
+	&--2{
+		width: 35rem;
+		@include breakpoint(xsmall){
+			width: 90%;
+		}
+		.newsletter-form{
+			&__input{
+				@extend %body-color;
+			}
+			&__submit{
+				&:hover{
+					color: $primary-color;
+				}
+			}
+		}
+	}
+	&--3{
+		.newsletter-form{
+			@extend %posrelative;
+			&__input{
+				padding-right: 4rem;
+				color: inherit;
+				font-size: 1.4rem;
+			}
+			&__submit{
+				background: none;
+				@extend %border-none;
+				@extend %posabsolute;
+			    @extend %right-0;
+			    width: 4rem;
+			    @extend %heightAuto;
+			    font-size: 2.2rem;
+			    @extend %padding-0;
+			    @extend %lineheight1;
+			    top: 11px;
+			}
+		}
+	}
+	&--4{
+		width: 57rem;
+		@extend %maxWidth100;
+		.newsletter-form{
+			&__input{
+				border-color: rgba($color-white, .4);
+				color: $color-white;
+				@include placeholder{
+					color: $color-white;
+				}
+				&:focus{
+					border-color: rgba($color-white, 1);
+				}
+			}
+			&__submit{
+				color: $color-white;
+				@extend %fontWeight400;
+			}
+		}
+	}
+	&--5{
+		@extend %maxWidth100;
+		.newsletter-form{
+			&__input{
+				background: none;
+				@extend %border-width-1;
+				@extend %border-style-solid;
+				border-color: #fff;
+				color: #fff;
+				outline: none;
+				@extend %width100;
+				line-height: 32px;
+				padding: 25px 140px 25px 30px;
+				@extend %margin-0;
+				font-size: 16px;
+				@include placeholder{
+					color: $color-white;
+				}
+				&:focus{
+					border-color: rgba($color-white, 1);
+				}
+				@include breakpoint(small){
+					padding: 15px 100px 15px 10px;
+					font-size: 14px;
+				}
+			}
+			&__submit{
+				@extend %border-none;
+				background: none;
+				@extend %margin-0;
+				@extend %widthAuto;
+				padding: 25px 30px;
+				line-height: 32px;
+				@extend %posabsolute;
+				top: 1px;
+				@extend %right-0;
+				font-size: 16px;
+				color: $color-white;
+				@extend %fontWeight400;
+				@include breakpoint(small){
+					padding: 15px;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+	&--6{
+		@extend %maxWidth100;
+		@extend %posrelative;
+		.newsletter-form{
+			&__input{
+				margin: 0;
+				border: 1px solid #1d1d1d;
+				background-color: transparent;
+				color: #1d1d1d;
+				padding: 12px 15px;
+				line-height: 24px;
+				border-right: 0;
+				display: block;
+				width: 100%;
+				max-width: 100%;	
+				@include placeholder{
+					color: #1d1d1d;
+				};		
+			}
+			&__submit{
+				width: auto;
+				white-space: pre;
+				margin: 0 !important;
+				background-color: #1D1D1D;
+				border: none;
+				font-weight: bold;
+				font-size: 12px;
+				padding: 10px 15px;
+				cursor: pointer;
+				min-height: 40px;
+				display: block;
+				color: #fff;
+				transition: all 300ms ease;
+				line-height: 30px;
+				text-align: center;
+				top: 0;
+				text-transform: uppercase;
+				&:hover{
+					background-color: $primary-color;
+					color: $color-white;
+				}
+			}
+		}
+	}
+}
+
+
+.popup-newsletter-form{
+	&__input{
+	    background: #fff;
+	    border: 1px solid #CECECE;
+	    outline: none !important;
+	    @extend %width100;
+	    line-height: 30px;
+	    padding: 14px 20px;
+	    margin: 10px 0 20px;
+	}
+}
+
+/*-- 25.04 - Cart Form --*/ 
+
+.cart-form{
+	&__input{
+		@extend %border-none;
+		border-bottom: 1px solid $border-color;
+		@extend %heading-color;
+		@extend %width100;
+		font-size: 1.2rem;
+		padding-bottom: .5rem;
+		@include placeholder{
+			color: $heading-color;
+		}
+	}
+	&__btn{
+		background: none;
+		@extend %border-none;
+		@extend %heading-color;
+		@extend %fontWeight700;
+		font-size: 1.4rem;
+		&:hover{
+			color: $primary-color;
+		}
+	}
+	.coupon{
+		@extend %posrelative;
+		@include breakpoint(xsmall){
+			margin-bottom: 2rem;
+		}
+		.cart-form{
+			&__btn{
+				@extend %posabsolute;
+				@extend %right-0;
+				@extend %top-0;
+			}
+		}
+	}
+}
+
+/*-- 25.05 - Shipping Calculator Form --*/ 
+
+.shipping-calculator-form{
+	select, input{
+		@extend %width100;
+		height: 4rem;
+		@extend %border;
+		font-size: 1.2rem;
+		padding: 0 1.5rem;
+		@extend %heading-color;
+		@include placeholder{
+			color: $heading-color;
+		}
+	}
+	input[type="submit"]{
+		background: none;
+		@extend %border-none;
+		@extend %heading-color;
+		font-size: 1.4rem;
+		@extend %fontWeight700;
+		@extend %padding-0;
+		@extend %widthAuto;
+		@extend %heightAuto;
+	}
+	.nice-select{
+		height: 4rem;
+		margin-bottom: 1rem;
+		font-size: 1.2rem;
+		.list{
+			max-height: 190px;
+		}
+	}
+}

@@ -1,0 +1,71 @@
+/*****************************
+21. Animation CSS
+*****************************/
+
+@keyframes passing-reverse {
+  from {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(7%);
+    opacity: .6;
+  }
+
+  to {
+    transform: translateX(30%);
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes effect_shine {
+  100% {
+    left: 150%;
+  }
+}
+
+@keyframes effect_shine {
+  100% {
+    left: 150%;
+  }
+}
+
+@keyframes airiFadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 10%, 0)
+    }
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+
+@-webkit-keyframes ai-bouncedelay {
+  0%, 80%, 100% {
+    @include transform(scale(0));
+  }
+  40% {
+    @include transform(scale(1)); 
+  } 
+}
+
+@keyframes ai-bouncedelay {
+  0%, 80%, 100% {
+    @include transform(scale(0));
+  }
+  40% {
+    @include transform(scale(1)); 
+  } 
+}

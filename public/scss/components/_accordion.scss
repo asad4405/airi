@@ -1,0 +1,52 @@
+/*****************************
+20. Accordion CSS
+*****************************/
+
+.accordion{
+	&__link{
+		@extend %textTcap;
+		@extend %fontWeight400;
+		@extend %heading-color;
+		@extend %padding-0;
+		@extend %displayBlock;
+		font-size: 1.8rem;
+		line-height: 1.4;
+		overflow-wrap: break-word;
+	    @include white-space(normal);
+		&:not([href]):not([tabindex]){
+			@extend %heading-color;
+		}
+		&:hover{
+			@extend %heading-color;	
+		}
+	}
+	&__body{
+		background: transparent;
+		@extend %padding-0;
+		@extend %body-color;
+		font-size: 1.2rem;
+		line-height: 1.8;
+		margin-top: 2.5rem;
+		@include breakpoint(medium){
+			margin-top: 2rem;
+		}
+		@include breakpoint(medium){
+			margin-top: 1rem;
+		}
+	}
+}
+
+.faq-bg{
+	background: url(../img/others/faqs-bg1.jpg) no-repeat scroll center/cover;
+	@extend %height100;
+	min-height: 350px;
+}
+.accordion-container{
+	padding-left: 8%;
+	padding-right: 8%;
+
+	.row{
+		width: 900px;
+		max-width: 100%;
+	}
+}

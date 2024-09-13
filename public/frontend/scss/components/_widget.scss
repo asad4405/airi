@@ -1,0 +1,218 @@
+/*****************************
+37. Widget CSS
+*****************************/
+
+/*-- 37.00 - Product Widget --*/
+
+.product-widget{
+	.widget-title{
+		@extend %heading-color;
+		font-weight: 700;
+		font-size: 2.4rem;
+		margin-bottom: 2.5rem;
+		line-height: 1;
+		@include breakpoint(small){
+			font-size: 2rem;
+			margin-bottom: 2rem;
+		}
+	}
+	&__list{
+		li{
+		    @extend %posrelative;
+		    margin-bottom: 5px;
+		    padding: 5px 0;
+		    &:first-child{
+		    	padding-top: 0;
+		    }
+		    &:last-child{
+		    	margin-bottom: 0;
+		    	padding-bottom: 0;
+		    }
+			a{ 
+				color: $body-color;
+				font-size: 1.4rem;
+				line-height: 1.8;
+				&:hover{
+					color: $primary-color;
+				}
+			}
+			.count{
+				padding-left: 2px;
+				display: inline-block;
+			}
+		}
+	}
+}
+
+/*-- 37.01 - Sidebar Widget --*/
+
+
+/*-- 37.02 - Price Slider Range Widget --*/
+
+.ui-widget-content {
+    background: #d9d9d9;
+    border: medium none;
+    border-radius: 0;
+    height: 3px;
+    margin: 1rem 0 2.5rem;
+	.ui-state-default {
+	    background: $heading-color;
+	    border-color: $heading-color;
+	    border-radius: 50%;
+	    box-shadow: none;
+	    cursor: pointer;
+	    font-weight: normal;
+	    height: 1.5rem;
+	    width: 1.5rem;
+	}
+	.ui-state-default:hover {
+	    background: $heading-color;
+	}
+	.ui-slider-range{
+		&:last-child{
+			background: $heading-color;
+			height: 3px;
+		}
+	}
+	.ui-slider-handle{
+		top: -6px;
+	}
+}
+.product-price-widget{
+	.widget_content{
+		padding: 0 1rem;
+	}
+}
+
+/*-- 37.03 - Filter Price --*/
+
+.filter-price{
+	margin: 0 -1rem;
+	&__count{
+	    font-size: 1.3rem;
+	    font-weight: 600;
+	}
+	&__input-group{
+		@include flexbox;
+		font-size: 1.4rem;
+		color: $body-color;
+		font-weight: 400;
+		span{
+			padding-right: 1rem;
+		}
+	}
+	.amount-range{
+		border: none;
+		background-color: transparent;
+		max-width: 10rem;
+		color: $body-color;
+	}
+}
+
+/*-- 37.04 - Tag Cloud --*/
+
+.tagcloud{
+	a{
+	    font-size: 11px;
+	    border: 1px solid #ccc;
+	    padding: 5px 15px;
+	    display: inline-block;
+	    margin: 0 0 5px;
+	    border-radius: 30px;
+	    line-height: 1.7;
+	}
+}
+
+/*-- 37.05 - Contact Info --*/
+
+.contact-info{
+	h3{
+	    font-size: 14px;
+	    line-height: 20px;
+	    margin-bottom: 1.5rem;
+	    font-weight: 700;
+	}
+	p, a{
+		font-size: 14px;
+		line-height: 20px;
+		color: $heading-color;
+	}
+	a{
+		&:hover{
+			color: $primary-color;
+		}
+	}
+}
+
+/*-- 37.06 - Blog Widget --*/
+
+.blog-widget{
+	.widget-title{
+		margin: 0 0 25px;
+		font-weight: bold;
+		font-size: 2.4rem
+	}
+	.menu{
+		li{
+		    padding: 10px 0;
+		    margin-bottom: 10px;
+		    @include breakpoint(small){
+			    padding: 5px 0;
+			    margin-bottom: 5px;
+		    }
+		    &:first-child{
+		    	padding-top: 0;
+		    }
+		    &:last-child{
+		    	margin-bottom: 0;
+		    	padding-bottom: 0;
+		    }
+		    a{
+		    	color: $heading-color;
+		    	&:hover{
+		    		color: $primary-color;
+		    		text-decoration: underline;
+		    	}
+		    }
+		}
+	}
+}
+
+/*-- 37.07 - Recent Post --*/
+
+.recent-post{
+	&__item{
+		@extend %flexbox;
+		padding-bottom: 3rem;
+		border-bottom: 1px solid $border-color-2;
+		@include breakpoint(small){
+			padding-bottom: 2rem;
+		}
+		&:not(:last-child){
+			margin-bottom: 3rem;
+			@include breakpoint(small){
+				margin-bottom: 2rem;
+			}
+		}
+	}
+	&__thumb{
+		@include flex-basis(7rem);
+		max-width: 7rem;
+	}
+	&__content{
+		@include flex-basis(calc(100% - 7rem));
+		max-width: calc(100% - 7rem);
+		padding-left: 2rem;
+	}
+	&__title{
+		font-size: 16px;
+		margin-bottom: 5px;
+		a{	
+			@extend %heading-color;
+			font-family: $font-2;
+		}
+	}
+	&__meta{
+
+	}
+}

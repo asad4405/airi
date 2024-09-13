@@ -1,0 +1,900 @@
+/*****************************
+28. Navigation CSS
+*****************************/
+
+ 
+/*-- 28.00 - Main Menu --*/
+.main-navigation{
+	margin-top: 8px;
+	@include breakpoint(medium){
+		display: none;
+	}
+	.mainmenu{
+		@extend %posrelative;
+		z-index: 1;
+		&__item{
+			@extend %displayInlineBlock;
+			@include breakpoint(xlarge){
+				padding: 0;
+			}
+			&.active{
+				& > a{
+					& > span{
+						&:after{
+							@extend %visible;
+						}
+					}
+				}
+			}
+			&.menu-item-has-children{
+				& > ul{
+					@extend %posabsolute;
+					@extend %left-0;
+					top: 150%;
+					visibility: hidden;
+					opacity: 0;
+					background: #fff;
+					@extend %width100;
+					padding: 30px 0;
+					margin-top: 3.5rem;
+					@include box-shadow(0 0 38px 0 rgba(41, 44, 58, 0.09));
+					z-index: 9; 
+					pointer-events:none;
+					@include white-space(nowrap);
+					@include transition(all .3s ease);
+					@include breakpoint(large){
+						margin-top: 3rem;
+					}
+					&.megamenu{
+						@extend %flexbox;
+						@extend %justify-between;
+						@include white-space(nowrap);
+						@extend %width100;
+						padding: 2.5rem 2.5rem 2rem;
+						width: 100rem;
+						@include breakpoint(xxlargeonly){
+							width: 117rem;
+						}
+						@include breakpoint(large){
+							width: 90rem;
+						}
+						&.two-column{
+							> li{
+								@include flex-basis(50%);
+								max-width: 50%;
+								min-width: 25rem;
+							}
+						}
+						&.three-column{
+							> li{
+								@include flex-basis(33.33333%);
+								max-width: 33.33333%;
+								min-width: 25rem;
+							}
+						}
+						&.four-column{
+							> li{
+								@include breakpoint(largeonly){
+									@include flex-basis(25%);
+									max-width: 25%;
+									min-width: 24rem;
+								}
+								@include breakpoint(large){
+									@include flex-basis(20%);
+									max-width: 20%;
+									min-width: 20rem;
+								}
+								@include breakpoint(medium){
+									@include flex-basis(100%);
+									max-width: 100%;
+									min-width: 100%;
+								}
+							}
+						}
+						&.five-column{
+							> li{
+								@include flex-basis(20%);
+								max-width: 20%;
+								min-width: 20rem;
+								@include breakpoint(large){
+									min-width: 18rem;
+								}
+							}
+						}
+						& > li{
+							a{
+							    padding: 8px 15px;
+							    @extend %displayInlineBlock;
+							    font-size: 1.2rem;
+							    @extend %textTcap;
+							    color: $body-color;
+								&.megamenu-title{
+								    font-size: 1.3rem;
+								    @extend %textTcap;
+								    color: $heading-color;
+								    @extend %fontWeight600;
+								    &:hover{
+								    	color: $heading-color;
+								    }
+								    .mm-text{
+								    	&:after{
+								    		background-color: $heading-color;
+								    	}
+								    }
+								    &:after{
+								    	@include breakpoint(largeonly){
+								    		display: none;
+								    	}
+								    }
+								}
+							}
+							&.banner-holder{
+								@include breakpoint(largeonly){
+								    margin-top: -25px !important;
+								    margin-right: -25px !important;
+								    margin-bottom: -36px !important;
+								}
+							}
+						}
+					}
+					.megamenu{
+						&-banner{
+							@include breakpoint(largeonly){
+								position: relative;
+							    overflow: hidden;
+							}
+							@include breakpoint(large){
+								
+							}
+							@include breakpoint(medium){
+								display: none;
+							}
+							&-image{
+								@include breakpoint(largeonly){
+									background: url(../img/banner/banner-in-menu.jpg) no-repeat scroll center/cover;
+									width: 100%;
+									height: 100%;
+									@include transition(opacity 0.35s, -webkit-transform 0.35s);
+									@include transform(scale(1.025));
+								    position: relative;
+								    padding-top: 158%;
+								}
+								@include breakpoint(large){
+									padding-top: 182%;
+								}
+							    &:before{
+							    	@extend %bannergradient
+							    }
+							    &:after{
+							    	@extend %banneroverlay;
+							    }
+							}
+							&-info{
+								@extend %posabsolute;
+								left: 5rem;
+								bottom: 5rem;
+								color: #fff;
+								@include breakpoint(large){
+									left: 3rem;
+									bottom: 3rem;
+								}
+								span{
+									a{
+										font-size: 1.8rem;
+										color: #fff;
+										@extend %padding-0;
+										text-transform: lowercase;
+										@extend %displayInlineBlock;
+										margin-bottom: 5px;
+										&:after{
+											display: none;
+										}
+
+										&:hover{
+											color: #fff;
+											@extend %textDnone;
+										}
+									}
+								}
+								h3{
+									font-size: 4rem;
+									color: #fff;
+									@extend %fontWeight400;
+									@extend %lineheight1;
+									strong{
+										@extend %fontWeight400;
+										@extend %displayBlock;
+									}
+								}
+							}
+							&:hover{
+								.megamenu-banner{
+									&-image{
+									    transform: scale(1);
+									    -webkit-transform: scale(1);
+									    opacity: 1;	
+									    &:before{
+											@extend %bannergradienthover;
+									    }
+									    &:after{
+									    	@extend %banneroverlayhover;
+									    }
+									}
+								}						
+							}
+						}		
+					}
+					li{
+						&.active{
+							a{
+								color: $primary-color;
+							}
+						}
+					}
+				}
+				&:hover{
+					& > ul{
+						pointer-events: visible;
+						top: 100%;
+						visibility: visible;
+						opacity: 1;
+					}
+				}
+			}
+			&::last-child{
+				.mainmenu__link{
+					@extend %paddingRight-0;
+				}
+			}
+		}
+		&__link{
+		    color: #fff;
+		    font-size: 1.6rem;    
+		    line-height: 3rem;
+    		padding: .5rem 4rem .5rem 0;
+		    @extend %textTcap;
+		    @extend %fontWeight700;
+			&:before{
+				@extend %pseudo;
+				@extend %left-0;
+				bottom: -100%;
+				@extend %width100;
+				@extend %height100;
+			}
+			@include breakpoint(xxalarge){
+		    	padding-right: 1.6rem;
+			}
+		    @include breakpoint(xlarge){
+		    	font-size: 1.4rem;
+		    }
+		    & > span{
+		    	@extend %posrelative;
+		    	&.mm-text{
+				    line-height: 1.5;
+				    @extend %displayInlineBlock;
+				    &:after{
+			    		@extend %posabsolute;
+			    		top: auto;
+				    	@extend %bottom-0;
+				    	@extend %left-0;
+				    	right: auto;
+				    	@extend %width100;
+				    	height: 2px;
+				    	background: #fff;
+				    	opacity: 0;
+				    }
+		    	}
+				&.tip{
+					@extend %posabsolute;
+				    color: #fff;
+				    background-color: $color-red-dark;
+				    font-size: 8px;
+				    @extend %lineheight1;
+				    padding: 2px 4px;
+				    @extend %fontWeight400;
+				    bottom: 100%;
+				    bottom: calc( 100% + 5px);
+				    bottom: -webkit-calc( 100% + 5px);
+				    bottom: -moz-calc( 100% + 5px);
+				    right: 15px;
+				    &:after{
+					    @extend %pseudo;
+					    @extend %visible;
+					    border-top: 4px solid $color-red-dark;
+					    border-right: 5px solid transparent;
+					    border-left: 5px solid transparent;
+					    left: 50%;
+					    margin-left: -5px;
+					    top: 100%;
+						background: transparent;
+						@extend %widthAuto;
+						@extend %heightAuto;
+				    }
+					@include breakpoint(medium){
+						display: none;
+					}
+				}
+		    }
+		}
+		.sub-menu{
+			@extend %textAleft;
+			padding: 3rem 0 !important;
+			@include white-space(nowrap);
+			min-width: 24rem;
+			background: #fff;
+			@include breakpoint(large){
+				min-width: 19rem;
+				padding: 2rem 0 !important;
+			}
+			li{
+				&.menu-item-has-children{
+					& > a{
+						&:after{
+							@extend %posabsolute;
+							content: '\f105';
+							right: 2rem;
+							top: 1.2rem;
+							@extend %fontAwesome;
+							color: $body-color;
+							@extend %lineheight1;
+						}
+					}
+				}
+				&:hover{
+					ul{
+						visibility: visible;
+						opacity: 1;
+						margin-left: 0;
+					}
+				}
+				a{
+					color: $body-color;
+					padding: .8rem 3rem;
+					@extend %textTcap;
+					font-size: 1.3rem;
+					@include breakpoint(large){
+						padding: 8px 2rem;
+					}
+				}
+			}
+			.sub-menu{
+				@extend %posabsolute;
+				left: 100%;
+				margin-left: -2rem;
+				top: -2rem;
+				visibility: hidden;
+				opacity: 0;
+			}
+		}
+		ul {
+			li{
+				a{
+					.mm-text{
+						@extend %posrelative;
+						&:after{
+					    	@extend %pseudo;
+					    	@extend %left-0;
+					    	bottom: -2px;
+					    	width: 0;
+					    	height: 1px;
+					    	background-color: $primary-color;
+					    	visibility: hidden;
+					    	opacity: 0;
+					    	@include transition(width .3s ease-in);
+					    }
+					}
+					&:hover{
+				    	color: $primary-color;
+				    	.mm-text{
+					    	&:after{
+					    		width: 100%;
+					    		visibility: visible;
+					    		opacity: 1;
+					    	}
+				    	}	
+				    	&:after{
+				    		color: $primary-color;
+				    	}				
+					}
+
+				}
+			}
+		} 
+		li{
+			&.has-children{
+				@extend %posrelative;
+			}	
+			&.megamenu-holder{
+				position: static;
+			}
+			.sub-menu{
+				@extend %displayBlock;
+				background: #fff;
+			}
+			a{
+				@extend %posrelative;
+				@extend %displayBlock;
+				@include transition(all .3s ease-in);
+				&:hover{
+					background: none;
+				}
+			}
+			ul{
+				@include transition(all .3s cubic-bezier(.07,.81,.96,.66));
+			}
+		}
+		&--2{
+			.mainmenu{
+				&__item{
+					@include breakpoint(xlarge){
+						padding-left: 1rem;
+						padding-right: 1rem;
+					}
+					& > a{
+						@include breakpoint(xlarge){
+							padding-left: 1rem;
+							padding-right: 1rem;
+						}
+					}
+					&.menu-item-has-children{
+						& > ul{
+							margin-top: 1.5rem;						
+						}
+					}
+				}
+			}
+		}
+		&--centered{
+			@extend %textAcenter;
+			.mainmenu{
+				&__item{
+					&.menu-item-has-children{
+						& > ul{
+							@extend %textAleft;
+							&.megamenu{
+								left: 50%;
+								@include transform(translateX(-50%));
+							}
+							.megamenu{
+								&-banner{
+									&-info{
+										@extend %textAleft;
+									}
+								}		
+							}
+						}
+					}
+				}
+			}
+		}
+		&--3{
+			.mainmenu{
+				&__item{
+					&.active{
+						.mainmenu__link{
+							& > span{
+								&:after{
+									width: 100%;
+								}
+							}
+						}
+					}
+				}
+				&__link{
+					& > span{
+						text-transform: uppercase;
+						font-family: $font-4;
+						&:after{
+							bottom: -10px;
+							left: 50%;
+							width: 20%;
+							@include transform(translateX(-50%));
+							@include transition(width 0.5s ease, opacity 0.3s ease);
+						}
+					}
+					&:hover{
+						color: $primary-color;
+						& > span{
+							&:after{
+								width: 100%;
+								opacity: 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}	
+	&-2{
+		margin-top: 0;
+		.mainmenu--centered{
+			.mainmenu{
+				&__item{
+					&.menu-item-has-children{
+						& > ul{
+							&.megamenu{
+								@include breakpoint(large){
+									left: 65%;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/*-- 28.01 - Vertical Main Menu --*/
+
+.main-navigation{
+	&.vertical-nav{
+		@extend %marginTop-0;
+		.mainmenu{
+			&__item{
+				@include breakpoint(largeonly){
+					display: block;
+					padding: 0;
+				}
+				&.active{
+					& > a{
+						span{
+							&:after{
+								display: none;
+							}
+						}
+						color: $primary-color;
+					}
+				}
+				&:before{
+					height: 0;
+				}
+				&.menu-item-has-children{
+					& > ul{
+						top: -3rem;
+						left: 100%;
+						&.megamenu{
+							&.four-column{
+								@include breakpoint(xlarge){
+									width: 90rem;
+								}
+								@include breakpoint(large){
+									width: 70rem;
+								}
+								& > li{
+									@include breakpoint(xlarge){
+										min-width: 20rem;
+									}
+								}
+								& > li{
+									@include breakpoint(large){
+										min-width: 17rem;
+									}
+								}
+							}
+
+							.megamenu-banner{
+								&-image{
+									@include breakpoint(large){
+										padding-top: 189%;
+									}
+								}
+								&-info{
+									@include breakpoint(large){
+										left: 1rem;
+										bottom: 3rem;
+									}
+								}
+							}
+						}
+
+					}
+					&:hover{
+						& > ul{
+							margin-top: 0;
+						}
+					}
+				}
+			}
+			&__link{
+				color: $heading-color;
+				@include breakpoint(xlargeonly){
+					padding: 1rem 0;
+				}
+				@include breakpoint(xlarge){
+					padding: .5rem 0;
+				}
+				.tip{
+					@include breakpoint(largeonly){
+						right: auto;
+						bottom: 100%;
+					}
+				}
+			}
+			&--centered{
+			.mainmenu{
+				&__item{
+					&.menu-item-has-children{
+						& > ul{
+							@extend %textAleft;
+							&.megamenu{
+								left: 100%;
+								@include transform(translateX(0%));
+							}
+						}
+					}
+				}
+			}
+			}
+		}
+	}	
+}
+
+/*-- 28.02 - Mobile Menu --*/
+
+.mobile-navigation{
+	display: none;
+	@include breakpoint(medium){
+		display: block;
+	}
+	@extend %maxWidth100;
+    @extend %posabsolute;
+    @extend %width100;
+    top: 100%;
+    z-index: 9;
+    @extend %left-0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    @include transform(translateY(30px));
+    @include backface-visibility(hidden);
+    @include transition(all 0.3s ease);
+
+	.dl-menuwrapper{
+		margin-right: 0;
+		.dl-menu{
+			margin: 0;
+		}
+	}
+	
+	.dl-trigger{
+		visibility: hidden;
+		opacity: 0;
+	}
+	&.open-mobile-menu{
+		@include breakpoint(medium){
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
+			@include transform(translateY(-50px));
+		}
+	}
+	.dl-menuwrapper{
+	    @extend %margin-0;
+	    @extend %maxWidth100;
+	}
+	ul{
+		&.dl-menu{
+		    border-width: 1px 0 0;
+		    @extend %border-style-solid;
+		    border-color: rgba(140, 140, 140, 0.2);
+		    @include box-shadow(0 6px 12px rgba(0, 0, 0, 0.076));
+		}
+		background: #fff;
+		li{
+			&:not(:first-child){
+				border-width: 1px 0 0;
+				border-style: solid;
+				border-color: rgba(140, 140, 140, 0.2);
+			}
+			a{
+			    @extend %displayBlock;
+			    @extend %posrelative;
+			    padding: 12px 30px;
+			    line-height: 30px;
+			    color: $heading-color;
+			    font-size: 1.4rem;
+			    @extend %fontWeight400;
+			}
+			& > a{
+			    &:not(:only-child){
+			    	&:after{
+					    @extend %fontAwesome;
+					    content: "\f105";
+					    @extend %posabsolute;
+					    left: auto;
+					    right: 20px;
+					    top: 18px;
+					    font-size: 16px;
+					    @extend %widthAuto;
+					    @extend %lineheight1;
+					    color: $heading-color;
+			    	}
+			    }
+			}
+			&.dl-back{
+				& > a{
+					@extend %textAright;
+					background: transparent;
+					&:before{
+						font-family: fontAwesome;
+						content: "\f177";
+						float: left;
+					}
+				}
+				&:after{
+					display: none;
+				}
+			}
+			&.dl-subviewopen, 
+			&.dl-subview{
+				@include breakpoint(medium){
+					border-width: 0;
+				}
+			}
+		}
+		.tip{
+			display: none;
+		}
+	}
+	&-2{
+		&.open-mobile-menu{
+			@include breakpoint(medium){
+				@include transform(translateY(-50px));
+			}
+		}	
+    }
+}
+
+/*-- 28.03 - Side Navigation --*/
+
+.side-navigation{
+	&.open{
+		.side-navigation-wrapper{
+			@extend %sideNavOpen;
+		}
+	}
+	.btn-close{
+		@extend %sideNavCloseBtn;
+		font-size: 2.6rem;
+		background: none;
+		i{
+			color: $color-dark-2;
+		}
+	}
+
+	&-wrapper{
+		@extend %sideNavWrapper;
+	}
+	&-inner{
+		@extend %sideNavInner;
+		.widget{
+			margin-bottom: 3rem;
+			a{
+				&:hover{
+					color: $primary-color;
+				}
+			}
+
+			p{
+				font-size: 1.3rem;
+				line-height: 1.8;
+				color: $heading-color;
+				&:not(:last-child){
+					margin-bottom: 1.5rem;
+				}
+				a{
+					font-size: 1.3rem;
+					@extend %displayBlock;
+				}
+			}
+			&.google-map-link{
+				a{
+					@extend %textDunder;
+				}
+			}
+			.copyright-text{
+				font-size: 1.1rem;
+			}
+		}
+	}
+
+	&--left{
+		.side-navigation{
+			&-wrapper{
+				right: auto;
+				@extend %left-0;
+				@include transform(translate(-200px , 0));
+			}
+		}
+	}
+}
+
+
+/*-- 28.04 - Side Nav Menu --*/
+
+.sidenav-menu{
+	li{
+		a{
+			padding: 15px 0;
+			font-size: 18px;
+			@extend %displayBlock;
+			color: $heading-color;
+			&:hover{
+				color: $primary-color;
+			}
+		}
+	}
+}
+
+/*-- 28.05 - Offcanvas Navigation --*/
+
+.offcanvas-navigation{
+	@extend %sideNavWrapper;
+	right: auto;
+	@extend %left-0;
+	width: 350px;
+	@include transform(translate(-200px, 0));
+	&.open{
+		@extend %sideNavOpen;
+	}
+	&__inner{
+		@extend %sideNavInner;
+		padding-top: 80px;
+		.btn-close{
+			right: 25px;
+			top: 25px;
+		}
+	}
+	&__top{
+		margin-bottom: 50px;
+	}
+}
+
+.offcanvas-menu{
+	li{
+		@extend %posrelative;
+		&.menu-open{
+			& > {
+				span{
+					&.menu-expand{
+						i{
+							&:before{
+								content: "\f107";
+							}
+						}
+					}
+				}
+			}
+		}
+		a{
+			font-size: 14px;
+			@extend %fontWeight400;
+			@extend %textTupper;
+			@extend %displayBlock;
+			padding: 10px 20px;
+			span{
+				&.overlay-menu__title{
+					@extend %fontWeight600;
+				}
+			}
+		}
+		span{
+			&.menu-expand{
+				@extend %posabsolute;
+				@extend %right-0;
+				top: 2px;
+				width: 50px;
+				@extend %height100;
+				line-height: 40px;
+				@extend %cursorPointer;
+				@extend %textAcenter;
+				margin-right: 4px;
+			}
+		}
+	}
+	.sub-menu{
+		padding-left: 10px;
+	}
+}

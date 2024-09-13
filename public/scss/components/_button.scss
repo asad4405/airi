@@ -1,0 +1,445 @@
+/*****************************
+22. Button CSS
+*****************************/
+
+/*-- 22.00 - Global Button --*/
+.btn{
+	@extend %displayInlineBlock;
+	background-color: $color-dark-3;
+	@extend %textAcenter;
+	color: #fff;
+	font-size: 1.4rem;
+	padding: 0 2rem;
+	min-height: 6rem;
+	line-height: 6rem;
+	@extend %textTcap;
+	@extend %cursorPointer;
+	font-family: $heading-font;
+	@include border-radius(0);
+	@include breakpoint(small){
+		min-height: 5rem;
+		line-height: 5rem;
+	}
+	&[type="submit"],
+	&[type="button"]{
+		border: none;
+	}
+	i{
+		padding-left: 5px;
+	}
+	&-2{
+		background-color: #fff;
+		color: $heading-color;
+	}
+	&-3{
+		background-color: $primary-color;
+	}
+	&-fullwidth{
+		@extend %width100;
+		@extend %displayBlock;
+	}
+	&-bordered{
+		background: none;
+		color: $color-white;
+		border: 1px solid #fff;
+		&-2{
+			background: none;
+			border-color: rgba($color-white, .5);
+		}
+		&-3{
+			background: none;
+			color: $color-white;
+			border: 2px solid #fff;
+		}
+	}
+	&-large{
+		min-height: 7rem;
+		line-height: 7rem;
+		padding: 0 7.5rem;
+	}
+	&-semi-large{
+		min-height: 6rem;
+		line-height: 6rem;
+		padding: 0 5rem;
+	}
+	&-medium{
+		min-width: 16rem;
+		min-height: 5rem;
+		line-height: 5rem;
+	}
+	&-small{
+		min-height: 3rem;
+		line-height: 3rem;
+		font-size: 1.4rem;
+		padding: 1rem 3rem;
+		min-width: 15rem;
+	}
+	&-tiny{
+		min-height: auto;
+		line-height: 1.8;
+		padding: 5px 15px;
+	}
+	&-transparent{
+		background-color: rgba($color-dark-3, .5);
+	}
+	&.newsletter-btn{
+		padding-left: 6rem;
+		padding-right: 6rem;
+	}
+	&-color-black{
+		border-color: $heading-color;
+		color: $heading-color;
+		&:hover{
+			border-color: $heading-color;
+			color: #fff;
+			background-color: $heading-color;
+		}
+	}
+	&-color-gray{
+		border-color: $color-gray-3;
+		color: $heading-color;
+		&:hover{
+			border-color: $heading-color;
+			color: #fff;
+			background-color: $heading-color;
+		}
+	}
+	&-submit{
+		min-width: 11.4rem;
+		min-height: auto;
+		@extend %lineheight1;
+	}
+	&-link{
+		border-bottom: 2px solid #1D1D1D;
+		@extend %fontWeight700;
+		@extend %displayInlineBlock;
+		text-transform: capitalize;
+		padding: 0 0 5px 0;
+		color: #1D1D1D;
+		background: none;
+		font-size: 14px;
+		line-height: 20px;
+		min-height: auto;
+		&:hover{
+			border-bottom-color: $primary-color;
+			text-decoration: none;
+		}
+		&--2{
+			text-transform: uppercase;
+			border-bottom-width: 1px;
+			padding: 0;
+			font-size: 12px;
+			letter-spacing: 1px;
+			line-height: 14px;
+		}
+	}
+	&-style-1{
+		&:hover{
+			background-color: $primary-color;
+			color: #fff !important;
+			border-color: $primary-color;
+		}
+	}
+	&-style-2{
+		background-color: $primary-color;
+		color: #fff;
+		&:hover{
+			background-color: $color-dark-3;
+			color: #fff !important;
+		}
+	}
+	&-style-3{
+		background-color: $primary-color;
+		color: #fff;
+		&:hover{
+			background-color: $color-dark-1;
+			color: #fff !important;
+		}
+	}
+	&-style-4{
+		background-color: $primary-color;
+		color: #fff;
+		&:hover{
+			background-color: $color-red-dark-2;
+			color: #fff !important;
+		}
+	}
+}
+
+/*-- 22.01 - Close Button --*/
+
+.btn-close{
+    font-size: 40px;
+    @extend %displayBlock;
+    @extend %posabsolute;
+    z-index: 5;
+    line-height: 40px;
+    height: 40px;
+    opacity: 1;
+    i{
+	    @extend %displayInlineBlock;
+	    vertical-align: top;
+	    @extend %basetransition;
+    }
+    &:hover{
+    	i{
+    		@include transform(rotate(90deg));
+    		color: $primary-color;
+    	}
+    }
+}
+
+/*-- 22.02 - Menu Button --*/
+
+.menu-btn{
+    width: 4rem;
+    height: 4rem;
+    line-height: 4.5rem;
+    @extend %posrelative;
+    &:after{
+    	@extend %absCenter;
+    	content: "\64";
+		font-family: "dl-icon";
+		@extend %body-color;
+		font-size: 1.8rem;
+    }
+    &.open{
+    	&:after{
+    		content: "\6e";
+    		font-size: 2.4rem;
+    	}
+    }
+}
+
+/*-- 22.03 - Video Play Button --*/
+
+.video-btn{
+	@extend %displayInlineBlock;
+	@extend %posrelative;
+    width: 6.4rem;
+    height: 6.4rem;
+    text-indent: -99999px;
+	&:after, &:before{
+		@extend %pseudo;
+		@extend %borderRadius50;
+		width: 6.4rem;
+		height: 6.4rem;
+		left: 50%;
+		top: 50%;
+		margin-left: -3.2rem;
+		margin-top: -3.2rem;
+		transition: all .3s;
+		@include box-shadow(0 0 0 0 rgba(255, 255, 255, 0.4));
+	}
+	&:after{
+		background-image: url(../img/icons/button-play.png);
+		background-size: contain;
+	}
+	&:before{
+		background: rgba(255, 255, 255, 0.3);
+	}
+	&:hover{
+		&:after{
+			@include box-shadow(0 0 0 12px rgba(255, 255, 255, 0.3));
+			@include transform(scale(.9));
+		}
+		&:before{
+			@include transform(scale(1.6));
+			opacity: .6;
+		}
+	}
+	&--2{
+		&:after{
+			@include box-shadow(0 2px 32px 0 rgba(255, 113, 113, 0.3));
+		}
+	}
+	&-3{
+		@include textBoxCenter(60px);
+		@extend %borderRadius50;
+		background: #fff;
+		color: $heading-color;
+	}
+}
+
+/*-- 22.04 - Banner Button --*/
+.banner-btn{
+	&-2{
+	    font-size: 1.6rem;
+	    @extend %displayInlineBlock;
+	    background-color: #fff;
+	    padding: 0 3rem;
+	    @extend %textAcenter;
+	    @extend %fontWeight700;
+	    @extend %maxWidth100;
+	    color: $heading-color;
+	    width: 25rem;
+	    height: 6.7rem;
+	    line-height: 6.7rem;
+	    @extend %posrelative;
+	    @extend %overflowHidden;
+	    @include breakpoint(large){
+	    	padding: 1.5rem;
+		    font-size: 1.4rem;
+		    font-weight: 600;
+		    width: 20rem;
+		    height: 5.4rem;
+		    line-height: 5.4rem;
+	    }
+	    span{
+	    	@extend %displayInlineBlock;
+			@extend %posabsolute;
+			@extend %fullwidth;
+			@extend %textAcenter;
+			@include transition(top .4s ease, opacity .3s);
+		    &.hover-view{
+				@extend %invisible;
+				&:before{
+					content: '\2c';
+					font-family: 'dl-icon';
+					@extend %posabsolute;
+					right: 35px;
+				}
+		    }
+	    }
+	    &:hover{
+	    	background: $heading-color;
+	    	span{
+			    &.normal-view{
+					@extend %invisible;
+			    }
+			    &.hover-view{
+					@extend %visible;
+					color: #fff;
+			    }
+	    	}
+	    }
+	}
+	&-3{
+		width: 100%;
+		height: 9rem;
+		line-height: 9rem;
+		@extend %posrelative;
+		@extend %textAcenter;
+		color: #fff;
+		@include breakpoint(medium){
+			height: 8rem;
+			line-height: 8rem;
+		}
+		&:after{
+			@extend %pseudo;
+			@extend %fullwidth;
+			background-color: $heading-color;
+			opacity: .5;
+			@extend %basetransition;
+			z-index: -1;
+		}
+		span{
+			&.front-view{
+				font-size: 1.6rem;
+				@extend %lineheight1;
+				@extend %fontWeight600;
+			}
+			&.hover-view{
+				@extend %posabsolute;
+				color: #fff;
+				transition: all .3s;
+				margin-top: 20px;
+				opacity: 0;
+			    left: 50%;
+			    @include transform(translateX(-50%));
+				&:after{
+					content: "\2c";
+					font-family: 'dl-icon';    
+					@extend %posabsolute;
+					padding-left: 5px;
+				}
+			}
+		}
+		&:hover{
+			span{
+				&.front-view{
+				    opacity: 0;
+				    visibility: hidden;
+				    margin-top: -20px;
+				}
+				&.hover-view{
+					opacity: 1;
+					@extend %marginTop-0;
+				}
+			}
+		}
+	}
+	&-4{
+		background-color: rgba($heading-color,.6);
+		padding: 2.4rem 9rem 2.4rem 5rem;
+		font-size: 1.6rem;
+		color: #fff;
+		@include breakpoint(large){
+			padding: 1.5rem 2rem;
+			font-size: 1.4rem;
+		}
+
+		i{
+			font-size: 1.8rem;
+			color: #fff;
+			@extend %posabsolute;
+			right: 50px;
+			top: 50%;
+			transform: translateY(-50%);
+			@include breakpoint(large){
+				display: none;
+			}
+		}
+	}
+}
+
+/*-- 22.05 - Action Button --*/
+.action-btn{
+	@extend %posrelative;
+	z-index: 1;
+	&.btn-zoom-popup{
+		background-color: transparent;
+		@extend %border-none;
+		@extend %padding-0;
+	}
+	i{
+	    @include textBoxCenter(44px);
+	    @extend %borderRadius50;
+	    @extend %displayBlock;
+	    background-color: #fff;
+    	font-size: 1.6rem;
+    	@extend %heading-color;
+	}
+	&-2{
+		i{
+			@include breakpoint(large){
+				@include textBoxCenter(40px);
+				font-size: 1.4rem;
+			}
+		}
+	}
+}
+
+/*-- 22.06 - Action Button --*/
+.sidebar-btn{
+    padding: 0 30px;
+    font-size: 13px;
+    font-weight: 300;
+    min-height: 4.2rem;
+    line-height: 4.2rem;
+}
+
+/*-- 22.07 - Action Button --*/
+.read-more-btn{
+	border: 2px solid $heading-color;
+	color: $heading-color;
+    @extend %fontWeight400;
+    padding: 14px 40px;
+	@extend %displayInlineBlock;
+	@extend %basetransition;
+    &:hover{
+    	border-color: $primary-color;
+    	background: $primary-color;
+    	color: $color-white;
+    }
+}

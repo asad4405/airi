@@ -1,0 +1,382 @@
+/*****************************
+00. Global CSS
+*****************************/
+ 
+html{
+	font-size: 62.5%;
+}
+body{
+	overflow-x: hidden;
+	overflow-y: auto; 
+ 
+	&.home-22{
+		font-family: $font-4;
+		color: #707070;
+		h1, h2, h3, h4, h5, h6{
+			font-family: $font-4;
+		}
+	}
+}
+p {
+    &:last-child{
+    	margin-bottom: 0;
+    }
+}
+figure{
+	margin: 0;
+}
+
+
+// Base
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number]
+{
+  -moz-appearance: textfield;
+}
+input, textarea{
+	@include placeholder{
+		color: $body-color;
+	}
+}
+ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+img{
+	max-width: 100%;
+}
+a, button {
+    color: inherit;
+    display: inline-block;
+    line-height: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+a{
+	&:hover{
+		@extend %primary-color;
+	}
+}
+a, button, img, input, span {
+    @extend %basetransition; 
+}
+*:focus {
+    outline: none !important;
+}
+a:focus {
+    color: inherit;
+    outline: none;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+button, input[type="submit"] {
+    cursor: pointer;
+}
+ul {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+a, a:hover, a:focus, a:active, button, button:focus, 
+input, select, textarea, .slick-slide, .slick-slide:focus, .slick-slide:active{
+	outline: none;
+}
+
+
+/*****************************
+01. Typography CSS
+*****************************/
+
+
+h4, .h4 {
+    line-height: 1.2;
+}
+h5, .h5 {
+    line-height: 23px;
+}
+
+.font-2{
+	font-family: $font-2;
+}
+.font-roboto{
+	font-family: $font-4;
+}
+.font{
+	&-light{
+		font-weight: 300 !important;
+	}
+	&-normal{
+		font-weight: 400 !important;
+	}
+	&-semi-bold{
+		font-weight: 600 !important;
+	}
+	&-bold{
+		font-weight: 700 !important;
+	}
+	&-bolder{
+		font-weight: 900 !important;
+	}
+}
+
+@for $i from 3 through 9{
+	.font-weight-#{$i * 100}{
+		font-weight: #{$i * 100} !important;
+	}
+}
+@for $i from 3 through 9{
+	@include breakpoint(small){
+		.font-weight-sm-#{$i * 100}{
+			font-weight: #{$i * 100} !important;
+		}
+	}
+}
+@for $i from 10 through 30{
+	.font-size-#{$i}{
+		font-size: #{$i*.1}rem !important;
+	}
+}
+@include breakpoint(large){
+	.font-size-lg-20{
+		font-size: 20px !important;
+	}
+}
+@for $i from 10 through 30{
+	@include breakpoint(medium){
+		.font-size-md-#{$i}{
+			font-size: #{$i*.1}rem !important;
+		}
+	}
+}
+@for $i from 10 through 30{
+	@include breakpoint(small){
+		.font-size-sm-#{$i}{
+			font-size: #{$i*.1}rem !important;
+		}
+	}
+}
+@for $i from 10 through 30{
+	@include breakpoint(xsmall){
+		.font-size-xs-#{$i}{
+			font-size: #{$i*.1}rem !important;
+		}
+	}
+}
+@for $i from 0 through 40{
+	.lts-#{$i}{
+		letter-spacing: #{$i}px !important;
+	}
+}
+@for $i from 0 through 40{
+	.lts-xl-#{$i}{
+		@include breakpoint(xlarge){
+			letter-spacing: #{$i}px !important;
+		}
+	}
+}
+@for $i from 0 through 40{
+	.lts-lg-#{$i}{
+		@include breakpoint(large){
+			letter-spacing: #{$i}px !important;
+		}
+	}
+}
+@for $i from 0 through 40{
+	.lts-md-#{$i}{
+		@include breakpoint(medium){
+			letter-spacing: #{$i}px !important;
+		}
+	}
+}
+@for $i from 0 through 40{
+	.lts-sm-#{$i}{
+		@include breakpoint(small){
+			letter-spacing: #{$i}px !important;
+		}
+	}
+}
+@for $i from 0 through 40{
+	.lts-xs-#{$i}{
+		@include breakpoint(xsmall){
+			letter-spacing: #{$i}px !important;
+		}
+	}
+}
+
+.text-underline{
+	text-decoration: underline;
+}
+
+.heading{
+	&-primary{
+		font-size: 4.8rem;
+		color: $heading-color;
+		margin-bottom: 0;
+		span{
+			color: $color-blue;
+		}
+		@include breakpoint(large){
+			font-size: 4.2rem;
+		}
+		@include breakpoint(medium){
+			font-size: 3.8rem;
+		}
+		@include breakpoint(small){
+			font-size: 3rem;
+		}
+		@include breakpoint(xsmall){
+			font-size: 2.5rem;
+		}
+	}
+	&-big{
+		color: $primary-color;
+	    font-size: 8.9rem;
+	    line-height: 1;
+	    text-transform: uppercase;
+	    @include breakpoint(large){
+	    	font-size: 6rem;
+	    }
+	    @include breakpoint(small){
+	    	font-size: 4rem;
+	    }
+	    @include breakpoint(xsmall){
+	    	font-size: 3rem;
+	    }
+	    @include breakpoint(xxsmall){
+	    	font-size: 2.5rem;
+	    }
+	}
+	&-bigger{
+		color: $primary-color;
+	    font-size: 13rem;
+	    line-height: 1;
+	    text-transform: uppercase;
+	    margin-bottom: 0;
+	    @include breakpoint(large){
+	    	font-size: 8rem;
+	    }
+	    @include breakpoint(medium){
+	    	font-size: 6rem;
+	    }
+	}
+	&-biggest{
+		font-size: 19.9rem;
+		line-height: 1.1;
+	}
+	&-secondary{
+		text-transform: capitalize;
+		font-size: 4.2rem;
+		margin-bottom: 0;
+		color: $heading-color;
+		line-height: 1;
+		font-weight: 400;
+		line-height: 1.2;
+		strong{
+			font-weight: 900;
+		}
+		@include breakpoint(large){
+			font-size: 3.5rem;
+			line-height: 1.3;
+		}
+		@include breakpoint(medium){
+			font-size: 3rem;
+			line-height: 1.5;
+		}
+		@include breakpoint(small){
+			font-size: 2.4rem;
+			line-height: 1.6;
+		}
+
+		&-2{
+			@include breakpoint(medium){
+				font-size: 2.5rem;
+			}
+		}
+		&-3{
+			font-size: 36px;
+			margin: 0;
+			padding-bottom: 5px;
+			font-weight: 700;
+			letter-spacing: 3px;
+			text-transform: uppercase;
+			@include breakpoint(medium){
+				font-size: 30px;
+				letter-spacing: 1px;
+			}
+			@include breakpoint(medium){
+				font-size: 25px;
+			}
+		}
+		&-4{
+			font-size: 32px;
+			margin: 0;
+			padding-bottom: 5px;
+			font-weight: 700;
+			letter-spacing: 3px;
+			text-transform: uppercase;
+			@include breakpoint(large){
+				font-size: 30px;
+				letter-spacing: 1px;
+			}
+			@include breakpoint(medium){
+				font-size: 24px;
+			}
+		}
+	}
+	&-tertiary{
+		text-transform: capitalize;
+		font-size: 3.5rem;
+		margin-bottom: 0;
+		color: $primary-color;
+		line-height: 1.35;
+		font-weight: 400;
+		@include breakpoint(large){
+			font-size: 3rem;
+		}
+		@include breakpoint(medium){
+			font-size: 2.5rem;
+		}
+		@include breakpoint(xsmall){
+			font-size: 2rem;
+		}
+	}
+	&-button{
+	    border-bottom: 2px solid #D0D0D0;
+	    font-weight: bold;
+	    padding-bottom: 5px;
+	    display: inline-block;
+	    @extend %heading-color;
+	    &:hover{
+	    	@extend %heading-color;
+	    	border-color: $heading-color;
+	    }
+	}
+}
+
+.load-more{
+	@extend %heading-color;
+	i{
+		font-size: 1.2rem;
+		padding-left: .5rem;
+	}
+}
+.view-all{
+	@extend %heading-color;
+	font-size: 1.6rem;
+    border-bottom: 1px solid;
+    text-transform: uppercase;
+}
+.subheading-tag{
+    font-size: 16px;
+    line-height: 34px;
+}

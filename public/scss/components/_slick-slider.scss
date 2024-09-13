@@ -1,0 +1,118 @@
+.single-slide{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center;
+    &.slider-height{
+        height: calc(100vh - 130px);
+        width: 100%;
+        &-2{
+            height: 850px;
+            @include breakpoint(xlarge){
+                height: 750px;
+            }
+            @include breakpoint(large){
+                height: 650px;
+            }
+            @include breakpoint(medium){
+                height: 550px;
+            }
+            @include breakpoint(small){
+                height: 500px;
+            }
+            @include breakpoint(xsmall){
+                height: 400px;
+            }
+        }
+    } 
+    .slider-content{
+        &-2{
+            p{
+                font-size: 16px;
+                color: rgb(112, 112, 112);
+                font-family: $font-4;
+                line-height: 30px;
+                @include breakpoint(medium){
+                    font-size: 14px;
+                    line-height: 25px;
+                }
+            }
+            .slider-btn{
+                font-size: 14px;
+                line-height: 32px;
+                color: $heading-color;
+                font-weight: 700;
+                text-transform: uppercase;
+                border-bottom: 3px solid $heading-color;
+                font-family: $font-4;
+            }
+        }
+    }
+    .slider-heading{
+        font-weight: 600;
+        &--main{
+            font-size: 60px;
+            display: block;
+            @include breakpoint(medium){
+                font-size: 50px;
+            }
+            @include breakpoint(small){
+                font-size: 40px;
+            }
+        }
+        &--sub{
+            font-size: 50px;
+            @include breakpoint(medium){
+                font-size: 40px;
+            }
+            @include breakpoint(small){
+                font-size: 30px;
+            }
+        }
+        &-2{
+            font-size: 90px;
+            line-height: 110px;
+            font-weight: 700;
+            @include breakpoint(xlarge){
+                font-size: 75px;
+                line-height: 95px;
+            }
+            @include breakpoint(large){
+                font-size: 60px;
+                line-height: 70px;
+                max-width: 465px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            @include breakpoint(medium){
+                font-size: 45px;
+                line-height: 50px;
+                max-width: 390px;
+            }
+            @include breakpoint(small){
+                font-size: 30px;
+                line-height: 40px;
+                max-width: 250px;
+            }
+            @include breakpoint(xsmall){
+                font-size: 25px;
+                line-height: 30px;
+                max-width: 220px;
+            }
+        }
+        &-3{
+            font-size: 59px;
+            line-height: 69px;
+            font-family: $font-4;
+            font-weight: 700;
+            @include breakpoint(medium){
+                font-size: 40px;
+                line-height: 50px;
+            }
+            @include breakpoint(small){
+                font-size: 30px;
+                line-height: 40px;
+            }
+        }
+    }
+}

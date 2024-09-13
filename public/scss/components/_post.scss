@@ -1,0 +1,674 @@
+/*****************************
+29. Post CSS
+*****************************/
+
+
+/*-- 29.00 - Blog Carousel --*/
+
+.blog{
+	&-media{
+		img{
+			@extend %width100;
+		}
+	}
+	&-entry-meta{
+		margin-bottom: .5rem;
+		a{
+			font-size: 1.2rem;
+			color: $primary-color;
+		}
+	}
+	&-info{ 
+		@extend %textAcenter;
+		background: #fff;
+		padding: 15px;
+		margin: -20px 40px 0;
+		z-index: 999999;
+		@extend %posrelative;
+
+		p{
+			line-height: 1.8;
+		}
+	}
+	&-title{
+		font-size: 2rem;
+		margin-bottom: 1rem;
+		@extend %lineheight1;
+		a{
+			color: $heading-color;
+			&:hover{
+				color: $primary-color;
+			}
+		}
+	}
+	&-footer-meta{
+		margin-bottom: 1rem;
+		a{
+			color: $body-color;
+			font-size: 1.2rem;
+			&:hover{
+				color: $primary-color;
+			}
+		}
+		.meta-separator{
+			padding: 0 5px;
+		}
+	}
+	&-link-overlay{
+		@extend %posrelative;
+	    @extend %displayBlock;
+	    &:after{
+	    	@extend %pseudo;
+	    	@extend %fullwidth;
+	    	transition: all 0.4s 0.1s;
+	    	background-color: rgba($color-black, 0);
+	    }
+	}
+	&-style-2{
+		.blog{
+			&-entry-meta{
+				margin-bottom: 1rem;
+				a{
+					color: $body-color;
+				}
+			}
+			&-title{
+				font-size: 2.4rem;
+				margin-bottom: 1.5rem;
+				@extend %lineheight1;
+				@extend %fontWeight700;
+				&--2{
+					font-size: 2rem;
+					@include breakpoint(large){
+						font-size: 1.8rem;
+					}
+				}
+			}
+			&-info{
+				@extend %textAleft;
+				@extend %margin-0;
+				padding: 2rem 0;
+			}
+		}
+	}
+
+	&-list{
+		@extend %flexbox;
+		@extend %align-start;
+		.blog{
+			&-info{
+				@extend %margin-0;
+				@extend %textAleft;
+			}
+			&-title{
+				@extend %fontWeight700;
+				font-size: 2.4rem;
+			}
+			&-entry-meta{
+				margin-top: -5px;
+				margin-bottom: 1rem;
+				a{
+					color: $body-color;	
+				}
+			}
+		}
+
+		&-small{
+			.blog{
+				&-media{
+					@include flex-basis(18rem);
+					max-width: 18rem;
+					min-height: 18.9rem;
+					img{
+						min-height: 18.9rem;
+					}
+					@include breakpoint(large){
+						@include flex-basis(14rem);
+						max-width: 14rem;
+						min-height: 15rem;
+						img{
+							min-height: 15rem;
+						}
+					}
+				}
+				&-title{
+					@include breakpoint(large){
+						font-size: 1.8rem;
+						line-height: 1.4;
+					}
+				}
+				&-info{
+					@include flex-basis(calc(100% - 18rem));
+					padding: 0 0 0 3rem;
+				}
+			}
+		}
+	}
+	&:hover{
+		.blog-link-overlay{
+			&:after{
+				background-color: rgba($color-black, .2);
+			}
+		}
+	}
+}
+
+/*-- 29.01 - Post --*/
+
+.post{
+	&-media{
+		margin-bottom: 2rem;
+		@extend %posrelative;
+		.image{
+			@extend %posrelative;
+			img{
+				@extend %width100;
+			}
+		}
+	}
+	&-info{
+		@extend %textAcenter;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		@include breakpoint(small){
+			padding-left: .5rem;
+			padding-right: .5rem;
+		}
+
+		&--2{
+			margin-left: auto;
+			margin-right: auto;
+			width: 770px;
+			@extend %maxWidth100;
+			@extend %paddingLeft-0;
+			@extend %paddingRight-0;
+			.post{
+				&-title{
+					font-size: 3.6rem;
+					@extend %marginTop-0;
+				}
+			}
+		}
+		&--3{
+			.post{
+				&-title{
+					font-size: 3.6rem;
+					@extend %marginTop-0;
+					@include breakpoint(medium){
+						font-size: 2.4rem;
+					}
+				}
+				&-meta{
+					margin-bottom: 3.5rem;
+					@include breakpoint(medium){
+						margin-bottom: 2.5rem;
+					}
+				}
+				&-content{
+					margin-bottom: 3.5rem;
+					@include breakpoint(medium){
+						margin-bottom: 2.5rem;
+					}
+				}
+			}
+		}
+		&--4{
+			@include breakpoint(xlargeonly){
+				margin-left: auto;
+				margin-right: auto;
+				width: 770px;
+				max-width: 100%;
+			}
+		}
+	}
+	&-entry-meta{
+		a{
+			font-size: 1.2rem;
+			color: $primary-color;
+		}
+	}
+    &-title{
+	    font-size: 2.4rem;
+	    margin: 2rem 0 0;
+	    @extend %textTcap;
+	    a{
+	    	color: $heading-color;
+	    	&:hover{
+	    		color: $primary-color;
+	    	}
+	    }
+	    @include breakpoint(small){
+	    	font-size: 2rem;
+	    }
+    }
+	&-meta{
+		@extend %flexbox;
+		@extend %justify-center;
+		margin: 5px 0 10px;
+		span, a{
+		    font-size: 1.2rem;
+		}
+		.meta-separator{
+			padding: 0 5px;
+		}
+	} 
+	&-content{
+		margin-bottom: 2rem;
+		blockquote{
+			background: $bg-color;
+			border: 1px solid $border-color;
+			border-left: 5px solid $primary-color;
+			font-size: 1.4rem;
+			font-style: italic;
+			margin: 4rem 0 4rem 4rem;
+			padding: 3rem 4.5rem;
+			line-height: 1.8;
+			color: $body-color;
+		}
+	}
+	&-gallery{
+		.single-post-gallery{
+			margin: 0 1rem;
+			img{
+				@extend %width100;
+			}
+		}
+		.slick{
+			&-btn{
+				@include textBoxCenter(40px);
+				font-size: 2rem;
+				background: rgba(0,0,0,.6);
+				color: $color-white-light-1;
+				@extend %borderRadius50;
+				@extend %invisible;	
+				z-index: 99;		
+			}
+			&-prev{
+				left: 3rem;
+			}
+			&-next{
+				right: 3rem;
+			}
+		}
+		&:hover{
+			.slick{
+				&-btn{
+					@extend %visible;
+				}
+				&-prev{
+					left: 1.5rem;
+				}
+				&-next{
+					right: 1.5rem;
+				}
+			}
+		}
+	}
+	&.sticky{
+		.post-title{
+			font-size: 2rem;
+		}
+		.post-details{
+			.post{
+				&-title{
+					font-size: 2.6rem;
+				}
+			}
+		}
+	}
+	&-listview{
+		@extend %flexbox;
+		@extend %flex-wrap;
+		@extend %flex-row-reverse;
+		@include breakpoint(small){
+			@include flex-direction(column);
+		}
+		.post{
+			&-info{
+				@include flex-basis(43%);
+				max-width: 43%;
+				@extend %textAleft;
+				@include breakpoint(small){
+					@include flex-basis(100%);
+					max-width: 100%;
+					padding: 0;
+				}
+			}
+			&-media{
+				@include flex-basis(calc(100% - 43%));
+				max-width: calc(100% - 43%);
+				@extend %marginBottom-0;
+				padding-left: 1.5rem;
+				padding-right: 1.5rem;
+				@include breakpoint(small){
+					@include flex-basis(100%);
+					max-width: 100%;
+					padding: 0;
+					margin-bottom: 1.5rem;
+				}
+			}
+			&-meta{
+				@extend %justify-start;
+			}
+			&-gallery{
+				width: 100%;
+			}
+		}
+	}
+	&.format-video{
+		.video-btn-3{
+			@extend %absCenter;
+		}
+	}
+}
+
+/*-- 29.02 - Masonary Blog Layout --*/
+
+.masonary-blog-layout{
+	.grid-item, .grid-sizer{
+		width: 25%;
+		@include breakpoint(large){
+			width: 33.3333%;
+		}
+		@include breakpoint(medium){
+			width: 50%;
+		}
+		@include breakpoint(xsmall){
+			width: 100%;
+		}
+	}	
+	.grid-item{
+		padding: 10px;
+		@include breakpoint(xsmall){
+			padding: 0 10px;
+		}
+	}
+}
+
+/*-- 29.03 - Single Post --*/
+
+.single-post{
+	@extend %posrelative;
+	&-details{
+		.entry{
+			&-header{
+				@extend %textAcenter;
+			}
+			&-title{
+			    @extend %marginTop-0;
+			    font-size: 4.2rem;
+			    @extend %fontWeight400;
+			    margin-bottom: 1.5rem;
+			    line-height: 1.2;
+			}
+			&-meta{
+				margin-bottom: 3.1rem;
+				&-top{
+					margin-bottom: 1.5rem;
+				}
+				&-bottom{
+					a{
+						i{
+						    font-size: 15px;
+						    line-height: 20px;
+						    vertical-align: middle;
+						    padding-right: 10px;
+						}
+						&:not(:last-child){
+							padding-right: 2rem;
+						}
+					}
+				}
+			}
+			&-thumbnail{
+				margin-bottom: 4.5rem
+			}
+			&-content{
+				
+				p{
+					color: $heading-color;
+					margin-bottom: 3rem;
+				}
+				ul{
+					&.list{
+						padding-left: 16px;
+						&-disc{
+							list-style-type: disc;
+						}
+						&-cicle{
+							list-style-type: cicle;
+						}
+						&-square{
+							list-style-type: square;
+						}
+						&-upper-roman{
+							list-style-type: upper-roman;
+						}
+						&-lower-alpha{
+							list-style-type: lower-alpha;
+						}
+						li{
+
+						}
+					}
+					li{
+						color: $heading-color;
+						margin-bottom: 3rem;
+					}
+				}
+
+				a{
+					color: $heading-color;
+					&:hover{
+						color: $primary-color;
+						@extend %textDunder;
+					}
+				}
+				h1, h2, h3, h4, h5, h6{
+					font-family: $font-2;
+					margin-bottom: 1.5rem;
+					line-height: 1.4;
+				}
+				h3{
+					font-size: 2.4rem;
+				}
+			}
+			&-footer-meta{
+				border-bottom: 1px solid $border-color-2;
+			    padding-bottom: 1rem;
+			    margin-bottom: 4rem;
+			    font-size: 1.2rem;
+			    margin-top: 3.5rem;
+			    color: $heading-color;
+			    @extend %flexbox;
+			    @extend %justify-between;
+			}
+
+		}
+	}
+	.post-share{
+		@extend %posabsolute;
+	    top: 8%;
+	    right: calc( (6% + 30px) * -1);
+	    @include breakpoint(xlarge){
+			right: calc( (2.4% + 30px) * -1);
+	    }
+	    @include breakpoint(xclarge){
+			right: calc( (-1% + 30px) * -1);
+	    }
+	    @include breakpoint(large){
+			right: calc( (3% + 30px) * -1);
+	    }
+	    @include breakpoint(blarge){
+			right: calc( (-1% + 30px) * -1);
+	    }
+	    @include breakpoint(medium){
+		    position: relative;
+		    right: auto !important;
+		    left: auto !important;
+		    top: auto !important;
+		    bottom: auto !important;
+		    margin-bottom: 4rem;
+		    text-align: right;
+
+		    .social{
+		    	.social{
+		    		&__item{
+		    			display: inline-block;
+		    			margin: 0 5px !important;
+		    			&:last-child{
+		    				margin-right: 0 !important;
+		    			}
+		    		}
+		    		&__link{
+		    			@include border-radius(0);
+		    			width: 30px;
+		    			height: 30px;
+		    			line-height: 30px;
+		    			color: #fff;
+		    			font-size: 1.4rem;
+		    			&.facebook{
+							background-color: $facebook-color;
+		    			}
+		    			&.twitter{
+							background-color: $twitter-color;
+		    			}
+		    			&.google-plus{
+							background-color: $google-plus-color;
+		    			}
+		    			&.pinterest{
+							background-color: $pinterest-color;
+		    			}
+		    		}
+		    	}
+		    }
+	    }
+	}
+
+}
+
+/*-- 29.04 - Post Navigation --*/
+
+.post-navigation{
+	margin-bottom: 4.2rem;
+	.nav-links{
+		@extend %flexbox;
+		@extend %justify-between;
+		@include breakpoint(small){
+			@include flex-direction(column);
+			@include align-items(flex-start);
+		}
+		&__link{
+		    @extend %posabsolute;
+		    @extend %width100;
+		    @extend %height100;
+		    @extend %top-0;
+		    opacity: 0;
+		}
+		&__inner{
+			@extend %flexbox;
+			@extend %align-center;
+			color: $heading-color;
+			@extend %posrelative;
+			padding-top: 5.5rem;
+			@include breakpoint(small){
+				padding-top: 3rem;
+			}
+			&.nav-prev{
+				@include breakpoint(small){
+					margin-bottom: 2rem;
+				}
+				.nav-links{
+					&__text{
+						left: 0;
+					}
+					&__content{
+						padding-left: 2rem;
+						@include breakpoint(small){
+							padding-left: 0
+						}
+					}
+				}
+			}
+			&.nav-next{
+				@extend %flex-row-reverse;
+				@include breakpoint(small){
+					@include flex-direction(row);
+				}
+				.nav-links{
+					&__text{
+						right: 0;
+						@include breakpoint(small){
+							right: auto;
+							left: 0;
+						}
+					}
+					&__content{
+						padding-right: 2rem;
+						@include breakpoint(small){
+							padding-right: 0;
+						}
+					}
+				}
+			}
+		}
+		&__text{
+		    @extend %posabsolute;
+		    @extend %top-0;
+		    @extend %textTupper;
+		    font-size: 12px;
+		}
+		&__thumb{
+			@include flex-basis(100px);
+			max-width: 100px;
+		    height: 100px;
+			@include breakpoint(small){
+				display: none;
+			}
+		}
+		&__content{
+			@include flex-basis(calc(100% - 100px));
+			max-width: calc(100% - 100px);
+			@include breakpoint(small){
+				@include flex-basis(100%);
+				max-width: 100%;
+			}
+		}
+		&__title{
+			font-size: 1.8rem;
+			@extend %marginBottom-0;
+		}
+		&__meta{
+			font-size: 1.1rem;
+			color: $body-color;
+		}
+	}
+}
+
+/*-- 29.05 - Related Post --*/
+
+.related-posts-wrap{
+	h3{
+		font-size: 2rem;
+		margin: 0 0 3rem;
+		@extend %textTupper;
+		@extend %lineheight1;
+	}
+}
+.related-post{
+	&__thumb{
+		@extend %displayBlock;
+		margin-bottom: 3rem;
+	}
+	h4{
+		font-size: 1.4rem;
+		@extend %textTupper;
+		a{
+			color: $heading-color;
+		}
+	}
+	span{
+		font-size: 1.2rem;
+		font-style: italic;
+	}
+}

@@ -1,0 +1,100 @@
+/*****************************
+43. Checkout CSS
+*****************************/
+
+.user-actions{
+	&__form{
+		margin-bottom: 3rem;
+		@include breakpoint(small){
+			margin-bottom: 2rem;
+		}
+		.form{
+			&__input{
+				width: 48%;
+				@include breakpoint(xsmall){
+					width: 100%;
+					margin-bottom: 2rem;
+				}
+			}
+		}
+	}
+}
+
+
+
+.checkout{
+	&-wrapper{
+
+	}
+	&-title{
+		h2{
+			font-size: 2rem;
+			margin-bottom: 4.5rem;
+			@extend %posrelative;
+			@include breakpoint(medium){
+				margin-bottom: 3rem;
+			}
+			@include breakpoint(xsmall){
+				margin-bottom: 2rem;
+			}
+			&:after{
+			    content: "";
+			    width: 50px;
+			    display: block;
+			    margin-top: 10px;
+			    border-bottom-width: 2px;
+			    border-bottom-style: solid;
+			    border-color: inherit;
+			}
+		}
+	}
+}
+.new-account{
+	padding-top: 2rem;
+}
+.order-details{
+	padding: 4rem 4.5rem;
+	border: 2px solid $border-color-2;
+	@include breakpoint(small){
+		padding: 3rem 3.5rem;
+	}
+	@include breakpoint(xsmall){
+		padding: 2rem 2.5rem;
+	}
+}
+.payment{
+	&-label{
+		@extend %heading-color;
+		text-transform: uppercase;
+	}
+	&-radio{
+		input{
+			margin-right: 1rem;
+		}
+	}
+	&-info{
+		pading: 1rem 0;
+		p{
+			font-size: 1.2rem;
+			margin-bottom: 0;
+		}
+	}
+}
+.terms-condition-label{
+	a{
+		font-size: 1.8rem;
+		font-weight: 500;
+		font-family: $heading-font;
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+}
+.shipping-method{
+	@include flexbox;
+	@include flex-direction(column);
+	@include align-items(center);
+	.custom-radio{
+		width: 15rem; 
+	}
+}

@@ -1,0 +1,168 @@
+/******************************
+
+INDEX:
+
+    00 - Base - Global
+    01 - Base - Typography
+
+    10 - Layout - Header
+    11 - Layout - Footer
+    12 - Layout - Sidebar
+
+    20 - Components - Accordion
+    21 - Components - Animation
+    22 - Components - Button
+        22.00 - Global Button
+        22.01 - Close Button
+        22.02 - Menu Button
+        22.03 - Video Play Button
+        22.04 - Banner Button
+        22.05 - Action Button
+        22.06 - Action Button
+        22.07 - Action Button
+
+    23 - Components - Carousel
+    24 - Components - Comment
+    25 - Components - Form
+        25.00 - Global Form
+        25.01 - Rating
+        25.02 - Search Form
+        25.03 - Newsletter Form
+        25.04 - Cart Form
+        25.05 - Shipping Calculator Form
+
+    26 - Components - Mini cart
+    27 - Components - Modal
+        27.00 - Quick View Modal
+        27.01 - Newsletter Form Popup
+        27.02 - Search Form Popup
+
+    28 - Components - Navigation
+        28.00 - Main Menu
+        28.01 - Vertical Main Menu
+        28.02 - Mobile Menu
+        28.03 - Side Navigation
+        28.04 - Side Nav Menu
+
+    29 - Components - Post
+        29.00 - Blog Carousel
+        29.01 - Post
+        29.02 - Masonary Blog Layout
+        29.03 - Single Post
+        29.04 - Post Navigation
+        29.05 - Related Post
+
+    30 - Components - Product
+        30.00 - Airi Product
+        30.01 - Product List
+        30.02 - Product Summary
+        30.03 - Special Offer Product
+        30.04 - Product Countdown
+        30.05 - Product Rating
+        30.06 - Product Category
+        30.06 - Special Product List
+        30.07 - Special Product List
+        30.08 - Product Gallery
+        30.09 - Product Variations
+
+    31 - Components - Promo
+        31.00 - Banner Box
+        31.01 - Video Banner
+        31.02 - Fullwide Banner
+
+    32 - Components - Social
+    33 - Components - Table
+    34 - Components - Tabs
+        34.00 - tab style 1
+        34.01 - tab style 2
+        34.02 - tab style 3
+        34.03 - tab Content
+        34.04 - Product Data tab
+        34.05 - User Dashboard tab
+
+    35 - Components - Team
+    36 - Components - Testimonial
+    37 - Components - Widget
+
+
+    40 - Pages - 404 
+    41 - Pages - About
+    42 - Pages - Cart
+    43 - Pages - Checkout
+    44 - Pages - Shop
+    45 - Pages - Single Product
+
+    50 - Utilities - Helper
+    51 - Utilities - Common
+    52 - Utilities - Color
+
+******************************/
+
+
+/*
+    Defult Primary Color:       #8a8a8a
+    Default Border Color:       #e5e5e5
+    Default Text Color:         #8a8a8a
+    Default Heading Color:      #282828
+    Default Body Font:          'Montserrat', sans-serif;
+
+*/
+ 
+ 
+
+// Fonts
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Playfair+Display:400,700,900|Roboto+Condensed:300,400,700|Roboto:300,400,500,700,900');
+
+// Base 
+
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/typography';
+
+// Helper
+
+@import 'utilities/helper';
+
+
+// Layout 
+
+@import 'layout/header';
+@import 'layout/footer';
+
+// Components
+@import 'components/accordion';
+@import 'components/animation';
+@import 'components/box-content';
+@import 'components/button';
+@import 'components/carousel';
+@import 'components/comment';
+@import 'components/form';
+@import 'components/mini-cart';
+@import 'components/modal';
+@import 'components/navigation';
+@import 'components/post';
+@import 'components/product';
+@import 'components/promo';
+@import 'components/slick-slider';
+@import 'components/social';
+@import 'components/tabs';
+@import 'components/testimonial';
+@import 'components/widget';
+@import 'components/team';
+@import 'components/table';
+ 
+// Pages 
+
+@import 'pages/shop';
+@import 'pages/about';
+@import 'pages/404';
+@import 'pages/single-product';
+@import 'pages/checkout';
+@import 'pages/cart';
+
+// utilities
+
+@import 'utilities/common';
+@import 'utilities/color'; 
+    

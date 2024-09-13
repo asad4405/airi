@@ -1,0 +1,883 @@
+/*****************************
+03. Color CSS
+*****************************/
+
+%primary-color{
+	color: $primary-color;
+}
+%primary-bg-color{
+	background-color: $primary-color;
+}
+%primary-border-color{
+	border-color: $primary-color;
+}
+%heading-color{
+	color: $heading-color;
+}
+%white-color{
+	color: $color-white;
+}
+%white-bg-color{
+	background-color: $color-white;
+}
+%white-border-color{
+	border-color: $color-white;
+}
+%body-color{
+	color: $body-color;
+}
+%body-bg{
+	background-color: $bg-color;
+}
+%dark-color{
+	color: $color-dark;
+}
+%dark-bg-color{
+	background-color: $color-dark;
+}
+%dark-border-color{
+	border-color: $color-dark;
+}
+
+// Color
+
+
+.color--primary{
+	color: $primary-color !important;
+}
+.color--light{
+	color: $color-light !important;
+}
+.color--light-1{
+	color: $color-light-1 !important;
+}
+.color--light-2{
+	color: $color-light-2 !important;
+}
+.color--light-3{
+	color: $color-light-3 !important;
+}
+.color--light-6{
+	color: $color-light-6 !important;
+}
+.color--black{
+	color: $color-black !important;
+}
+.color--white{
+	color: $color-white !important;
+}
+.color--dark{
+	color: $color-dark !important;
+}
+.color--dark-1{
+	color: $color-dark-1 !important;
+}
+.color--dark-2{
+	color: $color-dark-2 !important;
+}
+.color--dark-3{
+	color: $color-dark-3 !important;
+}
+.color--dark-4{
+	color: $color-dark-4 !important;
+}
+.color--dark-5{
+	color: $color-dark-5 !important;
+}
+.color--red{
+	color: $color-red-dark !important;
+}
+.color--red-dark{
+	color: $color-red-dark !important;
+}
+
+.heading-color{
+	color: $heading-color !important;
+}
+
+// Background
+.bg--1{
+	background-color: $bg-color;
+}
+.bg--2{
+	background-color: $bg-color-2;
+}
+.bg--3{
+	background-color: $heading-color;
+}
+.bg--white{
+	background-color: $color-white;
+}
+.bg--white-2{
+	background-color: $color-white-light;
+}
+.bg--white-3{
+	background-color: $color-white-light-1;
+}
+.bg--white-4{
+	background-color: $color-white-light-2;
+}
+.bg--white-5{
+	background-color: $color-white-light-3;
+}
+.bg--white-6{
+	background-color: $color-white-light-4;
+}
+.bg--white-7{
+	background-color: $color-white-light-5;
+}
+.bg--white-dark{
+	background-color: $color-white-dark;
+}
+.bg--light{
+	background-color: $color-light;
+}
+.bg--dark{
+	background-color: $color-dark;
+}
+.bg--dark-2{
+	background-color: $color-dark-2;
+}
+.bg--dark-3{
+	background-color: $color-dark-3;
+}
+.bg--dark-4{
+	background-color: $color-dark-4;
+}
+.bg--dark-5{
+	background-color: $color-dark-5;
+}
+.bg--black{
+	background-color: $color-black;
+}
+.bg--shaft{
+	background-color: $bg-color;
+}
+.bg--blue{
+	background-color: $color-blue;
+}
+.bg--gray{
+	background-color: $color-gray;
+}
+.bg--gray-2{
+	background-color: $color-gray-2;
+}
+.bg--gray-3{
+	background-color: $color-gray-3;
+}
+.bg--gray-4{
+	background-color: $color-gray-4;
+}
+.bg--dark{
+	background-color: $color-dark;
+}
+.bg--dark-2{
+	background-color: $color-dark-2;
+}
+.bg--dark-3{
+	background-color: $color-dark-3;
+}
+.bg--dark-4{
+	background-color: $color-dark-4;
+}
+.bg--zircon-light{
+	background-color: $color-white-light-1;
+}
+.yellow-dark-bg{
+	background-color: $color-yellow-dark;
+}
+.green-dark-bg{
+	background-color: $color-green-dark;
+}
+.primary-bg{
+	@extend %primary-bg-color
+}
+.brand-bg{
+	@extend %brand-bg-color
+}
+.pampas-bg{
+	background-color: $color-pampas;
+}
+
+
+@for $i from 1 through length($colorList) {
+	.template-color-#{$i}{
+    	a:hover, button:hover{
+    		color: nth($colorList, $i);
+    	}
+    	.color--primary{
+    		color: nth($colorList, $i) !important;
+    	}
+		.bg--primary{
+			background-color: nth($colorList, $i);
+		}
+		.bd-color--primary{
+			border-color: nth($colorList, $i);
+		}
+    	.scroll-to-top{
+    		&:hover{
+    			background-color: nth($colorList, $i); 
+    		}
+    	}
+		.ai-preloader {
+			.ai-child{
+				background-color: nth($colorList, $i);
+			}
+		}
+		.header{
+			&-toolbar{
+				&__item{
+					&:hover{
+						& > a{
+							color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.header:not(.header-transparent) {
+			.main-navigation{
+				.mainmenu{
+					&__item{
+						&.active{
+							& > a{
+								color: nth($colorList, $i);
+							}
+						}
+					}
+					&__link{
+						@extend %heading-color;
+						& > span{
+							&.mm-text{
+								&:after{
+									background: nth($colorList, $i);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.user-info-menu{
+			li{
+				a{
+					&:hover{
+						color: nth($colorList, $i);
+					}
+				}
+			}
+		}
+		.mini-cart-btn{
+			&--2{
+				.mini-cart{
+					&-icon{
+						sup{
+							background-color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.overlay-menu-btn{
+			.toolbar-btn{
+				&:hover{
+					color: nth($colorList, $i);
+				}
+			}
+		}
+		.footer{
+			&-top{
+				font-size: 1.2rem;
+			}
+			&-widget{
+				.widget-title{
+					&:after{
+						background-color: nth($colorList, $i);
+					}
+				}
+				.widget-menu{
+					li{
+						&:not(:last-child){
+							margin-bottom: 1.5rem;
+						}
+					}
+					a{
+						&:hover{
+							color: nth($colorList, $i);
+						} 
+					}
+				}
+				.contact-info{
+					&--3{
+						.contact-info{
+							&__item{
+								i{
+									font-size: 1.4rem;
+									color: nth($colorList, $i);
+								}
+							}
+						}
+					}
+				}
+			}
+			a{
+				&:hover{
+					color: nth($colorList, $i);
+				}
+			}
+		}
+		.box-content{
+			&__inner{
+				&:after{
+					background-color: nth($colorList, $i);
+				}
+			}
+		}
+		.btn{
+			&-link{
+				&:hover{
+					border-bottom-color: nth($colorList, $i);
+				}
+			}
+			&-3{
+				background-color: nth($colorList, $i);
+			}
+			&-style-1{
+				&:hover{
+					background-color: nth($colorList, $i);
+					border-color: nth($colorList, $i);
+				}
+			}
+			&-style-2{
+				background-color: nth($colorList, $i);
+			}
+			&-style-3{
+				background-color: nth($colorList, $i);
+			}
+			&-style-4{
+				background-color: nth($colorList, $i);
+			}
+		}
+		.btn-close{
+			&:hover{
+				i{
+					color: nth($colorList, $i);
+				}
+			}
+		}
+		.read-more-btn{
+			&:hover{
+				border-color: nth($colorList, $i);
+				background: nth($colorList, $i);
+			}
+		}
+		.nav{
+			&-style-2{
+				.slick{
+					&-btn{
+						&:hover{
+							background-color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.comment{
+			&-author{
+				a{
+					&:hover{
+						color: nth($colorList, $i);
+					}
+				}
+			}
+			.reply{
+				&:hover{
+					background-color: nth($colorList, $i);
+					border-color: nth($colorList, $i);
+				}
+			}
+		}
+		.form{
+			.forgot-pass{
+				margin: 0;
+				color: nth($colorList, $i);
+				font-size: 1.2rem;
+				&:hover{
+					text-decoration: underline;
+				}
+			}
+		}
+		.newsletter-form{
+			&--2{
+				.newsletter-form{
+					&__submit{
+						&:hover{
+							color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.cart-form{
+			&__btn{
+				&:hover{
+					color: nth($colorList, $i);
+				}
+			}
+		}
+		.custom-close{
+			&:hover{
+				i{
+					color: nth($colorList, $i);
+				}
+			}
+		}
+		.main-navigation{
+			.mainmenu{
+				&__item{
+					&.menu-item-has-children{
+						& > ul{
+							li{
+								&.active{
+									a{
+										color: nth($colorList, $i);
+									}
+								}
+							}
+						}
+					}
+				}
+				ul {
+					li{
+						a{
+							.mm-text{
+								&:after{
+									background-color: nth($colorList, $i);
+								}
+							}
+							&:hover{
+								color: nth($colorList, $i);
+								&:after{
+									color: nth($colorList, $i);
+								}				
+							}
+
+						}
+					}
+				} 
+				&--3{
+					.mainmenu{
+						&__link{
+							&:hover{
+								color: nth($colorList, $i);
+							}
+						}
+					}
+				}
+			}	
+		}
+		.main-navigation{
+			&.vertical-nav{
+				.mainmenu{
+					&__item{
+						&.active{
+							& > a{
+								color: nth($colorList, $i);
+							}
+						}
+					}
+				}
+			}	
+		}
+		.side-navigation{
+			&-inner{
+				@extend %sideNavInner;
+				.widget{
+					margin-bottom: 3rem;
+					a{
+						&:hover{
+							color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.sidenav-menu{
+			li{
+				a{
+					&:hover{
+						color: nth($colorList, $i);
+					}
+				}
+			}
+		}
+		.blog{
+			&-entry-meta{
+				a{
+					color: nth($colorList, $i);
+				}
+			}
+			&-title{
+				a{
+					&:hover{
+						color: nth($colorList, $i);
+					}
+				}
+			}
+			&-footer-meta{
+				a{
+					&:hover{
+						color: nth($colorList, $i);
+					}
+				}
+			}
+		}
+		.post{
+			&-entry-meta{
+				a{
+					color: nth($colorList, $i);
+				}
+			}
+			&-title{
+				a{
+					&:hover{
+						color: nth($colorList, $i);
+					}
+				}
+			}
+			&-content{
+				blockquote{
+					border-left: 5px solid nth($colorList, $i);
+				}
+			}
+		}
+		.single-post{
+			&-details{
+				.entry{
+					&-content{
+						a{
+							&:hover{
+								color: nth($colorList, $i);
+							}
+						}
+					}
+				}
+			}
+		}
+		.product{
+			&-badge{
+				&.sale{
+					background-color: nth($colorList, $i);
+				}
+			}
+			&-title{
+				a{
+					&:hover{
+						color: nth($colorList, $i);
+					}
+				}
+			}	
+			&-action{
+				a{
+					i{
+						&:hover{
+							background-color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.product-summary{
+			.product{
+				&-action{
+					a{
+						i{
+							&:hover{ 
+								color: nth($colorList, $i);
+							}
+						}
+					}
+				}
+				&-extra{
+					a{
+						&:hover{
+							color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.ratings{
+			i{
+				&.rated{
+					color: nth($colorList, $i);
+				}
+			}
+		}
+		.product-gallery{
+			&__thumb{
+				.slick{
+					&-btn{
+						&:hover{
+							color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+			&__actions{
+				a, button{
+					&:hover{
+						i{
+							color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.variation-form{
+			.swatch-wrapper{
+				&:hover{
+					border-color: nth($colorList, $i);
+					color: nth($colorList, $i);
+				}
+			}
+		}
+		.banner-box{
+			&.banner{
+				&-hover-3{
+					&:hover{
+						.banner{
+							&-btn-3{
+								background-color: nth($colorList, $i);
+								border-color: nth($colorList, $i);
+							}
+						}
+						.btn-style-1{
+							background-color: nth($colorList, $i);
+							border-color: nth($colorList, $i);
+						}
+					}
+				}
+				&-hover-4{
+					&:hover{
+						.banner{
+							&-info{
+								.banner-btn-3{
+									&:after{
+										background-color: nth($colorList, $i);
+									}
+								}
+							}
+						}
+					}
+				}
+				&-hover-5{
+					&:hover{
+						.banner{
+							&-info{
+								.btn-style-1{
+									background-color: nth($colorList, $i);
+									border-color: nth($colorList, $i);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.social{
+			&-round{
+				.social{
+					&__link{
+						&:hover{
+							background-color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+			&__link{
+				&:hover{
+					color: nth($colorList, $i);
+				}
+			}
+			&.body-color{
+				.social__link{
+					&:hover{
+						color: nth($colorList, $i);
+					}
+				}
+			}
+			&.color--white{
+				.social__link{
+					&:hover{
+						color: nth($colorList, $i);
+					}
+				}
+			}
+		} 
+		.table{
+			tbody{
+				td{
+					&.product{
+						&-action-btn{
+							a{
+								&:hover{
+									color: nth($colorList, $i);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.tab-style-1{
+			.nav{
+				&-link{
+					&.active{
+						span{
+							border-color: nth($colorList, $i);
+						}
+						&:hover{
+							span{
+								border-color: nth($colorList, $i);
+							}
+						}
+					}
+				}
+			}
+		}
+		.tab-style-2{
+			.nav{
+				&-link{
+					&.active{
+						span{
+							border-color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.user-dashboard-tab{
+			&__head{
+				.nav-link{
+					&.active, 
+					&:hover{
+						background-color: nth($colorList, $i);
+					}
+				}
+			}
+		}
+		.team-member{
+			&__designation{
+				color: nth($colorList, $i);
+			}
+		}
+		.testimonial{
+			&-style-3{
+				.testimonial{
+					&__desc{
+						&:after{
+							background-color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.product-widget{
+			&__list{
+				li{
+					a{ 
+						&:hover{
+							color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.contact-info{
+			a{
+				&:hover{
+					color: nth($colorList, $i);
+				}
+			}
+		}
+		.blog-widget{
+			.menu{
+				li{
+					a{
+						&:hover{
+							color: nth($colorList, $i);
+						}
+					}
+				}
+			}
+		}
+		.shop-toolbar{
+			.product{
+				&-filter-btn{
+					&.open{
+						&:after{
+							content: "\f106";
+						}
+						color: nth($colorList, $i);
+					}
+				}
+			}
+		}
+		.message-box{
+			a{
+				&:hover{
+					color: nth($colorList, $i);
+				}
+			}
+		}
+		.list-with-icon{
+			li{
+				i{
+					color: nth($colorList, $i);
+				}
+			}
+		}
+		.dropdown-item{
+			&:hover{
+				color: nth($colorList, $i);
+			}
+		}
+		.insta-content-header{
+			h2{
+				color: nth($colorList, $i);
+			}
+		}
+		.separator{
+			border-color: nth($colorList, $i);
+		}
+		.dot-style-1{
+			.slick{
+				&-dots{
+					li{
+						&.slick-active{
+							button{
+								border-color: nth($colorList, $i);
+								background-color: nth($colorList, $i);
+							}
+						}
+					}
+				}
+			}
+		}
+		.dot-style-2{
+			.slick{
+				&-dots{
+					li{
+						&.slick-active{
+							button{
+								border-color: nth($colorList, $i);
+								background-color: nth($colorList, $i);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

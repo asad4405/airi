@@ -1,0 +1,139 @@
+/*****************************
+32. Social Icon
+*****************************/
+
+
+.social{
+	&-round{
+		.social{
+			&__item{
+				margin: 5px !important;
+			}
+			&__link{
+				@include textBoxCenter(36px);
+				@include border-radius(50%);
+				background-color: $color-white;
+				color: $heading-color;
+				font-size: 1.4rem;
+				@include transition(color .4s ease);
+				&:hover{
+					background-color: $primary-color;
+					color: #fff;
+				}
+			}
+		}
+	}
+	&-big{
+		.social{
+			&__link{
+				width: 5rem;
+				height: 5rem;
+				line-height: 5rem;
+				font-size: 1.8rem;
+			}
+		}
+	}
+	&-medium{
+		.social{
+			&__item{
+				&:not(:last-child){
+					margin-right: 1.5rem;
+				}
+			}
+			&__link{
+				color: $heading-color;
+				font-size: 1.6rem;	
+			}
+		}
+	}
+	&-small{
+		.social{
+			&__item{
+				&:not(:last-child){
+					margin-right: 1rem;
+				}
+			}
+			&__link{
+				color: $heading-color;
+				font-size: 1.3rem;	
+			}
+		}
+	}
+	&-sharing{
+		.social{
+			&__link{
+				&.facebook{
+					&:hover{
+						background-color: $facebook-color;
+					}					
+				}
+				&.twitter{
+					&:hover{
+						background-color: $twitter-color;
+					}
+				}
+				&.pinterest{
+					&:hover{
+						background-color: $pinterest-color;
+					}
+				}
+				&.google-plus{
+					&:hover{
+						background-color: $google-plus-color;
+					}
+				}
+			}
+		}
+	}
+	&__item{
+		display: inline-block;
+		&:not(:last-child){
+			margin-right: 2rem;
+		}
+	}
+	&__link{
+		display: block;
+		color: $color-light-2;
+		font-size: 1.8rem;
+		&:hover{
+			color: $primary-color;
+		}
+	}
+	&.body-color{
+		.social__link{
+			color: $body-color;
+			&:hover{
+				color: $primary-color;
+			}
+		}
+	}
+	&.bg-gray-2{
+		.social__link{
+			background: $color-gray-2;
+		}
+	}
+	&.vertical{
+		.social__item{
+			display: block;
+		}
+	}
+	&.color--white{
+		.social__link{
+			color: $color-white;
+			&:hover{
+				color: $primary-color;
+			}
+		}
+	}
+} 
+
+
+.sticky-social{
+    &.fixed{
+	    position: fixed !important;
+	    z-index: 999;
+    }
+}
+
+
+

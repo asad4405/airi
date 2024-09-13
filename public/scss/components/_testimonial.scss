@@ -1,0 +1,174 @@
+/*****************************
+36. Testimonail CSS
+*****************************/
+
+.testimonial{
+	&-bg-1{
+		background: url(../img/banner/m12-bg1.jpg) no-repeat scroll center/cover;
+	}
+	&-bg-2{
+		background: url(../img/banner/m13-bg1.jpg) no-repeat scroll center/cover;
+	}
+	&__desc{
+		font-family: $font-2;
+	}
+	&__rating{
+		i{
+			font-size: 1.4rem;
+			&.rated{
+				color: $color-red-dark-2;
+			}
+		}
+	}
+	&__author{
+		@include flexbox;
+		@include align-items(center);
+		margin-top: 2rem;
+		&--name{
+			font-weight: bold;
+			font-size: 1.6rem;
+			margin: 0 0 5px;
+		}
+		&--designation{
+		    font-size: 12px;
+		    margin: 0;
+		    @extend %heading-color;
+		    @extend %posrelative;
+		    &:before{
+				content: '-';
+				padding-left: .4em;
+				padding-right: .4em;
+		    }
+		}
+	}
+	&-style-1{
+		.testimonial{
+			&__desc{
+				font-size: 20px;
+				line-height: 1.9;
+				margin-bottom: 10px;
+				@extend %heading-color;
+			}
+
+			&__author{
+				&--name{
+					font-size: 1.8rem;
+					margin: 0;
+				}
+				&--designation{
+				    font-size: 1.8rem;
+				}
+			}
+		}
+	} 
+	&-style-2{
+		
+		.testimonial{
+			&__inner{
+				background: #fff;
+				padding: 4rem;
+				@include box-shadow(0px 0px 40px 0px rgba(41, 44, 58, 0.09));
+			}
+			&__desc{
+				font-size: 18px;
+				line-height: 1.9;
+				margin-bottom: 20px;
+				@extend %heading-color;
+			}
+			&__author{
+				&--img{
+					@include flex-basis(5.4rem);
+					width: 5.4rem;
+					height: 5.4rem;
+					@include border-radius(50%);
+					margin-right: 2.5rem;
+				}
+				&--name{
+					margin-bottom: 0;
+				}
+				&--designation{
+					font-size: 1.4rem;
+				}
+			}
+		}
+	} 
+	&-style-3{
+		.testimonial{
+			&__inner{
+				text-align: center;
+			}
+			&__desc{
+			    font-size: 1.8rem;
+			    line-height: 2.8rem;
+			    margin: 1.8rem auto 1.3rem;
+			    @extend %heading-color;
+				&:after{
+				    content: '';
+				    width: 35px;
+				    height: 2px;
+				    display: block;
+				    margin-left: auto;
+				    margin-right: auto;
+				    margin-top: 20px;
+				    background-color: $primary-color;
+				}
+			}
+			&__author{
+				@extend %justify-center;
+				&--img{
+					margin-left: auto;
+					margin-right: auto
+				}
+				&--name{
+					margin-bottom: 0;
+					font-weight: 400;
+					font-size: 1.4rem;
+				}
+				&--designation{
+					font-size: 1.4rem;
+					&:before{
+					    content: "\f111";
+					    font-family: FontAwesome;
+					    font-size: 4px;
+					    vertical-align: middle;
+					    padding-left: 1rem;
+					    padding-right: 1rem;
+					}
+				}
+			}
+		}
+	}
+	&-style-4{
+		.testimonial{
+			&__thumbnail{
+				margin-bottom: 17px;
+			}
+			&__desc{
+				font-size: 16px;
+				line-height: 2;
+				width: 570px;
+				max-width: 90%;
+				font-weight: bold;
+				margin: 0 auto 10px;
+				color: $color-dark-5;
+			}
+			&__rating{
+				i.rated{
+					color: #f5b223;
+				}
+			}
+			&__author{
+				@include justify-content(center);
+				margin-top: 9px;
+				&--name{
+					font-size: 14px;
+					margin: 0;
+					font-weight: normal;
+				}
+				&--designation{
+					font-size: 14px;
+				}
+			}
+		}
+	}
+}

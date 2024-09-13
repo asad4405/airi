@@ -1,0 +1,15 @@
+/*****************************
+41. About CSS
+*****************************/
+
+.about-bg{
+	&-1{
+		background: url(../img/about/about-bg1.jpg) no-repeat scroll center/auto;
+		margin-left: -15rem;
+		margin-right: -15rem;
+		padding-right: 15rem;
+		@include breakpoint(small){
+			margin-left: -2rem
+		} 
+	}
+}

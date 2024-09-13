@@ -1,0 +1,137 @@
+/*****************************
+26. Mini Cart CSS
+*****************************/
+ 
+.mini-cart{
+	@extend %sideNavWrapper;
+	width: 42rem;
+	@include breakpoint(small){
+		width: 35rem;
+	}
+	@include breakpoint(xsmall){
+		width: 31rem;
+		max-width: 100%;
+	}
+	&.open{
+		@extend %sideNavOpen;
+	}
+	.btn-close{
+		@extend %sideNavCloseBtn;
+		font-size: 3rem;
+		top: 4rem;
+		height: 3rem;
+		background: none;
+		@include breakpoint(small){
+			top: 1rem;
+			right: 2rem;
+		}
+		@include breakpoint(xsmall){
+			right: 1rem;
+		}
+		i{
+			color: $color-dark-2;
+		}
+	}
+
+	&-wrapper{
+		padding-top: 5rem;
+		@include breakpoint(large){
+			padding-top: 4rem;
+		}
+		@include breakpoint(small){
+			padding-top: 3rem;
+		}
+		@include breakpoint(xsmall){
+			padding-top: 2rem;
+		}
+	}
+	&-inner{
+		@extend %sideNavInner;
+		overflow: hidden;
+		padding: 5rem;
+		@include breakpoint(large){
+			padding: 4rem 5rem;
+		}
+		@include breakpoint(small){
+			padding: 3rem;
+		}
+		@include breakpoint(xsmall){
+			padding: 2rem;
+		}
+	}
+
+	&__heading{
+		@extend %fontWeight400;
+	}
+	&__list{
+	    max-height: 30rem;
+	    overflow: auto;
+	    margin-right: -7rem;
+	    padding-right: 7rem;
+	    margin-bottom: 3rem;
+	    @include breakpoint(large){
+	    	max-height: 27rem;
+	    }
+	    @include breakpoint(xsmall){
+	    	max-height: 21rem;
+	    	margin-bottom: 2rem;
+	    }
+	}
+	&__product{
+		@extend %flexbox;
+		@extend %posrelative;
+		&:not(:last-child){
+			margin-bottom: 3rem;
+		}
+		.remove{
+		    @extend %displayBlock;
+		    @extend %fontWeight400;
+		    font-size: 1.4rem;
+		    height: 2rem;
+		    width: 2rem;
+		    line-height: 1.7rem;
+		    @extend %overflowHidden;
+		    @extend %posabsolute;
+		    right: -17px;
+		    top: 2px;
+		    @extend %textAright;
+		}
+		&__image{
+			@include flex-basis(7rem);
+			max-width: 7rem;
+		}
+		&__content{
+			@include flex-basis(calc(100% - 7rem));
+			max-width: calc(100% - 7rem);
+			padding-left: 2rem;
+			@include breakpoint(small){
+				@include flex-basis(calc(100% - 9rem));
+				max-width: calc(100% - 9rem);
+				padding-left: 1rem;
+			}
+		}
+		&__title{
+			@extend %heading-color;
+			@extend %displayBlock;
+			font-size: 14px;
+			line-height: normal;
+			margin: 0 0 5px;
+		}
+	}
+	&__total{
+		@extend %flexbox;
+		@extend %justify-between;
+		@extend %align-center;
+		margin-bottom: 3rem;
+		span{
+			&.ammount{
+				font-size: 1.8rem;
+			}
+		}
+	}
+	&__buttons{
+		a:not(:last-child){
+			margin-bottom: 1rem;
+		}
+	}
+}

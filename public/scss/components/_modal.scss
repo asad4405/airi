@@ -1,0 +1,318 @@
+/*****************************
+27. Modal CSS
+*****************************/
+
+/*-- 27.00 - Quick View Modal --*/
+
+.modal {
+	display: block !important;
+	@extend %invisible;
+	padding-right: 0 !important;
+}
+.modal.show {
+	@extend %visible;
+}
+.product-modal{
+	.modal-dialog{
+		margin-bottom: 50px;
+		@include breakpoint(xclarge){
+			max-width: 95%;
+			width: 1025px;
+		}
+	}	
+	.modal-body{
+	    @extend %padding-0;
+	}
+	.modal-box{
+		&.product-summary{
+			padding: 4rem 2rem 2rem;
+			@include breakpoint(large){
+				padding-top: 7rem;
+			}
+			@include breakpoint(small){
+				padding: 4rem 2rem;
+			}
+			.product{
+				&-title{
+
+					@include breakpoint(medium){
+						font-size: 2rem;
+					}
+				}
+				&-action{
+					a{
+						i{
+							&:hover{
+								color: $heading-color !important;
+							}
+						}
+					}
+				}
+			}
+			.quantity{
+				height: 6rem;
+				width: 7rem;
+				@include breakpoint(xsmall){
+				    height: 5.5rem;
+				    width: 6rem;
+				}
+				.qtybutton {
+				    height: 6rem;
+				    line-height: 5.8rem;
+				}
+			}
+		}
+
+	}
+	.btn-close{
+		@extend %posabsolute;
+		@extend %lineheight1;
+		@extend %displayBlock;
+		@extend %fontWeight300;
+		background: none;
+		background-color: #292929;
+		left: 100%;
+		top: 0;
+		text-align: center;
+		font-size: 2.4rem;
+		text-shadow: 0 0 0 #fff;
+		opacity: 1;
+		width: 4rem;
+		height: 4rem;
+		border: none;
+		border-radius: 0;
+		@include breakpoint(large){
+			left: auto;
+			right: 0;
+			z-index: 9;
+			width: 2rem;
+			height: 2rem;
+			font-size: 2rem;
+		}
+		@include breakpoint(medium){
+			left: auto;
+			top: 0;
+			bottom: 100%;
+			right: 0;
+		}
+		i{
+			@extend %displayInlineBlock;
+			vertical-align: middle;
+			@extend %basetransition;
+		}
+		&:hover{
+			i{
+				@include transform(rotate(90deg));
+				color: $primary-color;
+			}
+		}
+	}
+}
+
+.custom-close{
+	background-color: #292929 !important;
+	@extend %posabsolute;
+	left: 100%;
+	top: 0 !important;
+	text-align: center !important;
+	font-size: 2.4rem;
+	@extend %lineheight1;
+	@extend %displayBlock;
+	padding: 1.8rem !important;
+	color: #fff !important;
+	@extend %fontWeight300;
+	text-shadow: 0 0 0 #fff;
+	opacity: 1 !important;
+	width: 6rem !important;
+	height: 6rem !important;
+	border: none;
+	@include breakpoint(medium){
+		left: auto;
+		top: 0 !important;
+		bottom: 100% !important;
+		right: 0 !important;
+	}
+    i{
+	    @extend %displayInlineBlock;
+	    vertical-align: middle;
+	    @extend %basetransition;
+	    &.mfp-close {
+		    width: auto !important;
+		    height: auto;
+		    line-height: 60px;
+		    position: absolute;
+		    right: 50%;
+		    @extend %top-0;
+		    margin-right: -12px;
+		    @extend %textDnone;
+		    @extend %textAcenter;
+		    opacity: 1;
+		    @extend %padding-0;
+		    font-style: normal;
+		    font-size: inherit;
+		    font-family: "dl-icon" !important;
+		}
+    }
+    &:hover{
+    	i{
+    		@include transform(rotate(90deg));
+    		color: $primary-color;
+    	}
+    }
+}
+
+/*-- 27.01 - Newsletter Form Popup --*/
+
+.ai-newsletter-popup{
+	background-color: rgba(0, 0, 0, 0.75);
+	@extend %posfixed;
+	@extend %fullwidth;
+	@include flexbox;
+	z-index: 9999999;
+	padding: 10px; 
+	&-modal{
+	    margin: auto;
+	    background-color: #fff;
+	    @extend %posrelative;
+	    max-width: 107rem;
+	    min-height: 46rem;
+	    @extend %width100;
+	    @include breakpoint(small){
+	    	min-height: auto;
+	    	height: auto;
+	    }
+	}
+	&-content{
+		background-image: url(../img/banner/bg-newsletter.jpg);
+	    background-repeat: no-repeat;
+	    background-position: right center;
+	    background-color: #ffffff;
+	    min-height: 46rem;
+	    @extend %flexbox;
+	    @extend %align-center;
+	    @include breakpoint(medium){
+	    	background-position: 140% center;
+	    }
+	    @include breakpoint(small){
+	    	background-position: 550% center;
+	    	min-height: auto;
+	    }
+	    @include breakpoint(xsmall){
+	    	background-image: none;
+	    	
+	    }
+	}
+	&-body{
+		margin-left: 8rem;
+		width: 50rem;
+		@include breakpoint(large){
+			margin-left: 4rem;
+		}
+		@include breakpoint(medium){
+			width: 41rem;
+		}
+		@include breakpoint(small){
+			width: 100%;
+			margin: 6rem 4rem;
+		}
+
+		h5{
+		    font-size: 1.8rem;
+		    @extend %body-color;
+		    margin: 1rem 0;
+		}
+		.heading-tertiary{
+			color: $heading-color;
+		}
+		.dont-show-popup{
+			@extend %marginBottom-0;
+		}
+	}
+	.custom-close{
+		@include breakpoint(large){
+			left: auto;
+			top: 0 !important;
+			bottom: 100% !important;
+			right: 0 !important;
+		}
+	}
+}
+
+/*-- 27.02 - Search Form Popup --*/
+
+.searchform{
+	&__popup{
+		@extend %width100;
+		@extend %height100;
+		@extend %posfixed;
+		@extend %top-0;
+		@extend %left-0;
+		@extend %invisible;
+		background-color: rgba(255, 255, 255, 0.9);
+		@extend %textAcenter;
+		@extend %basetransition;
+		z-index: 9999;
+		color: $color-dark-2;
+		p{
+			margin-bottom: 1.5rem;
+			color: $color-dark-2;
+			font-size: 1.8rem;
+		} 
+	    &.open{
+	    	@extend %visible;
+	    	.searchform__body{
+			    visibility: visible;
+			    opacity: 1;
+			    transform: scale(1);
+			    -webkit-transform: scale(1);
+	    	}
+	    }
+	    .btn-close{
+		    top: 20%;
+		    right: 20%;
+		    width: 5rem;
+		    height: 5rem;
+			background: none;
+		    i{
+		    	font-size: 5rem;
+				color: $color-dark-2;
+		    	@include breakpoint(xsmall){
+		    		font-size: 4rem;
+		    	}
+		    }
+		    @include breakpoint(large){
+		    	right: 10%;
+		    }
+		    @include breakpoint(medium){
+		    	right: 8%;
+		    	font-size: 4rem;
+		    }
+		    @include breakpoint(small){
+		    	right: 6%;
+		    	top: 30%;
+		    }
+		    @include breakpoint(xsmall){
+		    	top: 25%;
+		    }
+	    }
+	}
+	&__body{
+	    @extend %flexbox;
+	    @extend %justify-center;
+	    @extend %align-center;
+	    @extend %flex-column;
+	    @extend %maxWidth100;
+	    @extend %height100;
+	    @extend %textAcenter;
+	    font-size: 18px;
+	    transform: scale(0.9);
+	    -webkit-transform: scale(0.9);
+	    opacity: 0;
+	    visibility: hidden;
+	    transition: all ease-in-out .3s;
+	    @include breakpoint(medium){
+	    	max-width: 90%;
+	    	margin: 0 auto;
+	    }
+	}
+}

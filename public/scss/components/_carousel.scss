@@ -1,0 +1,386 @@
+/*****************************
+23. Carousel CSS
+*****************************/
+
+.slick{
+	&-btn,
+	&-arrow{
+		@extend %cursorPointer;
+		z-index: 1;
+	}
+	&-disabled{
+		cursor: not-allowed;
+	}
+}
+
+
+// Global Slick Carousel Gutter
+
+@for $i from 1 through 20{
+	.slick-gutter-#{$i * 5}{
+		margin-left: -#{($i/2)/2}rem;
+		margin-right: -#{($i/2)/2}rem;
+		.slick-slide{
+			padding-left: #{($i/2)/2}rem;
+			padding-right: #{($i/2)/2}rem;
+		}
+	}
+}
+
+// Slick Carousel Gutter For Extra large device
+
+@for $i from 1 through 20{
+	@include breakpoint(xlarge){
+		.slick-gutter-xl-#{$i * 5}{
+			margin-left: -#{($i/2)/2}rem;
+			margin-right: -#{($i/2)/2}rem;
+			.slick-slide{
+				padding-left: #{($i / 2)/2}rem;
+				padding-right: #{($i / 2)/2}rem;
+			}
+		}
+	}
+}
+
+// Slick Carousel Gutter For large device
+
+@include breakpoint(large){
+	.slick-gutter-lg-30{
+		margin-left: -15px;
+		margin-right: -15px;
+		.slick-slide{
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+	}
+}
+
+// Slick Dot Margin Bottom
+
+@for $i from 1 through 20{
+	.slick-dot-mb-#{$i * 5}{
+		.slick-dots{
+			margin-top: #{($i * 5)*.1}rem !important;
+		}
+	}
+}
+
+// Slick Dot Margin Bottom for medium
+
+@for $i from 1 through 20{
+	@include breakpoint(medium){
+		.slick-dot-mb-md-#{$i * 5}{
+			.slick-dots{
+				margin-top: #{($i * 5)*.1}rem !important;
+			}
+		}
+	}
+}
+
+
+.nav{
+	&-vertical-center{
+		.slick{
+			&-btn{
+				@extend %vCenter;
+			}
+			&-prev{
+				left: 2rem;
+			}
+			&-next{
+				right: 2rem;
+			}
+		}
+		&.vertical-space-0{
+			.slick{
+				&-prev{
+					left: 0;
+				}
+				&-next{
+					right: 0;
+				}
+			}
+		}
+		&.vertical-space-xs-0{
+			@include breakpoint(xsmall){
+				.slick{
+					&-prev{
+						left: 0;
+					}
+					&-next{
+						right: 0;
+					}
+				}
+			}
+		}
+	}
+	&-horizontal-center{
+		.slick-list {
+		    margin: -.5rem 0;
+		}
+		.slick{
+			&-btn{
+				@extend %hCenter
+			}
+		}
+	}
+	&-top, 
+	&-vertical-center,
+	&-horizontal-center,
+	&-style-1,
+	&-style-2{
+		@extend %posrelative;
+		.slick{
+			&-btn{
+				@extend %posabsolute;
+				@extend %basetransition;
+			}
+		}
+	}
+	&-style-1{
+		.slick{
+			&-btn{
+				@include textBoxCenter(50px);
+				@include border-radius(50%);
+				background-color: #fff;
+				color: #000;
+				opacity: .5;
+				font-size: 2.4rem;
+				z-index: 2;
+				i{
+					line-height: 2; 
+				}
+			}
+		}
+	}
+	&-style-2{
+		.slick{
+			&-btn{
+				@include textBoxCenter(70px);
+				@extend %posabsolute;
+				color: $color-dark-2;
+				background: #fff;
+				bottom: 46px;
+				line-height: 8rem;
+				z-index: 2;
+				i{
+					font-size: 2.4rem;
+					line-height: 1;
+				}
+				&:hover{
+					background-color: $primary-color;
+					color: #fff;
+				}
+			}
+			&-prev{
+				left: 0;
+			}
+			&-next{
+				left: 7rem;
+			}
+			&-disabled{
+				cursor: not-allowed;
+			}
+		}
+	}
+	&-style-3{
+		.slick{
+			&-btn{
+				@include textBoxCenter(40px);
+				@include border-radius(50%);
+				background-color: transparent;
+				border: 1px solid $color-dark;
+				color: $color-dark;
+				opacity: .5;
+				font-size: 28px;
+				z-index: 2;
+				i{
+					line-height: 1; 
+				}
+				&:hover{
+					opacity: 1;
+				}
+			}
+		}
+	}
+	// X-axis and Y-axis
+	&-center-bottom{
+		.slick{
+			&-btn{
+				@extend %hCenter;
+				bottom: 20px;
+			}
+			&-prev{
+				margin-left: -35px;
+			}
+			&-next{
+				margin-left: 35px;
+			}
+		}
+	}
+}
+
+.slick-dots{
+	li{
+		@extend %displayInlineBlock;
+		@extend %cursorPointer;
+		width: 1.2rem;
+		height: 1.2rem;
+		margin: 0 5px;
+		font-size: 0px;
+	}
+}
+
+.dot-style-1{
+	@extend %textAcenter;
+	.slick{
+		&-dots{
+		    display: inline-block !important;
+		    margin-left: auto;
+		    margin-right: auto;
+		    border: 1px solid $color-light-1;
+		    border-radius: 15px;
+		    padding: 8px 12px !important;
+		    @extend %textAcenter;
+		    line-height: 0;
+			li{
+				button{
+					@extend %slickDotButton;
+				}
+				&.slick-active{
+					button{
+						border-color: $primary-color;
+						background-color: $primary-color;
+					}
+				}
+			}
+		}
+	}
+}
+.dot-style-2{
+	.slick{
+		&-dots{
+			li{
+				button{
+					@extend %slickDotButton;
+				}
+				&.slick-active{
+					button{
+						border-color: $primary-color;
+						background-color: $primary-color;
+					}
+				}
+			}
+		}
+	}
+}
+.dot-style-3{
+	.slick{
+		&-dots{
+			li{
+				button{
+					@extend %slickDotButton;
+					border: 1px solid $color-dark-5;
+					background-color: $color-dark-5;
+					opacity: .4;
+				}
+				&.slick-active{
+					button{
+						border: 1px solid $color-dark-5;
+						background-color: $color-dark-5;
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+}
+.dot-center{
+	.slick-dots{
+	    @extend %textAcenter;
+	}
+}
+.dark-dot{
+	.slick{
+		&-dots{
+			li{
+				button{
+					border: 1px solid $color-light-1;
+				}
+				&.slick-active{
+					button{
+						@extend %dark-border-color;
+						@extend %dark-bg-color;
+					}
+				}
+			}
+		}
+	}
+}
+.round-nav{
+	.slick-btn{
+		@include borderIconCenter(30px, 1px);
+		@extend %borderRadius50;
+		border: 1px solid #fff;
+		opacity: .5;
+		i{
+			color: #fff;
+			opacity: inherit;
+		}
+		&:hover{
+			opacity: 1;
+		}
+	}
+}
+
+.product-image-carousel{
+	.slick{
+		&-prev{
+			left: 2rem;
+		}
+		&-next{
+			right: 2rem;
+		}
+	}
+}
+.banner-carousel-2{
+	margin-bottom: -9rem;
+	@include breakpoint(medium){
+		margin-bottom: -8rem;
+	}
+	.slick{
+		&-btn{
+			@include breakpoint(xlarge){
+				opacity: 1;
+			}
+		}
+		&-prev{
+			right: 100%;
+			left: auto;
+			@include breakpoint(xlarge){
+				right: calc(100% - 70px);	
+			}
+		}
+		&-next{
+			left: 100%;
+			right: auto;
+			@include breakpoint(xlarge){
+				left: calc(100% - 70px);	
+			}
+		}
+	}
+}
+.product-carousel{
+	.slick{
+		&-btn{
+			font-size: 2.4rem;
+			opacity: .8;
+		}
+		&-prev{
+			left: 3rem;
+		}
+		&-next{
+			right: 3rem;
+		}
+	}
+}

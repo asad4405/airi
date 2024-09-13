@@ -1,0 +1,101 @@
+/*****************************
+45. Single Product
+*****************************/
+
+.page-content-inner{
+	&.enable-full-width{
+		&:not(.enable-page-sidebar){
+			.product-main-image{
+				@include breakpoint(xxblargeonly){
+		    		@include flex-basis(55%);
+		    		max-width: 55%;	
+				}
+				@include breakpoint(xxalargeonly){
+		    		@include flex-basis(63%);
+		    		max-width: 63%;
+				}
+			}
+			.product-main-details{
+				@include breakpoint(xxblargeonly){
+					padding-left: 55px;
+		    		@include flex-basis(calc(100% - 55%));
+		    		max-width: calc(100% - 55%);
+				}
+				@include breakpoint(xxalargeonly){
+		    		@include flex-basis(calc(100% - 63%));
+		    		max-width: calc(100% - 63%);
+				}
+			}
+		}
+	}
+} 
+
+.product-main-details{
+	.product-summary{
+		.product{
+			&-title{
+				@include breakpoint(xlarge){
+					font-size: 2rem;
+				}
+			}
+			&-action{
+				.quantity{
+					@include breakpoint(xlarge){
+						width: 6rem;
+						height: 6rem;
+					}
+				}
+				.add-to-cart{
+					&.btn-large{
+						@include breakpoint(xlarge){
+						    min-height: 6rem;
+						    line-height: 6rem;
+						    padding: 0 4rem;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.review{
+	&__title{
+		margin-bottom: 3rem;
+		padding-bottom: 3rem;
+		font-size: 1.4rem;
+		font-weight: 700;
+		border-bottom: 1px solid $border-color;
+	}
+	&__item{
+		margin-bottom: 2rem;
+	}
+	&__container{
+		@extend %flexbox;
+	}
+	&__avatar{
+		@include flex-basis(6rem);
+		max-width: 6rem;
+		height: 6rem;
+	}
+	&__text{
+		@include flex-basis(calc(100% - 6rem));
+		max-width: calc(100% - 6rem);
+		padding-left: 2rem;
+	}
+	&__meta{
+		margin-bottom: 1rem;
+	}
+	&__author{
+		@extend %heading-color;
+	}
+	&__dash{
+
+	}
+	&__published-date{
+		font-size: 1.2rem;
+	}
+	&__description{
+
+	}
+}

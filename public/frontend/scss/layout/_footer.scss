@@ -1,0 +1,382 @@
+/*****************************
+11. Footer CSS
+*****************************/
+
+.footer{
+	&-top{
+		font-size: 1.2rem;
+	}
+	&-widget{
+		.widget-title{
+			color: $color-white;
+		    text-transform: uppercase;
+		    font-weight: 500;
+		    letter-spacing: 2px;
+		    margin: 0 0 2rem;
+		    padding-bottom: 2rem;
+		    line-height: 1;
+		    font-size: 14px;
+		    @extend %posrelative;
+		    &:after{
+		    	@extend %pseudo;
+		    	left: 0;
+		    	bottom: 0;
+		    	width: 3rem;
+		    	height: 1px;
+		    	background-color: $primary-color;
+		    }
+		    &--2{
+		    	color: $heading-color;
+			    margin: 0 0 2rem;
+			    padding-bottom: 0;
+			    font-size: 14px;
+			    font-weight: bold;
+			    text-transform: capitalize;
+			    letter-spacing: 0;
+		    	&:after{
+		    		display: none;
+		    	}
+		    	@include breakpoint(small){
+		    		margin: 0 0 1rem;
+		    	}
+		    }
+		    &--icon{
+		    	@extend %posrelative;
+		    	padding-left: 4rem;
+		    	line-height: 1.3;
+		    	&:before{
+				    content: '\f003';
+				    font-family: FontAwesome;
+				    position: absolute;
+				    left: 0;
+				    font-size: 24px;
+				    font-weight: 300;
+				    line-height: 1;
+				    margin-top: -5px;
+				    top: 0;
+		    	}
+		    }
+		}
+		.widget-menu{
+			li{
+				&:not(:last-child){
+					margin-bottom: 1.5rem;
+				}
+			}
+			a{
+				color: $body-color;
+				padding: 3px 0;
+				font-weight: 400;
+				display: block;
+				font-size: 1.2rem;
+				&:hover{
+					color: $primary-color;
+				} 
+			}
+			&.color--white{
+				a{
+					color: $color-white;
+				}
+			}
+			&--2{
+				li{
+					&:not(:last-child){
+						margin-bottom: 1rem;
+					}
+				}
+			}
+			&--3{
+				li{
+					&:not(:last-child){
+						margin-bottom: 18px;
+					}
+					a{
+						color: $color-light-6;
+						font-size: 11px;
+						text-transform: uppercase;
+					}
+				}
+			}
+		}
+		.widget-menu-inline{
+			li{
+				display: inline-block;
+				position: relative;
+				line-height: 1;
+				padding-right: 12px;
+				padding-left: 10px;
+				&:first-child{
+					padding-left: 0;
+				}
+				&:last-child{
+					padding-right: 0;
+					&:after{
+						display: none;
+					}
+				}
+				&:after{
+					position: absolute;
+					content: '';
+					right: 0;
+					background-color: #D8D8D8;;
+					height: 100%;
+					width: 2px;
+				}
+			}
+		}
+		.contact-info{
+			&__item{
+				margin-bottom: 1.5rem;
+				@include flexbox;
+				@include align-items(flex-start);
+				span{
+					padding-left: 1.5rem;
+				}
+				i{
+					font-size: 1.7rem;
+					min-width: 2rem;
+				}
+				p, a{
+					font-size: 1.2rem;
+					color: $body-color;
+				}
+			}
+			&--2{
+				.contact-info{
+					&__item{
+						display: inline-block;
+						margin-bottom: 0;
+						padding-left: 1rem;
+						@extend %heading-color;
+						font-size: 1.2rem;
+						span{
+							padding-left: .5rem;
+						}
+						i{
+							font-size: 1.4rem;
+						}
+					}
+				}
+			}
+			&--3{
+				.contact-info{
+					&__item{
+						font-size: 11px;
+						&:not(:last-child){
+							margin-bottom: 20px;
+						}
+						span{
+							padding-left: 20px;
+						}
+						span, a{
+							text-transform: uppercase;
+							color: $color-light-6;
+							line-height: 18px;
+						}
+						i{
+							font-size: 1.4rem;
+							color: $primary-color;
+						}
+					}
+				}
+			}
+		}
+	}
+	a{
+		&:hover{
+			color: $primary-color;
+		}
+	}
+	&-menu{
+		li{
+			display: inline-block;
+			padding-right: 5px;
+			&:not(:last-child){
+				border-right: 1px solid $heading-color;
+			}
+			a{
+				@extend %heading-color;
+			}
+		}
+	}
+	&-2{
+		@extend %posabsolute;
+		left: 0;
+		bottom: 3rem;
+		width: 100%;
+		z-index: 999;
+		@include breakpoint(small){
+			position: relative;
+			bottom: 0;
+		}
+		.copyright-text{
+			@extend %heading-color;
+			font-size: 1.4rem;
+			i {
+				color: red;
+			}
+		}
+
+	}
+	&-4{
+		color: $color-light-6;
+		p, a, span{
+			color: $color-light-6;
+		}
+		.footer-widget .widget-title--2 {
+			@include breakpoint(small){
+				margin: 0 0 2rem;
+			}
+		}
+		.footer-logo{
+			img{
+				max-width: 260px;
+				@include breakpoint(medium){
+					max-width: 210px;
+				}
+			}
+		}
+		[class^="footer-column"]{
+			@include flex(0, 0, 100%);
+			max-width: 100%;
+			padding-left: 15px;
+			padding-right: 15px;
+			@include breakpoint(smallonly){
+				@include flex(0, 0, 50%);
+				max-width: 50%;
+			}
+		}
+		.footer-column{
+			&-1{
+				@include breakpoint(mediumonly){
+					@include flex(0, 0, 30%);
+					max-width: 30%;
+				}
+				@include breakpoint(largeonly){
+					@include flex(0, 0, 34%);
+					max-width: 34%;
+				}
+			}
+			&-2{
+				@include breakpoint(mediumonly){
+					margin-left: 5%;
+					@include flex(0, 0, 15%);
+					max-width: 15%;
+				}
+				@include breakpoint(largeonly){
+					margin-left: 4%;
+					@include flex(0, 0, 15%);
+					max-width: 15%;
+				}
+			}
+			&-3{
+				@include breakpoint(mediumonly){
+					@include flex(0, 0, 17%);
+					max-width: 17%;
+					margin-left: 1%;
+				}
+				@include breakpoint(largeonly){
+					@include flex(0, 0, 15%);
+					max-width: 15%;
+					margin-left: 0;
+				}
+			}
+			&-4{
+				@include breakpoint(mediumonly){
+					@include flex(0, 0, 30%);
+					max-width: 30%;
+					margin-left: 2%;
+				}
+				@include breakpoint(largeonly){
+					@include flex(0, 0, 30%);
+					max-width: 30%;
+					margin-left: 2%;
+				}
+			}
+		}	
+	}
+	&-5{
+		color: #707070;
+		font-size: 12px;
+		line-height: 1.84;
+		p,span{
+			color: #707070;
+		}
+		a{
+			color: $color-dark-5;
+		}
+		.footer-widget .widget-menu--3 li a {
+			color: #707070;
+			font-size: 11px;
+			text-transform: capitalize;
+		}
+		.textwidget p{
+			font-size: 12px;
+			line-height: 1.84;
+		}
+		.container{
+			@include breakpoint(xlargeonly){
+				width: 1400px;
+				max-width: 96%;
+			}
+		}
+		.footer-widget .widget-title--2 {
+			@include breakpoint(small){
+				margin: 0 0 2rem;
+			}
+		}
+		.footer-logo{
+			img{
+				max-width: 260px;
+				@include breakpoint(medium){
+					max-width: 210px;
+				}
+			}
+		}
+		[class^="footer-column"]{
+			@include flex(0, 0, 100%);
+			max-width: 100%;
+			padding-left: 15px;
+			padding-right: 15px;
+			@include breakpoint(smallonly){
+				@include flex(0, 0, 50%);
+				max-width: 50%;
+			}
+		}
+		.footer-column{
+			&-1{
+				@include breakpoint(largeonly){
+					@include flex(0, 0, 33%);
+					max-width: 33%;
+				}
+			}
+			&-2{
+				@include breakpoint(largeonly){
+					margin-left: 3%;
+					@include flex(0, 0, 15%);
+					max-width: 15%;
+				}
+			}
+			&-3{
+				@include breakpoint(largeonly){
+					@include flex(0, 0, 15%);
+					max-width: 15%;
+					margin-left: 0;
+				}
+			}
+			&-4{
+				@include breakpoint(largeonly){
+					@include flex(0, 0, 32%);
+					max-width: 32%;
+					margin-left: 2%;
+				}
+			}
+		}	
+	}
+}
+.copyright-text{
+	font-size: 1.2rem;
+	i {
+		color: red;
+	}
+}

@@ -1,0 +1,172 @@
+/*****************************
+44. Shop CSS
+*****************************/
+
+.shop-toolbar{
+	margin-bottom: 3rem;
+	@include breakpoint(small){
+		margin-bottom: 2rem;
+	}
+	&__inner{
+		padding-top: 1.5rem;
+		padding-bottom: 1.5rem;
+	}
+	&__left{
+		@extend %flexbox;
+		@extend %justify-start;
+		@extend %align-center;
+		@extend %flex-wrap;
+		@include breakpoint(small){
+			@include justify-content(center);
+		}
+	}
+	&__right{
+		@extend %flexbox;
+		@extend %justify-end;
+		@extend %align-center;
+		@include breakpoint(small){
+			@include justify-content(center);
+		}
+	}
+	&__btn{
+		@extend %posrelative;
+		border: 1px solid $border-color-2;
+		@include border-radius(3.5rem);
+		@extend %heading-color;
+		padding: 1.2rem 2.5rem;
+		min-width: 15rem;
+		font-size: 1.4rem;
+		line-height: 2.4rem;
+		@extend %flexbox;
+		@extend %justify-between;
+		@extend %align-center;
+		@include breakpoint(xsmall){
+			min-width: 13rem;
+		}
+		&:after{
+		    content: "\f107";
+		    font-family: FontAwesome;
+		    padding-left: 5px;
+		    display: inline-block;
+		    line-height: inherit;
+		    font-style: normal;
+		    @extend %basetransition;
+		}
+		&:hover{
+			@extend %heading-color;
+		}
+	}
+	.product{
+		&-pages{
+			@extend %heading-color;
+			margin-bottom: 0;
+		}
+		&-view-count{
+			margin: 0 2rem 0 4rem;
+			@extend %flexbox;
+
+			@include breakpoint(medium){
+				margin: 0 2rem 0 2rem;
+			}
+			p{
+				display: inline-block;
+				margin: 0 5px;
+				line-height: 1.6;
+			}
+			ul{
+				li{
+				    display: inline-block;
+				    margin: 0 5px;
+					a{
+						line-height: 1.6;
+					}
+					&.active{
+						a{
+							@extend %heading-color;
+							border-bottom: 1px solid $heading-color;
+						}
+					}
+				}
+			}
+		}
+		&-ordering{
+			margin-left: 2rem;
+			@extend %posrelative;
+			&:after{
+			    content: "";
+			    position: absolute;
+			    left: 0;
+			    width: 100%;
+			    padding-bottom: 20px;
+			}
+			&__list{
+				@extend %posabsolute;
+				right: 0;
+				background-color: #fff;
+				padding: 7px;
+				z-index: 11;
+				margin-top: 3rem;
+				box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.05);
+				@extend %invisible;
+				@extend %basetransition;
+
+				li{
+					&.active{
+						a{
+							background-color: $heading-color;
+							color: #fff;
+						}
+					}
+					a{
+						padding: 5px 10px;
+						white-space: pre;
+						display: block;
+						border-radius: 4px;
+					    font-size: 1.4rem;
+					    line-height: 2.4rem;
+					    &:hover{
+							background-color: $heading-color;
+							color: #fff;
+					    }
+					}
+				}
+			}
+			&__btn{
+				width: 100%;
+			}
+			&:hover{
+				.product-ordering{
+					&__btn{
+						&:after{
+							content: "\f106";
+						}
+					}
+					&__list{
+						@extend %visible;
+						margin-top: .7rem;
+					}
+				}
+			}
+		}
+		&-filter-btn{
+			&.open{
+				&:after{
+					content: "\f106";
+				}
+				color: $primary-color;
+			}
+		}
+	}
+}
+
+.enable-page-sidebar{
+	.shop-toolbar{
+		.product{
+			&-view-count{
+				@include breakpoint(large){
+					margin: 0 1rem 0 1rem;
+				}
+			}
+		}
+	}
+}
