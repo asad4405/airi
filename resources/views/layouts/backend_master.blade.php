@@ -56,22 +56,16 @@ License: You must have a valid license purchased only from above link or https:/
                     </li>
                     <li class="nav-item nav-category">web apps</li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#emails" role="button" aria-expanded="false"
-                            aria-controls="emails">
+                        <a class="nav-link" data-toggle="collapse" href="#user" role="button" aria-expanded="false"
+                            aria-controls="user">
                             <i class="link-icon" data-feather="mail"></i>
                             <span class="link-title">Email</span>
                             <i class="link-arrow" data-feather="chevron-down"></i>
                         </a>
-                        <div class="collapse" id="emails">
+                        <div class="collapse" id="user">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="pages/email/inbox.html" class="nav-link">Inbox</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/email/read.html" class="nav-link">Read</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/email/compose.html" class="nav-link">Compose</a>
+                                    <a href="{{ route('user') }}" class="nav-link">User</a>
                                 </li>
                             </ul>
                         </div>
@@ -529,7 +523,7 @@ License: You must have a valid license purchased only from above link or https:/
                                             </div>
                                             <div class="content">
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <p>Amiah Burton</p>
+                                                    <p>{{ Auth::user()->name }}</p>
                                                     <p class="sub-text text-muted">2 hrs ago</p>
                                                 </div>
                                                 <p class="sub-text text-muted">Project deadline</p>
@@ -623,22 +617,30 @@ License: You must have a valid license purchased only from above link or https:/
                                 <a class="nav-link dropdown-toggle" href="#" id="profileDropdown"
                                     role="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    <img src="https://via.placeholder.com/30x30" alt="profile">
+                                    @if (Auth::user()->photo)
+                                        <img src="https://via.placeholder.com/30x30" alt="profile">
+                                    @else
+                                        <img src="{{ Avatar::create('Joko Widodo')->toBase64() }}" />
+                                    @endif
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="profileDropdown">
                                     <div class="dropdown-header d-flex flex-column align-items-center">
                                         <div class="mb-3 figure">
-                                            <img src="https://via.placeholder.com/80x80" alt="">
+                                            @if (Auth::user()->photo)
+                                                <img src="https://via.placeholder.com/30x30" alt="profile">
+                                            @else
+                                                <img src="{{ Avatar::create('Joko Widodo')->toBase64() }}" />
+                                            @endif
                                         </div>
                                         <div class="text-center info">
-                                            <p class="mb-0 name font-weight-bold">Amiah Burton</p>
-                                            <p class="mb-3 email text-muted">amiahburton@gmail.com</p>
+                                            <p class="mb-0 name font-weight-bold">{{ Auth::user()->name }}</p>
+                                            <p class="mb-3 email text-muted">{{ Auth::user()->email }}</p>
                                         </div>
                                     </div>
                                     <div class="dropdown-body">
                                         <ul class="p-0 pt-3 profile-nav">
                                             <li class="nav-item">
-                                                <a href="pages/general/profile.html" class="nav-link">
+                                                <a href="{{ route('user.update') }}" class="nav-link">
                                                     <i data-feather="user"></i>
                                                     <span>Profile</span>
                                                 </a>
@@ -672,30 +674,49 @@ License: You must have a valid license purchased only from above link or https:/
 
                 <div class="page-content">
 
-                    @yield('content')
+                    <nav class="page-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Home</li>
+                        </ol>
+                    </nav>
+
+                    <div class="flex-wrap justify-content-between align-items-center grid-margin">
+                        @yield('content')
+                    </div>
 
                 </div>
-            </div>
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
+                    <p class="text-center text-muted text-md-left">Copyright © 2024 <a href="https://www.nobleui.com"
+                            target="_blank">NobleUI</a>. All rights reserved</p>
+                    <p class="mb-0 text-center text-muted text-md-left d-none d-md-block">Handcrafted With <i
+                            class="mb-1 ml-1 text-primary icon-small" data-feather="heart"></i></p>
+                </footer>
+                <!-- partial -->
 
-            <!-- core:js -->
-            <script src="{{ asset('backend/assets') }}/vendors/core/core.js"></script>
-            <!-- endinject -->
-            <!-- plugin js for this page -->
-            <script src="{{ asset('backend/assets') }}/vendors/chartjs/Chart.min.js"></script>
-            <script src="{{ asset('backend/assets') }}/vendors/jquery.flot/jquery.flot.js"></script>
-            <script src="{{ asset('backend/assets') }}/vendors/jquery.flot/jquery.flot.resize.js"></script>
-            <script src="{{ asset('backend/assets') }}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-            <script src="{{ asset('backend/assets') }}/vendors/apexcharts/apexcharts.min.js"></script>
-            <script src="{{ asset('backend/assets') }}/vendors/progressbar.js/progressbar.min.js"></script>
-            <!-- end plugin js for this page -->
-            <!-- inject:js -->
-            <script src="{{ asset('backend/assets') }}/vendors/feather-icons/feather.min.js"></script>
-            <script src="{{ asset('backend/assets') }}/js/template.js"></script>
-            <!-- endinject -->
-            <!-- custom js for this page -->
-            <script src="{{ asset('backend/assets') }}/js/dashboard.js"></script>
-            <script src="{{ asset('backend/assets') }}/js/datepicker.js"></script>
-            <!-- end custom js for this page -->
+            </div>
+        </div>
+
+        <!-- core:js -->
+        <script src="{{ asset('backend/assets') }}/vendors/core/core.js"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <script src="{{ asset('backend/assets') }}/vendors/chartjs/Chart.min.js"></script>
+        <script src="{{ asset('backend/assets') }}/vendors/jquery.flot/jquery.flot.js"></script>
+        <script src="{{ asset('backend/assets') }}/vendors/jquery.flot/jquery.flot.resize.js"></script>
+        <script src="{{ asset('backend/assets') }}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+        <script src="{{ asset('backend/assets') }}/vendors/apexcharts/apexcharts.min.js"></script>
+        <script src="{{ asset('backend/assets') }}/vendors/progressbar.js/progressbar.min.js"></script>
+        <!-- end plugin js for this page -->
+        <!-- inject:js -->
+        <script src="{{ asset('backend/assets') }}/vendors/feather-icons/feather.min.js"></script>
+        <script src="{{ asset('backend/assets') }}/js/template.js"></script>
+        <!-- endinject -->
+        <!-- custom js for this page -->
+        <script src="{{ asset('backend/assets') }}/js/dashboard.js"></script>
+        <script src="{{ asset('backend/assets') }}/js/datepicker.js"></script>
+        <!-- end custom js for this page -->
 </body>
 
 </html>
