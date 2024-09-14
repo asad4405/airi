@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UserController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -42,5 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('category/edit/{id}', [CategoryController::class, 'category_edit'])->name('category.edit');
     Route::post('category/update/{id}', [CategoryController::class, 'category_update'])->name('category.update');
     Route::get('/category/delete/{id}', [CategoryController::class, 'category_delete'])->name('category.delete');
-    
+
+    // Subcategory
+    Route::resource('/subcategory',SubcategoryController::class);
 });

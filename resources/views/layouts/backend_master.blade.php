@@ -88,7 +88,7 @@
                                     <a href="{{ route('category') }}" class="nav-link">Category</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link"></a>
+                                    <a href="{{ route('subcategory.index') }}" class="nav-link">Sub Category</a>
                                 </li>
                             </ul>
                         </div>
