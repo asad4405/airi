@@ -1,19 +1,11 @@
 <!DOCTYPE html>
-<!--
-Template Name: NobleUI - Admin & Dashboard Template
-Author: NobleUI
-Website: https://www.nobleui.com
-Contact: nobleui123@gmail.com
-Purchase: https://1.envato.market/nobleui_admin
-License: You must have a valid license purchased only from above link or https://themeforest.net/user/nobleui/portfolio/ in order to legally use the theme for your project.
--->
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NobleUI Responsive Bootstrap 4 Dashboard Template</title>
+    <title>Airi Dashboard - @yield('title')</title>
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('backend/assets') }}/vendors/core/core.css">
     <!-- endinject -->
@@ -59,7 +51,7 @@ License: You must have a valid license purchased only from above link or https:/
                         <a class="nav-link" data-toggle="collapse" href="#user" role="button" aria-expanded="false"
                             aria-controls="user">
                             <i class="link-icon" data-feather="mail"></i>
-                            <span class="link-title">Email</span>
+                            <span class="link-title">Users</span>
                             <i class="link-arrow" data-feather="chevron-down"></i>
                         </a>
                         <div class="collapse" id="user">
@@ -87,73 +79,16 @@ License: You must have a valid license purchased only from above link or https:/
                         <a class="nav-link" data-toggle="collapse" href="#uiComponents" role="button"
                             aria-expanded="false" aria-controls="uiComponents">
                             <i class="link-icon" data-feather="feather"></i>
-                            <span class="link-title">UI Kit</span>
+                            <span class="link-title">Category</span>
                             <i class="link-arrow" data-feather="chevron-down"></i>
                         </a>
                         <div class="collapse" id="uiComponents">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="pages/ui-components/alerts.html" class="nav-link">Alerts</a>
+                                    <a href="{{ route('category') }}" class="nav-link">Category</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/ui-components/badges.html" class="nav-link">Badges</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/breadcrumbs.html" class="nav-link">Breadcrumbs</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/buttons.html" class="nav-link">Buttons</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/button-group.html" class="nav-link">Button group</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/cards.html" class="nav-link">Cards</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/carousel.html" class="nav-link">Carousel</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/collapse.html" class="nav-link">Collapse</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/dropdowns.html" class="nav-link">Dropdowns</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/list-group.html" class="nav-link">List group</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/media-object.html" class="nav-link">Media object</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/modal.html" class="nav-link">Modal</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/navs.html" class="nav-link">Navs</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/navbar.html" class="nav-link">Navbar</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/pagination.html" class="nav-link">Pagination</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/popover.html" class="nav-link">Popovers</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/progress.html" class="nav-link">Progress</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/scrollbar.html" class="nav-link">Scrollbar</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/scrollspy.html" class="nav-link">Scrollspy</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/spinners.html" class="nav-link">Spinners</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/ui-components/tooltips.html" class="nav-link">Tooltips</a>
+                                    <a href="" class="nav-link"></a>
                                 </li>
                             </ul>
                         </div>
@@ -658,10 +593,17 @@ License: You must have a valid license purchased only from above link or https:/
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="javascript:;" class="nav-link">
-                                                    <i data-feather="log-out"></i>
-                                                    <span>Log Out</span>
-                                                </a>
+                                                <form method="POST" action="{{ route('logout') }}">
+                                                    @csrf
+
+                                                    <a href="{{ route('logout') }}"
+                                                        onclick="event.preventDefault();
+                                                        this.closest('form').submit();"
+                                                        class="nav-link">
+                                                        <i data-feather="log-out"></i>
+                                                        <span>Log Out</span>
+                                                    </a>
+                                                </form>
                                             </li>
                                         </ul>
                                     </div>

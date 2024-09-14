@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" href="{{ asset('frontend/assets') }}/img/icon.png">
 
     <!-- Title -->
-    <title>Airi - Clean, Minimal eCommerce Bootstrap 5 Template</title>
+    <title>Airi - @yield('title')</title>
 
     <!-- ************************* CSS Files ************************* -->
 
