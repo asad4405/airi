@@ -3,10 +3,11 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
-use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 
@@ -45,5 +46,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/category/delete/{id}', [CategoryController::class, 'category_delete'])->name('category.delete');
 
     // Subcategory
-    Route::resource('/subcategory',SubcategoryController::class);
+    Route::resource('/subcategory', SubcategoryController::class);
+
+    // Product
+    Route::resource('/product', ProductController::class);
+
+    // Tag
+    Route::get('/tag', [TagController::class, 'tag'])->name('tag');
+    Route::post('/tag/store', [TagController::class, 'tag_store'])->name('tag.store');
+    Route::get('/tag/delete/{id}', [TagController::class, 'tag_delete'])->name('tag.delete');
 });
