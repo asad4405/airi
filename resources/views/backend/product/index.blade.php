@@ -25,8 +25,8 @@
                                 <td><img src="{{ asset('uploads/product') }}/{{ $product->preview }}" alt=""></td>
                                 <td>{{ $product->after_discount }} Taka</td>
                                 <td>
-                                    <a href="" class="btn btn-info">Add Stock</a>
-                                    <form action="{{ route('product.destroy') }}" method="POST">
+                                    <a href="{{ route('inventory',$product->id) }}" class="btn btn-info">Add Stock</a>
+                                    <form action="{{ route('product.destroy',$product->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>

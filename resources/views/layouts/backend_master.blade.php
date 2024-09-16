@@ -111,6 +111,9 @@
                                 <li class="nav-item">
                                     <a href="{{ route('tag') }}" class="nav-link">Tag</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('variation') }}" class="nav-link">Variation</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

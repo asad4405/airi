@@ -3,11 +3,13 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VariationController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,11 +50,22 @@ Route::middleware('auth')->group(function () {
     // Subcategory
     Route::resource('/subcategory', SubcategoryController::class);
 
-    // Product
-    Route::resource('/product', ProductController::class);
-
     // Tag
     Route::get('/tag', [TagController::class, 'tag'])->name('tag');
     Route::post('/tag/store', [TagController::class, 'tag_store'])->name('tag.store');
     Route::get('/tag/delete/{id}', [TagController::class, 'tag_delete'])->name('tag.delete');
+
+    // Product
+    Route::resource('/product', ProductController::class);
+
+    // variation
+    Route::get('/variation', [VariationController::class, 'variation'])->name('variation');
+    Route::post('/color/store', [VariationController::class, 'color_store'])->name('color.store');
+    Route::post('/size/store', [VariationController::class, 'size_store'])->name('size.store');
+    Route::get('/color/delete/{id}', [VariationController::class, 'color_delete'])->name('color.delete');
+    Route::get('/size/delete/{id}', [VariationController::class, 'size_delete'])->name('size.delete');
+    // Invetory
+    Route::get('/inventory/{product_id}', [InventoryController::class, 'inventory'])->name('inventory');
+    Route::post('/inventory/store/{product_id}', [InventoryController::class, 'inventory_store'])->name('inventory.store');
+    Route::get('/inventory/delete/{inventory_id}', [InventoryController::class, 'inventory_delete'])->name('inventory.delete');
 });
