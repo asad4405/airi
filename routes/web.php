@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
+Route::get('/product/details/{slug}',[FrontendController::class,'product_details'])->name('product.details');
 
 
 
 // Dashboard
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/size/store', [VariationController::class, 'size_store'])->name('size.store');
     Route::get('/color/delete/{id}', [VariationController::class, 'color_delete'])->name('color.delete');
     Route::get('/size/delete/{id}', [VariationController::class, 'size_delete'])->name('size.delete');
+
     // Invetory
     Route::get('/inventory/{product_id}', [InventoryController::class, 'inventory'])->name('inventory');
     Route::post('/inventory/store/{product_id}', [InventoryController::class, 'inventory_store'])->name('inventory.store');

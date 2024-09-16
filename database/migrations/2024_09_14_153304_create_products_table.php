@@ -17,13 +17,14 @@ return new class extends Migration
             $table->integer('subcategory_id');
             $table->string('product_name');
             $table->integer('product_price');
-            $table->integer('discount');
+            $table->integer('discount')->nullable();
             $table->integer('after_discount');
-            $table->string('tags');
+            $table->string('tags')->nullable();
             $table->longText('short_desp');
             $table->longText('long_desp');
-            $table->longText('addi_info');
+            $table->longText('addi_info')->nullable();
             $table->string('preview');
+            $table->string('slug');
             $table->timestamps();
         });
     }

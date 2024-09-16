@@ -10,6 +10,7 @@ use App\Models\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -56,6 +57,8 @@ class ProductController extends Controller
 
         Image::make($preview)->save(public_path('uploads/product/' . $file_name));
 
+        $slug = Str::slug($request->product_name) . '-' . random_int(10000, 90000);
+
         $product_id = Product::insertGetId([
             'category_id' => $request->category_id,
             'subcategory_id' => $request->subcategory_id,
@@ -68,6 +71,7 @@ class ProductController extends Controller
             'long_desp' => $request->long_desp,
             'addi_info' => $request->addi_info,
             'preview' => $file_name,
+            'slug' => $slug,
             'created_at' => Carbon::now(),
         ]);
 
@@ -118,7 +122,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         if ($product->preview) {
-            $current_img = public_path('uploads/category/' . $product->preview);
+            $current_img = public_path('uploads/product/' . $product->preview);
             unlink($current_img);
         }
         $product->delete();
