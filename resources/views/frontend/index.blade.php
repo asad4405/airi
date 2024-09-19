@@ -279,10 +279,10 @@
                                 <div class="product-inner">
                                     <figure class="product-image">
                                         <div class="product-image--holder">
-                                            <a href="{{ route('product.details',$product->slug) }}">
-                                                <img src="{{ asset('frontend/assets') }}/img/products/prod-19-4.jpg"
+                                            <a href="{{ route('product.details', $product->slug) }}">
+                                                <img src="{{ asset('uploads/product') }}/{{ $product->preview }}"
                                                     alt="Product Image" class="primary-image">
-                                                <img src="{{ asset('frontend/assets') }}/img/products/prod-19-1.jpg"
+                                                <img src="{{ asset('uploads/product') }}/{{ $product->preview }}"
                                                     alt="Product Image" class="secondary-image">
                                             </a>
                                         </div>
@@ -312,7 +312,8 @@
                                     </figure>
                                     <div class="product-info">
                                         <h3 class="product-title">
-                                            <a href="{{ route('product.details',$product->slug) }}">{{ $product->product_name }}</a>
+                                            <a
+                                                href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
                                         </h3>
                                         <div class="product-rating">
                                             <span>
@@ -324,10 +325,12 @@
                                             </span>
                                         </div>
                                         <span class="product-price-wrapper">
-                                            <span class="money">$49.00</span>
-                                            <span class="product-price-old">
-                                                <span class="money">$60.00</span>
-                                            </span>
+                                            <span class="money">{{ $product->after_discount }} Taka</span>
+                                            @if ($product->discount)
+                                                <span class="product-price-old">
+                                                    <span class="money">{{ $product->product_price }} Taka</span>
+                                                </span>
+                                            @endif
                                         </span>
                                     </div>
                                 </div>

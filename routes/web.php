@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
-Route::get('/product/details/{slug}',[FrontendController::class,'product_details'])->name('product.details');
+Route::get('/product/details/{slug}', [FrontendController::class, 'product_details'])->name('product.details');
 
 
 
@@ -27,46 +27,52 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+
+// backend
 
 Route::middleware('auth')->group(function () {
     // Users
-    Route::get('/user/update', [UserController::class, 'user_update'])->name('user.update');
-    Route::post('/user/update/store', [UserController::class, 'user_update_store'])->name('user.update.store');
-    Route::post('/user/password/update', [UserController::class, 'user_password_update'])->name('user.password.update');
-    Route::post('/user/photo/update', [UserController::class, 'user_photo_update'])->name('user.photo.update');
+    Route::prefix('user')->controller(UserController::class)->name('user.')->group(function () {
+        Route::get('/update', [UserController::class, 'user_update'])->name('update');
+        Route::post('/update/store', [UserController::class, 'user_update_store'])->name('update.store');
+        Route::post('/password/update', [UserController::class, 'user_password_update'])->name('password.update');
+        Route::post('/photo/update', [UserController::class, 'user_photo_update'])->name('photo.update');
 
-    Route::get('/user', [UserController::class, 'user_list'])->name('user');
-    Route::post('/user/store', [UserController::class, 'user_store'])->name('user.store');
-    Route::get('/user/delete/{id}', [UserController::class, 'user_delete'])->name('user.delete');
+        Route::get('/index', [UserController::class, 'index'])->name('index');
+        Route::post('/store', [UserController::class, 'user_store'])->name('store');
+        Route::get('/delete/{id}', [UserController::class, 'user_delete'])->name('delete');
+    });
 
     // Category
-    Route::get('/category', [CategoryController::class, 'category'])->name('category');
-    Route::post('category/store', [CategoryController::class, 'category_store'])->name('category.store');
-    Route::get('category/edit/{id}', [CategoryController::class, 'category_edit'])->name('category.edit');
-    Route::post('category/update/{id}', [CategoryController::class, 'category_update'])->name('category.update');
-    Route::get('/category/delete/{id}', [CategoryController::class, 'category_delete'])->name('category.delete');
+    Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function () {
+        Route::get('/index', [CategoryController::class, 'index'])->name('index');
+        Route::post('/store', [CategoryController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [CategoryController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
+    });
 
     // Subcategory
     Route::resource('/subcategory', SubcategoryController::class);
 
     // Tag
-    Route::get('/tag', [TagController::class, 'tag'])->name('tag');
-    Route::post('/tag/store', [TagController::class, 'tag_store'])->name('tag.store');
-    Route::get('/tag/delete/{id}', [TagController::class, 'tag_delete'])->name('tag.delete');
+    Route::prefix('tag')->controller(TagController::class)->name('tag.')->group(function () {
+        Route::get('/index', [TagController::class, 'index'])->name('index');
+        Route::post('/store', [TagController::class, 'store'])->name('store');
+        Route::get('/delete/{id}', [TagController::class, 'delete'])->name('delete');
+    });
 
     // Product
     Route::resource('/product', ProductController::class);
 
-    // variation
-    Route::get('/variation', [VariationController::class, 'variation'])->name('variation');
-    Route::post('/color/store', [VariationController::class, 'color_store'])->name('color.store');
-    Route::post('/size/store', [VariationController::class, 'size_store'])->name('size.store');
-    Route::get('/color/delete/{id}', [VariationController::class, 'color_delete'])->name('color.delete');
-    Route::get('/size/delete/{id}', [VariationController::class, 'size_delete'])->name('size.delete');
-
     // Invetory
-    Route::get('/inventory/{product_id}', [InventoryController::class, 'inventory'])->name('inventory');
-    Route::post('/inventory/store/{product_id}', [InventoryController::class, 'inventory_store'])->name('inventory.store');
-    Route::get('/inventory/delete/{inventory_id}', [InventoryController::class, 'inventory_delete'])->name('inventory.delete');
+    Route::prefix('inventory')->controller(InventoryController::class)->name('inventory.')->group(function () {
+        Route::get('/index/{product_id}', [InventoryController::class, 'index'])->name('index');
+        Route::post('/store/{product_id}', [InventoryController::class, 'store'])->name('store');
+        Route::get('/edit/{inventory_id}', [InventoryController::class, 'edit'])->name('edit');
+        Route::post('/update/{inventory_id}', [InventoryController::class, 'update'])->name('update');
+        Route::get('/delete/{inventory_id}', [InventoryController::class, 'delete'])->name('delete');
+    });
 });
+
+require __DIR__ . '/auth.php';

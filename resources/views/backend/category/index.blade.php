@@ -10,8 +10,8 @@
                     <h3>Category List</h3>
                 </div>
                 <div class="card-body">
-                    @if (session('category_delete'))
-                        <div class="alert alert-success">{{ session('category_delete') }}</div>
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
                     <table class="table table-bordered">
                         <tr>

@@ -57,7 +57,7 @@
                         <div class="collapse" id="user">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="{{ route('user') }}" class="nav-link">User</a>
+                                    <a href="{{ route('user.index') }}" class="nav-link">User</a>
                                 </li>
                             </ul>
                         </div>
@@ -85,7 +85,7 @@
                         <div class="collapse" id="uiComponents">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="{{ route('category') }}" class="nav-link">Category</a>
+                                    <a href="{{ route('category.index') }}" class="nav-link">Category</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('subcategory.index') }}" class="nav-link">Sub Category</a>
@@ -109,10 +109,7 @@
                                     <a href="{{ route('product.index') }}" class="nav-link">Products</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('tag') }}" class="nav-link">Tag</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('variation') }}" class="nav-link">Variation</a>
+                                    <a href="{{ route('tag.index') }}" class="nav-link">Tag</a>
                                 </li>
                             </ul>
                         </div>

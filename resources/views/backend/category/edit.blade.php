@@ -10,9 +10,6 @@
                     <h3>Edit Category</h3>
                 </div>
                 <div class="card-body">
-                    @if (session('update_category'))
-                        <div class="alert alert-success">{{ session('update_category') }}</div>
-                    @endif
                     <form action="{{ route('category.update',$category->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">

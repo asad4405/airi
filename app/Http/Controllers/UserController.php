@@ -76,7 +76,7 @@ class UserController extends Controller
         }
     }
 
-    function user_list(Request $request)
+    function index(Request $request)
     {
         $users = User::where('id','!=',Auth::id())->get();
         return view('backend.user.index',compact('users'));
@@ -101,7 +101,7 @@ class UserController extends Controller
     function user_delete($id)
     {
         $user = User::find($id);
-        
+
         if($user->photo){
             $current_img = public_path('uploads/user/' . Auth::user()->photo);
             unlink($current_img);

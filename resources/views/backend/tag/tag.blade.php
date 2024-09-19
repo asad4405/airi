@@ -10,6 +10,9 @@
                     <h3>Tag List</h3>
                 </div>
                 <div class="card-body">
+                    @if (session('tag_delete'))
+                        <div class="alert alert-success">{{ session('tag_delete') }}</div>
+                    @endif
                     <table class="table table-bordered">
                         <tr>
                             <th>SL</th>

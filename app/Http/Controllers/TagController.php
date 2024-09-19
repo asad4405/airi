@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    function tag()
+    function index()
     {
         $tags = Tag::all();
         return view('backend.tag.tag',compact('tags'));
     }
 
-    function tag_store(Request $request)
+    function store(Request $request)
     {
         $request->validate([
             'tag_name' => 'required',
@@ -28,9 +28,9 @@ class TagController extends Controller
         return back()->with('success','Tag Added Success!');
     }
 
-    function tag_delete($id)
+    function delete($id)
     {
         Tag::find($id)->delete();
-        return back()->with('tag_delete','Tag Deleted Success!');
+        return redirect()->route('tag.index')->with('tag_delete','Tag Deleted Success!');
     }
 }

@@ -10,31 +10,32 @@
                     <h3>Inventory List</h3>
                 </div>
                 <div class="card-body">
+                    @if (session('edit_inventory'))
+                        <div class="alert alert-success">{{ session('edit_inventory') }}</div>
+                    @endif
                     @if (session('inventory_delete'))
                         <div class="alert alert-success">{{ session('inventory_delete') }}</div>
                     @endif
                     <table class="table table-bordered">
                         <tr>
                             <th>SL</th>
-                            <th>Color</th>
-                            <th>Size</th>
                             <th>Quantity</th>
                             <th>Action</th>
                         </tr>
                         @forelse ($inventories as $inventory)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $inventory->color_id }}</td>
-                                <td>{{ $inventory->size_id }}</td>
                                 <td>{{ $inventory->quantity }}</td>
                                 <td>
+                                    <a href="{{ route('inventory.edit', $inventory->id) }}"
+                                        class="btn btn-info">Edit</a>
                                     <a href="{{ route('inventory.delete', $inventory->id) }}"
                                         class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center text-danger">No Inventory Available!</td>
+                                <td colspan="3" class="text-center text-danger">No Inventory Available!</td>
                             </tr>
                         @endforelse
                     </table>
@@ -57,30 +58,6 @@
                             <input type="text" class="form-control" name="product_id"
                                 value="{{ $product->product_name }}" disabled>
                             @error('product_id')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Color Name</label>
-                            <select name="color_id" class="form-select">
-                                <option value="">Select Color</option>
-                                @foreach ($colors as $color)
-                                    <option value="{{ $color->id }}">{{ $color->color_name }}</option>
-                                @endforeach
-                            </select>
-                            @error('color_id')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Size Name</label>
-                            <select name="size_id" class="form-select">
-                                <option value="">Select Size</option>
-                                @foreach ($sizes as $size)
-                                    <option value="{{ $size->id }}">{{ $size->size_name }}</option>
-                                @endforeach
-                            </select>
-                            @error('size_id')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

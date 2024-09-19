@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+
+    function product()
+    {
+        return $this->belongsTo(Product::class,'product_id');
+    }
 }

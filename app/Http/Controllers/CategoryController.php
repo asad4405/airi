@@ -9,13 +9,13 @@ use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller
 {
-    function category()
+    function index()
     {
         $categories = Category::all();
         return view('backend.category.index',compact('categories'));
     }
 
-    function category_store(Request $request)
+    function store(Request $request)
     {
         $request->validate([
             'category_name' => 'required|unique:categories,category_name',
@@ -37,13 +37,13 @@ class CategoryController extends Controller
         return back()->with('add_category','Category Added Success!');
     }
 
-    function category_edit($id)
+    function edit($id)
     {
         $category = Category::find($id);
         return view('backend.category.edit',compact('category'));
     }
 
-    function category_update(Request $request, $id)
+    function update(Request $request, $id)
     {
         $category = Category::find($id);
 
@@ -68,10 +68,10 @@ class CategoryController extends Controller
             ]);
         }
 
-        return back()->with('update_category','Category Update Success!');
+        return redirect()->route('category.index')->with('success','Category Update Success!');
     }
 
-    function category_delete($id)
+    function delete($id)
     {
         $category = Category::find($id);
 
@@ -81,6 +81,6 @@ class CategoryController extends Controller
         }
         $category->delete();
 
-        return back()->with('category_delete','Category Deleted Success!');
+        return redirect()->route('category.index')->with('success','Category Deleted Success!');
     }
 }
