@@ -115,26 +115,16 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#forms" role="button"
-                            aria-expanded="false" aria-controls="forms">
+                        <a class="nav-link" data-toggle="collapse" href="#coupons" role="button"
+                            aria-expanded="false" aria-controls="coupons">
                             <i class="link-icon" data-feather="inbox"></i>
-                            <span class="link-title">Forms</span>
+                            <span class="link-title">Coupons</span>
                             <i class="link-arrow" data-feather="chevron-down"></i>
                         </a>
-                        <div class="collapse" id="forms">
+                        <div class="collapse" id="coupons">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="pages/forms/basic-elements.html" class="nav-link">Basic Elements</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/forms/advanced-elements.html" class="nav-link">Advanced
-                                        Elements</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/forms/editors.html" class="nav-link">Editors</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/forms/wizard.html" class="nav-link">Wizard</a>
+                                    <a href="{{ route('coupon.index') }}" class="nav-link">Coupon</a>
                                 </li>
                             </ul>
                         </div>

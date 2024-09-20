@@ -110,30 +110,57 @@
                                 <h5 class="mb--15">Cart totals</h5>
                                 <div class="table-content table-responsive">
                                     <div class="row">
-                                        <div class="col-sm-10">
-                                            <div class="coupon">
-                                                <input type="text" id="" name="coupon" class="cart-form__input"
-                                                    placeholder="Coupon Code">
-                                                <button type="submit" class="cart-form__btn">Apply Coupon</button>
+                                        <form action="{{ route('cart.index') }}" method="GET">
+                                            <div class="col-sm-8">
+                                                <div class="coupon">
+                                                    <input type="text" id="" name="coupon"
+                                                        class="cart-form__input" placeholder="Coupon Code"
+                                                        value="{{ $coupon }}">
+                                                    <button type="submit" class="cart-form__btn">Apply Coupon</button>
+                                                </div>
+                                                @if ($message)
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @endif
+                                                {{ $discount }}
+                                                {{ $highest_amount }}
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                     <br>
                                     <table class="table order-table">
                                         <tbody>
                                             <tr>
-                                                <th>Subtotal (+)</th>
+                                                <th>Subtotal (+) :</th>
                                                 <td>{{ $sub_total }} Taka</td>
                                             </tr>
                                             <tr>
-                                                <th>Coupon Discount (-)</th>
-                                                <td>40 Taka</td>
+                                                <th>Coupon :</th>
+                                                @if ($coupon)
+                                                    <td>{{ $coupon }}</td>
+                                                @else
+                                                    <td>N\A</td>
+                                                @endif
+                                            </tr>
+                                            @php
+                                                $calculated_discount = floor(($sub_total * $discount) / 100);
+                                            @endphp
+                                            <tr>
+                                                <th>Coupon Discount (-) :</th>
+                                                @if ($calculated_discount > $highest_amount)
+                                                    <td>{{ $highest_amount }} Taka</td>
+                                                @else
+                                                    <td>{{ $calculated_discount }} Taka</td>
+                                                @endif
                                             </tr>
                                             <tr class="order-total">
                                                 <th>Total</th>
                                                 <td>
                                                     <span class="product-price-wrapper">
-                                                        <span class="money">{{ $sub_total }} Taka</span>
+                                                        @if ($calculated_discount > $highest_amount)
+                                                            <span class="money">{{ $sub_total - $highest_amount }} Taka</span>
+                                                        @else
+                                                            <span class="money">{{ $sub_total - $calculated_discount }} Taka</span>
+                                                        @endif
                                                     </span>
                                                 </td>
                                             </tr>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/product/details/{slug}', [FrontendController::class, 'product_details'])->name('product.details');
-
+Route::get('/cart');
 
 
 // Dashboard
@@ -73,6 +74,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{inventory_id}', [InventoryController::class, 'edit'])->name('edit');
         Route::post('/update/{inventory_id}', [InventoryController::class, 'update'])->name('update');
         Route::get('/delete/{inventory_id}', [InventoryController::class, 'delete'])->name('delete');
+    });
+
+    // Coupon
+    Route::prefix('coupon')->controller(CouponController::class)->name('coupon.')->group(function(){
+        Route::get('/','index')->name('index');
+        Route::post('/store','store')->name('store');
+        Route::get('/edit/{id}','edit')->name('edit');
+        Route::post('/update/{id}','update')->name('update');
+        Route::get('/delete/{id}','delete')->name('delete');
     });
 });
 
