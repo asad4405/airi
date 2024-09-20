@@ -233,7 +233,7 @@
                                                 @endauth
                                             </li>
                                             <li>
-                                                <a href="cart.html">Shopping Cart</a>
+                                                <a href="{{ route('cart.index') }}">Shopping Cart</a>
                                             </li>
                                             <li>
                                                 <a href="checkout.html">Check Out</a>
@@ -252,7 +252,8 @@
                                     <li class="header-toolbar__item">
                                         <a href="#miniCart" class="mini-cart-btn toolbar-btn">
                                             <i class="dl-icon-cart4"></i>
-                                            <sup class="mini-cart-count">2</sup>
+                                            <sup
+                                                class="mini-cart-count">{{ App\Models\Cart::where('customer_id', Auth::guard('customer')->id())->count() }}</sup>
                                         </a>
                                     </li>
                                     <li class="header-toolbar__item">
@@ -527,72 +528,54 @@
                     <h5 class="mini-cart__heading mb--40 mb-lg--30">Shopping Cart</h5>
                     <div class="mini-cart__content">
                         <ul class="mini-cart__list">
-                            <li class="mini-cart__product">
-                                <a href="#" class="remove-from-cart remove">
-                                    <i class="dl-icon-close"></i>
-                                </a>
-                                <div class="mini-cart__product__image">
-                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-17-1-70x91.jpg"
-                                        alt="products">
-                                </div>
-                                <div class="mini-cart__product__content">
-                                    <a class="mini-cart__product__title" href="product-details.html">Chain print
-                                        bermuda
-                                        shorts </a>
-                                    <span class="mini-cart__product__quantity">1 x $49.00</span>
-                                </div>
-                            </li>
-                            <li class="mini-cart__product">
-                                <a href="#" class="remove-from-cart remove">
-                                    <i class="dl-icon-close"></i>
-                                </a>
-                                <div class="mini-cart__product__image">
-                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-18-1-70x91.jpg"
-                                        alt="products">
-                                </div>
-                                <div class="mini-cart__product__content">
-                                    <a class="mini-cart__product__title" href="product-details.html">Waxed-effect
-                                        pleated skirt</a>
-                                    <span class="mini-cart__product__quantity">1 x $49.00</span>
-                                </div>
-                            </li>
-                            <li class="mini-cart__product">
-                                <a href="#" class="remove-from-cart remove">
-                                    <i class="dl-icon-close"></i>
-                                </a>
-                                <div class="mini-cart__product__image">
-                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-19-1-70x91.jpg"
-                                        alt="products">
-                                </div>
-                                <div class="mini-cart__product__content">
-                                    <a class="mini-cart__product__title" href="product-details.html">Waxed-effect
-                                        pleated skirt</a>
-                                    <span class="mini-cart__product__quantity">1 x $49.00</span>
-                                </div>
-                            </li>
-                            <li class="mini-cart__product">
-                                <a href="#" class="remove-from-cart remove">
-                                    <i class="dl-icon-close"></i>
-                                </a>
-                                <div class="mini-cart__product__image">
-                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-2-1-70x91.jpg"
-                                        alt="products">
-                                </div>
-                                <div class="mini-cart__product__content">
-                                    <a class="mini-cart__product__title" href="product-details.html">Waxed-effect
-                                        pleated skirt</a>
-                                    <span class="mini-cart__product__quantity">1 x $49.00</span>
-                                </div>
-                            </li>
+                            @php
+                                $carts = App\Models\Cart::where('customer_id', Auth::guard('customer')->id())->get();
+                                $sub_total = 0;
+                            @endphp
+                            @forelse ($carts as $cart)
+                                <li class="mini-cart__product">
+                                    <a href="{{ route('cart.remove', $cart->id) }}" class="remove-from-cart remove">
+                                        <i class="dl-icon-close"></i>
+                                    </a>
+                                    <div class="mini-cart__product__image">
+                                        <img src="{{ asset('uploads/product') }}/{{ $cart->product->preview }}"
+                                            alt="products">
+                                    </div>
+                                    <div class="mini-cart__product__content">
+                                        <a class="mini-cart__product__title"
+                                            href="{{ route('product.details', $cart->product->slug) }}">
+                                            {{ $cart->product->product_name }}
+                                        </a>
+                                        <span class="mini-cart__product__quantity">{{ $cart->quantity }} x
+                                            {{ $cart->product->after_discount }} =
+                                            {{ $cart->quantity * $cart->product->after_discount }} Taka</span>
+                                    </div>
+                                </li>
+                                @php
+                                    $sub_total += $cart->quantity * $cart->product->after_discount;
+                                @endphp
+                            @empty
+                                <li class="mini-cart__product">
+                                    <a href="" class="text-danger">No Product Available!</a>
+                                </li>
+                            @endforelse
                         </ul>
-                        <div class="mini-cart__total">
-                            <span>Subtotal</span>
-                            <span class="ammount">$98.00</span>
-                        </div>
-                        <div class="mini-cart__buttons">
-                            <a href="cart.html" class="btn btn-fullwidth btn-style-1">View Cart</a>
-                            <a href="checkout.html" class="btn btn-fullwidth btn-style-1">Checkout</a>
-                        </div>
+                        @if (App\Models\Cart::where('customer_id', Auth::guard('customer')->id())->count() != 0)
+                            <div class="mini-cart__total">
+                                <span>Subtotal</span>
+                                <span class="ammount">{{ $sub_total }} Taka</span>
+                            </div>
+
+                            <div class="mini-cart__buttons">
+                                <a href="{{ route('cart.index') }}" class="btn btn-fullwidth btn-style-1">View
+                                    Cart</a>
+                            </div>
+                        @else
+                            <div class="mini-cart__buttons">
+                                <a href="{{ route('index') }}" class="btn btn-fullwidth btn-style-1">Return Shopping
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FrontendController;
@@ -10,7 +11,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VariationController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -74,6 +74,15 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{inventory_id}', [InventoryController::class, 'update'])->name('update');
         Route::get('/delete/{inventory_id}', [InventoryController::class, 'delete'])->name('delete');
     });
+});
+
+// Cart
+Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(function () {
+    Route::post('/add', 'add')->name('add');
+    Route::get('/remove/{id}', 'remove')->name('remove');
+    Route::get('/', 'index')->name('index');
+    Route::get('/clear', 'clear')->name('clear');
+    Route::post('/update', 'update')->name('update');
 });
 
 require __DIR__ . '/auth.php';
