@@ -226,7 +226,11 @@
                                         </a>
                                         <ul class="user-info-menu">
                                             <li>
-                                                <a href="my-account.html">My Account</a>
+                                                @auth('customer')
+                                                    <a href="{{ route('customer.profile') }}">My Account</a>
+                                                @else
+                                                    <a href="{{ route('customer.login') }}">Login/Register</a>
+                                                @endauth
                                             </li>
                                             <li>
                                                 <a href="cart.html">Shopping Cart</a>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
@@ -76,3 +77,16 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+// Customer
+// login and register
+Route::prefix('customer')->controller(CustomerController::class)->name('customer.')->group(function () {
+    Route::get('/register', 'register')->name('register');
+    Route::post('/register/store', 'register_store')->name('register.store');
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login/store', 'login_store')->name('login.store');
+    Route::get('/profile', 'profile')->name('profile');
+    Route::get('/logout', 'logout')->name('logout');
+});
+
+// Route::get()
