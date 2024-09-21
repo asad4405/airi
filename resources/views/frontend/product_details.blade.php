@@ -163,7 +163,7 @@
                                                 Add To Cart
                                             </button>
                                         @else
-                                            <button type="button" class="btn btn-style-1 btn-large add-to-cart">
+                                            <button type="button" onclick="location.href = '{{ route('customer.login') }}';" class="btn btn-style-1 btn-large add-to-cart">
                                                 Loin your Account
                                             </button>
                                         @endauth

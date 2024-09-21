@@ -16,14 +16,24 @@ class CartController extends Controller
             '*' => 'required',
         ]);
 
-        Cart::create([
+        if (Cart::where([
             'customer_id' => Auth::guard('customer')->id(),
             'product_id' => $request->product_id,
-            'quantity' => $request->quantity,
-            'created_at' => Carbon::now(),
-        ]);
-
-        return redirect()->route('index')->with('cart_success', 'Cart Added Success!');
+        ])->exists()) {
+            Cart::where([
+                'customer_id' => Auth::guard('customer')->id(),
+                'product_id' => $request->product_id,
+            ])->increment('quantity', $request->quantity);
+            return redirect()->route('cart.index')->with('cart_success', 'Cart Updated Success!');
+        } else {
+            Cart::create([
+                'customer_id' => Auth::guard('customer')->id(),
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+                'created_at' => Carbon::now(),
+            ]);
+            return redirect()->route('cart.index')->with('cart_success', 'Cart Added Success!');
+        }
     }
 
     function remove($id)
@@ -64,7 +74,7 @@ class CartController extends Controller
         }
 
         $carts = Cart::where('customer_id', Auth::guard('customer')->id())->get();
-        return view('frontend.cart', compact('carts', 'coupon', 'discount', 'message','highest_amount'));
+        return view('frontend.cart', compact('carts', 'coupon', 'discount', 'message', 'highest_amount'));
     }
 
     function clear()

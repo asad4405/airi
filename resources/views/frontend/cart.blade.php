@@ -44,6 +44,7 @@
                                             <tbody>
                                                 @php
                                                     $sub_total = 0;
+                                                    $flag = false;
                                                 @endphp
                                                 @forelse ($carts as $cart)
                                                     <tr>
@@ -58,6 +59,18 @@
                                                             <h3>
                                                                 <a
                                                                     href="{{ route('product.details', $cart->product->slug) }}">{{ $cart->product->product_name }}</a>
+                                                                @php
+                                                                    $inventory = App\Models\Inventory::where(
+                                                                        'product_id',
+                                                                        $cart->product_id,
+                                                                    )->first();
+                                                                @endphp
+                                                                @if (empty($inventory) || $inventory->quantity < $cart->quantity)
+                                                                    @php
+                                                                        $flag = true;
+                                                                    @endphp
+                                                                    <span class="badge bg-danger">Sold Out</span>
+                                                                @endif
                                                             </h3>
                                                         </td>
                                                         <td class="product-price">
@@ -159,11 +172,14 @@
                                                 <td>
                                                     <span class="product-price-wrapper">
                                                         @if ($calculated_discount > $highest_amount)
-                                                            <span class="money">{{ (int)$sub_total - (int)$highest_amount }} Taka</span>
-                                                            {{ session(['S_total' => (int)$sub_total - (int)$highest_amount]) }}
+                                                            <span
+                                                                class="money">{{ (int) $sub_total - (int) $highest_amount }}
+                                                                Taka</span>
+                                                            {{ session(['S_total' => (int) $sub_total - (int) $highest_amount]) }}
                                                         @else
-                                                            <span class="money">{{ $sub_total - $calculated_discount }} Taka</span>
-                                                            {{ session(['S_total' => (int)$sub_total - (int)$calculated_discount]) }}
+                                                            <span class="money">{{ $sub_total - $calculated_discount }}
+                                                                Taka</span>
+                                                            {{ session(['S_total' => (int) $sub_total - (int) $calculated_discount]) }}
                                                         @endif
                                                     </span>
                                                 </td>
@@ -177,9 +193,15 @@
                                     Return Shopping
                                 </a>
                             @else
-                                <a href="{{ route('checkout.index') }}" class="btn btn-fullwidth btn-style-1">
-                                    Proceed To Checkout
-                                </a>
+                                @if ($flag)
+                                    <div class="alert alert-danger">
+                                        Please Check your cart for any sold out item.
+                                    </div>
+                                @else
+                                    <a href="{{ route('checkout.index') }}" class="btn btn-fullwidth btn-style-1">
+                                        Proceed To Checkout
+                                    </a>
+                                @endif
                             @endif
                         </div>
                     </div>
