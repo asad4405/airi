@@ -121,8 +121,6 @@
                                                 @if ($message)
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @endif
-                                                {{ $discount }}
-                                                {{ $highest_amount }}
                                             </div>
                                         </form>
                                     </div>
@@ -132,11 +130,13 @@
                                             <tr>
                                                 <th>Subtotal (+) :</th>
                                                 <td>{{ $sub_total }} Taka</td>
+                                                {{ session(['S_sub_total' => $sub_total]) }}
                                             </tr>
                                             <tr>
                                                 <th>Coupon :</th>
                                                 @if ($coupon)
                                                     <td>{{ $coupon }}</td>
+                                                    {{ session(['S_coupon' => $coupon]) }}
                                                 @else
                                                     <td>N\A</td>
                                                 @endif
@@ -148,8 +148,10 @@
                                                 <th>Coupon Discount (-) :</th>
                                                 @if ($calculated_discount > $highest_amount)
                                                     <td>{{ $highest_amount }} Taka</td>
+                                                    {{ session(['S_discount' => $highest_amount]) }}
                                                 @else
                                                     <td>{{ $calculated_discount }} Taka</td>
+                                                    {{ session(['S_discount' => $calculated_discount]) }}
                                                 @endif
                                             </tr>
                                             <tr class="order-total">
@@ -157,9 +159,11 @@
                                                 <td>
                                                     <span class="product-price-wrapper">
                                                         @if ($calculated_discount > $highest_amount)
-                                                            <span class="money">{{ $sub_total - $highest_amount }} Taka</span>
+                                                            <span class="money">{{ (int)$sub_total - (int)$highest_amount }} Taka</span>
+                                                            {{ session(['S_total' => (int)$sub_total - (int)$highest_amount]) }}
                                                         @else
                                                             <span class="money">{{ $sub_total - $calculated_discount }} Taka</span>
+                                                            {{ session(['S_total' => (int)$sub_total - (int)$calculated_discount]) }}
                                                         @endif
                                                     </span>
                                                 </td>
@@ -173,9 +177,9 @@
                                     Return Shopping
                                 </a>
                             @else
-                                <button type="submit" class="btn btn-fullwidth btn-style-1">
+                                <a href="{{ route('checkout.index') }}" class="btn btn-fullwidth btn-style-1">
                                     Proceed To Checkout
-                                </button>
+                                </a>
                             @endif
                         </div>
                     </div>

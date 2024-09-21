@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FrontendController;
@@ -77,12 +78,12 @@ Route::middleware('auth')->group(function () {
     });
 
     // Coupon
-    Route::prefix('coupon')->controller(CouponController::class)->name('coupon.')->group(function(){
-        Route::get('/','index')->name('index');
-        Route::post('/store','store')->name('store');
-        Route::get('/edit/{id}','edit')->name('edit');
-        Route::post('/update/{id}','update')->name('update');
-        Route::get('/delete/{id}','delete')->name('delete');
+    Route::prefix('coupon')->controller(CouponController::class)->name('coupon.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/delete/{id}', 'delete')->name('delete');
     });
 });
 
@@ -93,6 +94,14 @@ Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(f
     Route::get('/', 'index')->name('index');
     Route::get('/clear', 'clear')->name('clear');
     Route::post('/update', 'update')->name('update');
+});
+
+// Checkout
+Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout.')->group(function () {
+    Route::get('/', 'checkout')->name('index');
+    Route::post('/getcity', 'getcity');
+    Route::post('/order/store', 'order_store')->name('order.store');
+    Route::get('/order/success', 'order_success')->name('order.success');
 });
 
 require __DIR__ . '/auth.php';
