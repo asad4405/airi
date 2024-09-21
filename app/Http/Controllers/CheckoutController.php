@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderMail;
 use App\Models\Billing;
 use App\Models\Cart;
 use App\Models\City;
@@ -14,6 +15,7 @@ use App\Models\Shipping;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -118,8 +120,8 @@ class CheckoutController extends Controller
             if($request->coupon){
                 Coupon::where('name',$request->coupon)->decrement('limit');
             }
+            Mail::to($request->email)->send(new OrderMail($order_id));
             return redirect()->route('checkout.order.success')->with('success', $order_id);
-
         } elseif ($request->payment_method == 2) {
             //
         } else {
