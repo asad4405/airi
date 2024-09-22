@@ -62,6 +62,74 @@ class CustomerController extends Controller
         return view('frontend.customer.profile');
     }
 
+    function update(Request $request)
+    {
+        if ($request->password == '') {
+            if ($request->photo == '') {
+                Customer::find(Auth::guard('customer')->id())->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'zip' => $request->zip,
+                    'address' => $request->address,
+                    'updated_at' => Carbon::now(),
+                ]);
+            } else {
+                if (Auth::guard('customer')->photo != null) {
+                    $current = public_path('uploads/customer/' . Auth::guard('customer')->user()->photo);
+                    unlink($current);
+                }
+
+                $photo = $request->photo;
+                $extension = $photo->extension();
+                $file_name = 'customer-' . uniqid() . '.' . $extension;
+
+                Customer::find(Auth::guard('customer')->id())->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'zip' => $request->zip,
+                    'address' => $request->address,
+                    'photo' => $file_name,
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
+        } else {
+            if ($request->photo == '') {
+                Customer::find(Auth::guard('customer')->id())->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'phone' => $request->phone,
+                    'zip' => $request->zip,
+                    'address' => $request->address,
+                    'updated_at' => Carbon::now(),
+                ]);
+            } else {
+                if (Auth::guard('customer')->photo != null) {
+                    $current = public_path('uploads/customer/' . Auth::guard('customer')->user()->photo);
+                    unlink($current);
+                }
+
+                $photo = $request->photo;
+                $extension = $photo->extension();
+                $file_name = 'customer-' . uniqid() . '.' . $extension;
+
+                Customer::find(Auth::guard('customer')->id())->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'phone' => $request->phone,
+                    'zip' => $request->zip,
+                    'address' => $request->address,
+                    'photo' => $file_name,
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
+        }
+        return back()->with('success', 'Profile Updated!');
+    }
+
     function logout()
     {
         Auth::guard('customer')->logout();

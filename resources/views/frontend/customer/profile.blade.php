@@ -25,33 +25,43 @@
             <div class="container">
                 <div class="row pt--80 pt-md--60 pt-sm--40 pb--80 pb-md--60 pb-sm--40">
                     <div class="col-12">
+                        @if (session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
                         <div class="user-dashboard-tab flex-column flex-md-row">
-                            <div class="user-dashboard-tab__head nav flex-md-column" role="tablist"
-                                aria-orientation="vertical">
-                                <a class="nav-link active" data-toggle="pill" role="tab" href="#dashboard"
-                                    aria-controls="dashboard" aria-selected="true">Dashboard</a>
-                                <a class="nav-link" data-toggle="pill" role="tab" href="#orders" aria-controls="orders"
-                                    aria-selected="true">Orders</a>
-                                <a class="nav-link" data-toggle="pill" role="tab" href="#downloads"
-                                    aria-controls="downloads" aria-selected="true">Downloads</a>
-                                <a class="nav-link" data-toggle="pill" role="tab" href="#addresses"
-                                    aria-controls="addresses" aria-selected="true">Addresses</a>
-                                <a class="nav-link" data-toggle="pill" role="tab" href="#accountdetails"
-                                    aria-controls="accountdetails" aria-selected="true">Account Details</a>
+                            <div class="user-dashboard-tab__head nav flex-md-column nav-pills" id="v-pills-tab"
+                                role="tablist" aria-orientation="vertical">
+                                <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-home" type="button" role="tab"
+                                    aria-controls="v-pills-home" aria-selected="true">Home</a>
+                                <a class="nav-link" id="v-pills-orders-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-orders" type="button" role="tab"
+                                    aria-controls="v-pills-orders" aria-selected="false">Orders</a>
+                                <a class="nav-link" id="v-pills-downloads-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-downloads" type="button" role="tab"
+                                    aria-controls="v-pills-downloads" aria-selected="false">Downloads</a>
+                                <a class="nav-link" id="v-pills-account_details-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-account_details" type="button" role="tab"
+                                    aria-controls="v-pills-account_details" aria-selected="false">Account Details</a>
                                 <a class="nav-link" href="{{ route('customer.logout') }}">Logout</a>
                             </div>
-                            <div class="user-dashboard-tab__content tab-content">
-                                <div class="tab-pane fade show active" id="dashboard">
-                                    <p>Hello <strong>{{ Auth::guard('customer')->user()->name }}</strong> (not
-                                        <strong>{{ Auth::guard('customer')->user()->name }}</strong>? <a
-                                            href="{{ route('customer.logout') }}">Log out</a>)</p>
-                                    <p>From your account dashboard. you can easily check &amp; view your <a
-                                            href="">recent orders</a>, manage your <a href="">shipping and
-                                            billing
-                                            addresses</a>
-                                    </p>
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                                    aria-labelledby="v-pills-home-tab" tabindex="0">
+                                    <div class="tab-pane fade show active" id="dashboard">
+                                        <p>Hello <strong>{{ Auth::guard('customer')->user()->name }}</strong> (not
+                                            <strong>{{ Auth::guard('customer')->user()->name }}</strong>? <a
+                                                href="{{ route('customer.logout') }}">Log out</a>)
+                                        </p>
+                                        <p>From your account dashboard. you can easily check &amp; view your <a
+                                                href="">recent orders</a>, manage your <a href="">shipping and
+                                                billing
+                                                addresses</a>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="tab-pane fade" id="orders">
+                                <div class="tab-pane fade" id="v-pills-orders" role="tabpanel"
+                                    aria-labelledby="v-pills-orders-tab" tabindex="0">
                                     <div class="message-box mb--30 d-none">
                                         <p><i class="fa fa-check-circle"></i>No order has been made yet.</p>
                                         <a href="shop-sidebar.html">Go Shop</a>
@@ -88,7 +98,8 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="downloads">
+                                <div class="tab-pane fade" id="v-pills-downloads" role="tabpanel"
+                                    aria-labelledby="v-pills-downloads-tab" tabindex="0">
                                     <div class="message-box mb--30 d-none">
                                         <p><i class="fa fa-exclamation-circle"></i>No downloads available yet.</p>
                                         <a href="shop-sidebar.html">Go Shop</a>
@@ -122,66 +133,61 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="addresses">
-                                    <p class="mb--20">The following addresses will be used on the checkout page by
-                                        default.</p>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-sm--20">
-                                            <div class="text-block">
-                                                <h4 class="mb--20">Billing address</h4>
-                                                <a href="">Edit</a>
-                                                <p>You have not set up this type of address yet.</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="text-block">
-                                                <h4 class="mb--20">Shopping address</h4>
-                                                <a href="">Edit</a>
-                                                <p>You have not set up this type of address yet.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="accountdetails">
-                                    <form action="#" class="form form--account">
+                                <div class="tab-pane fade" id="v-pills-account_details" role="tabpanel"
+                                    aria-labelledby="v-pills-account_details-tab" tabindex="0">
+                                    <form action="{{ route('customer.update') }}" class="form form--account"
+                                        method="POST" enctype="multipart/form-data">
+                                        @csrf
                                         <div class="row grid-space-30 mb--20">
                                             <div class="col-md-6 mb-sm--20">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="f_name">First name <span
+                                                    <label class="form__label" for="f_name">Full Name <span
                                                             class="required">*</span></label>
-                                                    <input type="text" name="f_name" id="f_name"
-                                                        class="form__input">
+                                                    <input type="text" name="name" class="form__input"
+                                                        value="{{ Auth::guard('customer')->user()->name }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="l_name">Last name <span
+                                                    <label class="form__label" for="l_name">Email Address <span
                                                             class="required">*</span></label>
-                                                    <input type="text" name="l_name" id="l_name"
-                                                        class="form__input">
+                                                    <input type="email" name="email" class="form__input"
+                                                        value="{{ Auth::guard('customer')->user()->email }}">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row mb--20">
-                                            <div class="col-12">
+                                        <div class="row grid-space-30 mb--20">
+                                            <div class="col-md-6 mb-sm--20">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="d_name">Display name <span
+                                                    <label class="form__label" for="f_name">Phone Number <span
                                                             class="required">*</span></label>
-                                                    <input type="text" name="d_name" id="d_name"
-                                                        class="form__input">
-                                                    <span class="suggestion"><em>This will be how your name will be
-                                                            displayed in the account section and in
-                                                            reviews</em></span>
+                                                    <input type="text" name="phone" class="form__input"
+                                                        value="{{ Auth::guard('customer')->user()->phone }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form__group">
+                                                    <label class="form__label" for="l_name">Email Address <span
+                                                            class="required">*</span></label>
+                                                    <input type="text" name="zip" class="form__input"
+                                                        value="{{ Auth::guard('customer')->user()->zip }}">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row mb--20">
-                                            <div class="col-12">
+                                        <div class="row grid-space-30 mb--20">
+                                            <div class="col-md-6 mb-sm--20">
                                                 <div class="form__group">
-                                                    <label class="form__label" for="email">Email Address <span
+                                                    <label class="form__label" for="f_name">Address <span
                                                             class="required">*</span></label>
-                                                    <input type="email" name="email" id="email"
-                                                        class="form__input">
+                                                    <input type="text" name="address" class="form__input"
+                                                        value="{{ Auth::guard('customer')->user()->address }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form__group">
+                                                    <label class="form__label" for="l_name">Photo <span
+                                                            class="required">*</span></label>
+                                                    <input type="file" name="photo" class="form__input">
                                                 </div>
                                             </div>
                                         </div>
@@ -192,7 +198,7 @@
                                                     <div class="form__group">
                                                         <label class="form__label" for="cur_pass">Current password
                                                             (leave blank to leave unchanged)</label>
-                                                        <input type="password" name="cur_pass" id="cur_pass"
+                                                        <input type="password" name="current_password"
                                                             class="form__input">
                                                     </div>
                                                 </div>
@@ -202,8 +208,7 @@
                                                     <div class="form__group">
                                                         <label class="form__label" for="new_pass">New password
                                                             (leave blank to leave unchanged)</label>
-                                                        <input type="password" name="new_pass" id="new_pass"
-                                                            class="form__input">
+                                                        <input type="password" name="password" class="form__input">
                                                     </div>
                                                 </div>
                                             </div>
@@ -212,8 +217,8 @@
                                                     <div class="form__group">
                                                         <label class="form__label" for="conf_new_pass">Confirm new
                                                             password</label>
-                                                        <input type="password" name="conf_new_pass" id="conf_new_pass"
-                                                            class="form__input">
+                                                        <input type="password" name="password_confirmation"
+                                                            id="conf_new_pass" class="form__input">
                                                     </div>
                                                 </div>
                                             </div>
@@ -221,8 +226,8 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form__group">
-                                                    <input type="submit" value="Save Changes"
-                                                        class="btn btn-style-1 btn-submit">
+                                                    <button type="submit" class="btn btn-style-1 btn-submit">Save
+                                                        Changes</button>
                                                 </div>
                                             </div>
                                         </div>
