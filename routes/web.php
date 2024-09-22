@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SslCommerzPaymentController;
@@ -105,6 +106,11 @@ Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout
     Route::get('/order/success', 'order_success')->name('order.success');
 });
 
+// Order
+// Route::prefix('order')->controller(OrderController::class)->name('order.')->group(function () {
+//     Route::get('/', 'index')->name('index');
+// });
+
 
 // SSLCOMMERZ Start
 Route::get('/pay', [SslCommerzPaymentController::class, 'index'])->name('sslpay');
@@ -129,6 +135,7 @@ Route::prefix('customer')->controller(CustomerController::class)->name('customer
     Route::get('/profile', 'profile')->name('profile');
     Route::post('/update', 'update')->name('update');
     Route::get('/logout', 'logout')->name('logout');
+    Route::get('/download/invoice/{id}', 'invoice')->name('download.invoice');
 });
 
 // Route::get()

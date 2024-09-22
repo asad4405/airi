@@ -78,22 +78,33 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td class="wide-column">September 19, 2018</td>
-                                                    <td>Processing</td>
-                                                    <td class="wide-column">$49.00 for 1 item</td>
-                                                    <td><a href="product-details.html"
-                                                            class="btn btn-medium btn-style-1">View</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td class="wide-column">September 19, 2018</td>
-                                                    <td>Processing</td>
-                                                    <td class="wide-column">$49.00 for 1 item</td>
-                                                    <td><a href="product-details.html"
-                                                            class="btn btn-medium btn-style-1">View</a></td>
-                                                </tr>
+                                                @forelse ($orders as $order)
+                                                    <tr>
+                                                        <td>{{ $order->order_id }}</td>
+                                                        <td class="wide-column">{{ $order->created_at->format('F d') }},
+                                                            {{ $order->created_at->format('Y') }}</td>
+                                                        @if ($order->status == 0)
+                                                            <td>Processing</td>
+                                                        @endif
+                                                        <td class="wide-column">{{ $order->total + $order->charge }} Taka
+                                                        </td>
+                                                        @php
+                                                            $order_product = App\Models\OrderProduct::where(
+                                                                'customer_id',
+                                                                Auth::guard('customer')->id(),
+                                                            )->first();
+                                                        @endphp
+                                                        <td>
+                                                            <a href="{{ route('product.details', $order_product->product->slug) }}"
+                                                                class="btn btn-medium btn-style-1">View</a>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="5" class="text-center text-danger">No Orders
+                                                            Available!</td>
+                                                    </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
@@ -115,20 +126,30 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="wide-column">Airi - Ecommerce Bootstrap Template</td>
-                                                    <td>August 10, 2018 </td>
-                                                    <td class="wide-column">Never</td>
-                                                    <td><a href="#" class="btn btn-medium btn-style-1">Download
-                                                            File</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="wide-column">Airi - Ecommerce Bootstrap Template</td>
-                                                    <td>August 10, 2018 </td>
-                                                    <td class="wide-column">Never</td>
-                                                    <td><a href="#" class="btn btn-medium btn-style-1">Download
-                                                            File</a></td>
-                                                </tr>
+                                                @forelse ($orders as $order)
+                                                    <tr>
+                                                        @php
+                                                            $order_product = App\Models\OrderProduct::where(
+                                                                'customer_id',
+                                                                Auth::guard('customer')->id(),
+                                                            )->first();
+                                                        @endphp
+                                                        <td class="wide-column">{{ $order_product->product->product_name }}
+                                                        </td>
+                                                        <td>{{ $order->created_at->format('F d') }},
+                                                            {{ $order->created_at->format('Y') }}</td>
+                                                        <td class="wide-column">Never</td>
+                                                        <td>
+                                                            <a href="{{ route('customer.download.invoice',$order->id) }}" class="btn btn-medium btn-style-1">Download
+                                                                Order</a>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="4" class="text-center text-danger">No Orders
+                                                            Available!</td>
+                                                    </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>

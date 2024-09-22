@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CustomerController extends Controller
 {
@@ -59,7 +61,8 @@ class CustomerController extends Controller
 
     function profile()
     {
-        return view('frontend.customer.profile');
+        $orders = Order::where('customer_id',Auth::guard('customer')->id())->latest()->get();
+        return view('frontend.customer.profile',compact('orders'));
     }
 
     function update(Request $request)
@@ -134,5 +137,12 @@ class CustomerController extends Controller
     {
         Auth::guard('customer')->logout();
         return redirect()->route('index');
+    }
+
+    function invoice($id)
+    {
+        $order_id = Order::find($id)->order_id;
+        $pdf = Pdf::loadView('frontend.customer.pdf.invoice', compact('order_id'));
+        return $pdf->download('invoice.pdf');
     }
 }
