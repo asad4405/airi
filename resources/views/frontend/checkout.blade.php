@@ -7,7 +7,7 @@
     <div class="breadcrumb-area bg--white-6 breadcrumb-bg-1 pt--60 pb--70 pt-lg--40 pb-lg--50 pt-md--30 pb-md--40">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 text-center">
+                <div class="text-center col-12">
                     <h1 class="page-title">Checkout</h1>
                     <ul class="breadcrumb justify-content-center">
                         <li><a href="index.html">Home</a></li>
@@ -128,7 +128,8 @@
                                                             Name
                                                             <span class="required">*</span></label>
                                                         <input type="text" name="ship_name" id="billing_fname"
-                                                            class="form__input form__input--2">
+                                                            class="form__input form__input--2"
+                                                            value="{{ Auth::guard('customer')->user()->name }}">
                                                     </div>
                                                 </div>
                                                 <div class="row mb--30">
@@ -138,7 +139,8 @@
                                                             Address
                                                             <span class="required">*</span></label>
                                                         <input type="email" name="ship_email" id="billing_fname"
-                                                            class="form__input form__input--2">
+                                                            class="form__input form__input--2"
+                                                            value="{{ Auth::guard('customer')->user()->email }}">
                                                     </div>
                                                 </div>
                                                 <div class="row mb--30">
@@ -147,7 +149,8 @@
                                                             class="form__label form__label--2">Phone
                                                             <span class="required">*</span></label>
                                                         <input type="text" name="ship_phone" id="billing_phone"
-                                                            class="form__input form__input--2">
+                                                            class="form__input form__input--2"
+                                                            value="{{ Auth::guard('customer')->user()->phone }}">
                                                     </div>
                                                 </div>
                                                 <div class="row mb--30">
@@ -264,6 +267,9 @@
                                                     <td class="text-end">N\A</td>
                                                 @endif
                                             </tr>
+                                            <input type="hidden" name="coupon" value="{{ session('S_coupon') }}">
+                                            <input type="hidden" name="customer_id"
+                                                value="{{ Auth::guard('customer')->id() }}">
                                             <tr class="cart-subtotal">
                                                 <th>Discount</th>
                                                 @if (session('S_discount'))
@@ -277,15 +283,18 @@
                                             <tr class="shipping">
                                                 <th>Shipping</th>
                                                 <td class="text-end">
-                                                    <span>(+) 100 Taka</span>
+                                                    <span id="shipping">(+) 70 Taka</span>
                                                 </td>
-                                                <input type="hidden" name="charge" value="100">
                                             </tr>
                                             <tr class="order-total">
                                                 <th>Order Total</th>
                                                 <td class="text-end">
-                                                    <span class="order-total-ammount">{{ session('S_total') }} Taka </span>
-                                                    <input type="hidden" name="total" value="{{ session('S_total') }}">
+                                                    <span class="order-total-ammount">
+                                                        <span id="total">{{ session('S_total') + 70 }} </span>
+                                                        Taka
+                                                    </span>
+                                                    <input type="hidden" name="total"
+                                                        value="{{ session('S_total') }}">
                                                 </td>
                                             </tr>
                                         </tfoot>
@@ -295,8 +304,32 @@
                                     <div class="payment-form">
                                         <div class="payment-group mb--10">
                                             <div class="payment-radio">
-                                                <input type="radio" value="1" name="payment_method" id=""
-                                                    checked>
+                                                <input data-charge="{{ session('S_total') }}" type="radio"
+                                                    value="70" name="charge" class="charge" checked>
+                                                <label class="payment-label" for="cash">
+                                                    Inside Dhaka (+) 70 Taka
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="payment-group mb--10">
+                                            <div class="payment-radio">
+                                                <input data-charge="{{ session('S_total') }}" type="radio"
+                                                    value="120" name="charge" class="charge">
+                                                <label class="payment-label" for="cash">
+                                                    Outside Dhaka (+) 120 Taka
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="checkout-payment">
+                                    <div class="payment-form">
+                                        <div class="payment-group mb--10">
+                                            <div class="payment-radio">
+                                                <input type="radio" value="1" name="payment_method"
+                                                    id="" checked>
                                                 <label class="payment-label" for="cash">
                                                     CASH ON DELIVERY
                                                 </label>
@@ -304,16 +337,11 @@
                                         </div>
                                         <div class="payment-group mb--10">
                                             <div class="payment-radio">
-                                                <input type="radio" value="2" name="payment_method" id="">
+                                                <input type="radio" value="2" name="payment_method"
+                                                    id="">
                                                 <label class="payment-label" for="cheque">
                                                     SSL Payment
                                                 </label>
-                                            </div>
-                                        </div>
-                                        <div class="payment-group mb--10">
-                                            <div class="payment-radio">
-                                                <input type="radio" value="3" name="payment_method" id="">
-                                                <label class="payment-label" for="cheque">Stripe Payment</label>
                                             </div>
                                         </div>
                                         <div class="payment-group mt--20">
@@ -356,6 +384,15 @@
                     $('.city_id').html(data);
                 }
             });
+        });
+    </script>
+    <script>
+        $('.charge').click(function() {
+            var charge = $(this).val();
+            var total = $(this).attr('data-charge');
+            var total = parseInt(total) + parseInt(charge);
+            $('#total').html(total);
+            $('#shipping').html(charge);
         });
     </script>
 @endsection

@@ -69,7 +69,7 @@ class CheckoutController extends Controller
                 'created_at' => Carbon::now(),
             ]);
 
-            if($request->ship_check == 1){
+            if ($request->ship_check == 1) {
                 Shipping::create([
                     'order_id' => $order_id,
                     'customer_id' => Auth::guard('customer')->id(),
@@ -84,7 +84,7 @@ class CheckoutController extends Controller
                     'notes' => $request->notes,
                     'created_at' => Carbon::now(),
                 ]);
-            }else{
+            } else {
                 Shipping::create([
                     'order_id' => $order_id,
                     'customer_id' => Auth::guard('customer')->id(),
@@ -117,13 +117,14 @@ class CheckoutController extends Controller
                 Inventory::where('product_id', $cart->product_id)->decrement('quantity', $cart->quantity);
             }
             // decrement coupon
-            if($request->coupon){
-                Coupon::where('name',$request->coupon)->decrement('limit');
+            if ($request->coupon) {
+                Coupon::where('name', $request->coupon)->decrement('limit');
             }
             Mail::to($request->email)->send(new OrderMail($order_id));
             return redirect()->route('checkout.order.success')->with('success', $order_id);
         } elseif ($request->payment_method == 2) {
-            //
+            $data = $request->all();
+            return redirect()->route('sslpay')->with('data', $data);
         } else {
             //
         }

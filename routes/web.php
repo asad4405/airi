@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
@@ -103,6 +104,19 @@ Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout
     Route::post('/order/store', 'order_store')->name('order.store');
     Route::get('/order/success', 'order_success')->name('order.success');
 });
+
+
+// SSLCOMMERZ Start
+Route::get('/pay', [SslCommerzPaymentController::class, 'index'])->name('sslpay');
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
+
 
 require __DIR__ . '/auth.php';
 
