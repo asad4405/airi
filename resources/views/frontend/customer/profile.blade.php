@@ -84,7 +84,19 @@
                                                         <td class="wide-column">{{ $order->created_at->format('F d') }},
                                                             {{ $order->created_at->format('Y') }}</td>
                                                         @if ($order->status == 0)
+                                                            <td>Placed</td>
+                                                        @elseif ($order->status == 1)
                                                             <td>Processing</td>
+                                                        @elseif ($order->status == 2)
+                                                            <td>Shipping
+                                                            </td>
+                                                        @elseif ($order->status == 3)
+                                                            <td>Ready For Deliver</td>
+                                                        @elseif ($order->status == 4)
+                                                            <td>Received
+                                                            </td>
+                                                        @elseif ($order->status == 5)
+                                                            <td>Cancelled</td>
                                                         @endif
                                                         <td class="wide-column">{{ $order->total + $order->charge }} Taka
                                                         </td>
@@ -121,7 +133,6 @@
                                                 <tr>
                                                     <th>Product</th>
                                                     <th>Downloads</th>
-                                                    <th>Expires</th>
                                                     <th>Download</th>
                                                 </tr>
                                             </thead>
@@ -138,9 +149,9 @@
                                                         </td>
                                                         <td>{{ $order->created_at->format('F d') }},
                                                             {{ $order->created_at->format('Y') }}</td>
-                                                        <td class="wide-column">Never</td>
                                                         <td>
-                                                            <a href="{{ route('customer.download.invoice',$order->id) }}" class="btn btn-medium btn-style-1">Download
+                                                            <a href="{{ route('customer.download.invoice', $order->id) }}"
+                                                                class="btn btn-medium btn-style-1">Download
                                                                 Order</a>
                                                         </td>
                                                     </tr>

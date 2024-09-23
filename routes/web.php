@@ -87,6 +87,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', 'update')->name('update');
         Route::get('/delete/{id}', 'delete')->name('delete');
     });
+
+    // Order
+    Route::prefix('order')->controller(OrderController::class)->name('order.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/status/update/{id}', 'status_update')->name('status.update');
+    });
 });
 
 // Cart
@@ -105,12 +111,6 @@ Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout
     Route::post('/order/store', 'order_store')->name('order.store');
     Route::get('/order/success', 'order_success')->name('order.success');
 });
-
-// Order
-// Route::prefix('order')->controller(OrderController::class)->name('order.')->group(function () {
-//     Route::get('/', 'index')->name('index');
-// });
-
 
 // SSLCOMMERZ Start
 Route::get('/pay', [SslCommerzPaymentController::class, 'index'])->name('sslpay');
