@@ -9,6 +9,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SslCommerzPaymentController;
@@ -138,4 +139,10 @@ Route::prefix('customer')->controller(CustomerController::class)->name('customer
     Route::get('/download/invoice/{id}', 'invoice')->name('download.invoice');
 });
 
-// Route::get()
+// Forgot Password
+Route::prefix('password')->controller(PasswordResetController::class)->name('password.')->group(function () {
+    Route::get('/forgot', 'forgot')->name('forgot');
+    Route::post('/forgot/post', 'forgot_post')->name('forgot.post');
+    Route::get('/password/reset/request/{token}', 'reset_request')->name('reset.request');
+    Route::post('/password/reset/confirm/{token}', 'reset_confirm')->name('reset.confirm');
+});
