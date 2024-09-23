@@ -146,3 +146,12 @@ Route::prefix('password')->controller(PasswordResetController::class)->name('pas
     Route::get('/password/reset/request/{token}', 'reset_request')->name('reset.request');
     Route::post('/password/reset/confirm/{token}', 'reset_confirm')->name('reset.confirm');
 });
+
+// Email Verify
+Route::prefix('email')->controller(CustomerController::class)->name('email.')->group(function () {
+    Route::get('/verify/customer/{token}', 'email_verify_customer')->name('verify.customer');
+    Route::get('/verify/resend/{token}', 'email_verify_resend')->name('verify.resend');
+    Route::get('/verify/resend', 'email_verify_resend')->name('verify.resend');
+    Route::post('/verify/resend/link', 'email_verify_resend_link')->name('verify.resend.link');
+});
+
