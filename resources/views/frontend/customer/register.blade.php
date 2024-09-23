@@ -70,6 +70,7 @@
                                     </div>
                                 </div>
                                 <a class="forgot-pass" href="{{ route('customer.login') }}">Login your account?</a>
+                                <a class="forgot-pass" href="{{ route('google.redirect') }}">Register with Gmail</a>
                             </form>
                         </div>
                     </div>

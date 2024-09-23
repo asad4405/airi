@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TagController;
@@ -154,4 +155,8 @@ Route::prefix('email')->controller(CustomerController::class)->name('email.')->g
     Route::get('/verify/resend', 'email_verify_resend')->name('verify.resend');
     Route::post('/verify/resend/link', 'email_verify_resend_link')->name('verify.resend.link');
 });
+
+// Socialite
+Route::get('/google/redirect',[SocialiteController::class,'google_redirect'])->name('google.redirect');
+Route::get('/google/callback',[SocialiteController::class,'google_callback'])->name('google.callback');
 

@@ -66,6 +66,7 @@
                                     </div>
                                 </div>
                                 <a class="forgot-pass" href="{{ route('password.forgot') }}">Lost your password?</a>
+                                <a class="forgot-pass" href="{{ route('google.redirect') }}">Login With Gmail</a>
                             </form>
                         </div>
                     </div>

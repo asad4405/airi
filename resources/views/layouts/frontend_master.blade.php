@@ -245,9 +245,11 @@
                                             <li>
                                                 <a href="order-tracking.html">Order tracking</a>
                                             </li>
-                                            <li>
-                                                <a href="compare.html">compare</a>
-                                            </li>
+                                            @auth('customer')
+                                                <li>
+                                                    <a href="{{ route('customer.logout') }}">Logout</a>
+                                                </li>
+                                            @endauth
                                         </ul>
                                     </li>
                                     <li class="header-toolbar__item">
