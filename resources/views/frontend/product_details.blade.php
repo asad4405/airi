@@ -119,13 +119,18 @@
                             <div class="product-summary">
                                 <div class="float-left product-rating">
                                     <span>
-                                        <i class="dl-icon-star rated"></i>
-                                        <i class="dl-icon-star rated"></i>
-                                        <i class="dl-icon-star rated"></i>
-                                        <i class="dl-icon-star rated"></i>
-                                        <i class="dl-icon-star rated"></i>
+                                        @if ($reviews->count())
+                                            @for ($i = 1; $i <= $reviews->average('star'); $i++)
+                                                <i class="dl-icon-star rated"></i>
+                                            @endfor
+                                            @for ($i = 1; $i <= 5 - $reviews->average('star'); $i++)
+                                                <i class="fa fa-star-o rated"></i>
+                                            @endfor
+                                        @endif
                                     </span>
-                                    <a href="" class="review-link">(1 customer review)</a>
+                                    @if ($reviews->count())
+                                        <a href="" class="review-link">({{ $reviews->count() }} customer review)</a>
+                                    @endif
                                 </div>
                                 <div class="product-navigation">
                                     <a href="#" class="prev"><i class="dl-icon-left"></i></a>
@@ -133,14 +138,27 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <h3 class="product-title">{{ $product->product_name }}</h3>
-                                <span class="float-right product-stock in-stock">
-                                    <i class="dl-icon-check-circle0"></i>
-                                    in stock
-                                </span>
-                                {{-- <span class="float-right product-stock in-stock">
-                                <i class="dl-icon-check-circle1"></i>
-                                stock out
-                            </span> --}}
+                                @php
+                                    $inventory = App\Models\Inventory::where('product_id', $product->id)->first();
+                                @endphp
+                                @if ($inventory)
+                                    @if ($inventory->quantity > 0)
+                                        <span class="float-right product-stock in-stock">
+                                            <i class="dl-icon-check-circle1"></i>
+                                            In Stock
+                                        </span>
+                                    @else
+                                        <span class="float-right product-stock in-stock">
+                                            <i class="dl-icon-check-circle1"></i>
+                                            Stock Out
+                                        </span>
+                                    @endif
+                                @else
+                                    <span class="float-right product-stock in-stock">
+                                        <i class="dl-icon-check-circle1"></i>
+                                        Upcomming
+                                    </span>
+                                @endif
                                 <div class="product-price-wrapper mb--40 mb-md--10">
                                     <span class="money">{{ $product->after_discount }} Taka</span>
                                     @if ($product->after_discount)
@@ -155,15 +173,36 @@
                                     <div class="flex-row product-action align-items-center">
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <div class="quantity">
-                                            <input type="number" class="quantity-input" name="quantity"
-                                                value="1" min="1">
+                                            <input type="number" class="quantity-input" name="quantity" value="1"
+                                                min="1">
                                         </div>
                                         @auth('customer')
-                                            <button type="submit" class="btn btn-style-1 btn-large add-to-cart">
-                                                Add To Cart
-                                            </button>
+                                            @php
+                                                $inventory = App\Models\Inventory::where(
+                                                    'product_id',
+                                                    $product->id,
+                                                )->first();
+                                            @endphp
+                                            @if ($inventory)
+                                                @if ($inventory->quantity > 0)
+                                                    <button type="submit" class="btn btn-style-1 btn-large add-to-cart">
+                                                        Add To Cart
+                                                    </button>
+                                                @else
+                                                    <button type="button"
+                                                        class="btn bg-danger btn-style-1 btn-large add-to-cart">
+                                                        Stock Out
+                                                    </button>
+                                                @endif
+                                            @else
+                                                <button type="button"
+                                                    class="btn btn-style-1 bg-info btn-large add-to-cart">
+                                                    Upcomming
+                                                </button>
+                                            @endif
                                         @else
-                                            <button type="button" onclick="location.href = '{{ route('customer.login') }}';" class="btn btn-style-1 btn-large add-to-cart">
+                                            <button type="button" onclick="location.href = '{{ route('customer.login') }}';"
+                                                class="btn btn-style-1 btn-large add-to-cart">
                                                 Loin your Account
                                             </button>
                                         @endauth
@@ -227,7 +266,7 @@
                             </button>
                             <button type="button" class="product-data-tab__link nav-link" id="nav-reviews-tab"
                                 data-bs-toggle="tab" data-bs-target="#nav-reviews" role="tab" aria-selected="true">
-                                <span>Reviews(1)</span>
+                                <span>Reviews({{ $reviews->count() }})</span>
                             </button>
                         </div>
                         <div class="tab-content product-data-tab__content" id="product-tabContent">
@@ -240,90 +279,140 @@
                             <div class="tab-pane fade" id="nav-reviews" role="tabpanel"
                                 aria-labelledby="nav-reviews-tab">
                                 <div class="product-reviews">
-                                    <h3 class="review__title">1 review for {{ $product->product_name }}</h3>
+                                    <h3 class="review__title">{{ $reviews->count() }} review for
+                                        {{ $product->product_name }}</h3>
+                                    @if (session('review'))
+                                        <div class="alert alert-success">{{ session('review') }}</div>
+                                    @endif
                                     <ul class="review__list">
-                                        <li class="review__item">
-                                            <div class="review__container">
-                                                <img src="{{ asset('frontend/assets') }}/img/others/comment-icon-2.png"
-                                                    alt="Review Avatar" class="review__avatar">
-                                                <div class="review__text">
-                                                    <div class="float-right product-rating">
-                                                        <span>
-                                                            <i class="dl-icon-star rated"></i>
-                                                            <i class="dl-icon-star rated"></i>
-                                                            <i class="dl-icon-star rated"></i>
-                                                            <i class="dl-icon-star rated"></i>
-                                                            <i class="dl-icon-star rated"></i>
-                                                        </span>
+                                        @forelse($reviews as $review)
+                                            <li class="review__item">
+                                                <div class="review__container">
+                                                    @if ($review->customer->photo)
+                                                        <img src="{{ asset('uploads/customer') }}/{{ $review->customer->photo }}"
+                                                            alt="Review Avatar" class="review__avatar">
+                                                    @else
+                                                        <img src="{{ Avatar::create($review->customer->name)->toBase64() }}"
+                                                            class="review__avatar" />
+                                                    @endif
+                                                    <div class="review__text">
+                                                        <div class="float-right product-rating">
+                                                            <span>
+                                                                @for ($i = 1; $i <= $review->star; $i++)
+                                                                    <i class="dl-icon-star rated"></i>
+                                                                @endfor
+                                                                @for ($i = 1; $i <= 5 - $review->star; $i++)
+                                                                    <i class="fa fa-star-o rated"></i>
+                                                                @endfor
+                                                            </span>
+                                                        </div>
+                                                        <div class="review__meta">
+                                                            <strong
+                                                                class="review__author">{{ $review->customer->name }}</strong>
+                                                            <span class="review__dash">-</span>
+                                                            <span
+                                                                class="review__published-date">{{ $review->updated_at->format('F d') }},
+                                                                {{ $review->updated_at->format('Y') }}</span>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <p class="review__description">{{ $review->review }}</p>
                                                     </div>
-                                                    <div class="review__meta">
-                                                        <strong class="review__author">John Snow </strong>
-                                                        <span class="review__dash">-</span>
-                                                        <span class="review__published-date">November 20,
-                                                            2018</span>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                    <p class="review__description">Aliquam egestas libero ac
-                                                        turpis pharetra, in vehicula lacus scelerisque.
-                                                        Vestibulum ut sem laoreet, feugiat tellus at, hendrerit
-                                                        arcu.</p>
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        @empty
+                                        @endforelse
                                     </ul>
-                                    <div class="review-form-wrapper">
-                                        <span class="reply-title"><strong>Add a review</strong></span>
-                                        <form action="#" class="form">
-                                            <div class="form-notes mb--20">
-                                                <p>Your email address will not be published. Required fields are
-                                                    marked <span class="required">*</span></p>
-                                            </div>
-                                            <div class="form__group mb--30 mb-sm--20">
-                                                <div class="revew__rating">
-                                                    <p class="stars selected">
-                                                        <a class="star-1 active" href="#">1</a>
-                                                        <a class="star-2" href="#">2</a>
-                                                        <a class="star-3" href="#">3</a>
-                                                        <a class="star-4" href="#">4</a>
-                                                        <a class="star-5" href="#">5</a>
-                                                    </p>
+                                    @auth('customer')
+                                        @if (App\Models\OrderProduct::where('customer_id', Auth::guard('customer')->id())->where('product_id', $product->id)->exists())
+                                            @if (App\Models\OrderProduct::where('customer_id', Auth::guard('customer')->id())->whereNotNull('review')->first() ==
+                                                    false)
+                                                <div class="review-form-wrapper">
+                                                    <span class="reply-title"><strong>Add a review</strong></span>
+                                                    <form action="{{ route('review.store', $product->id) }}" class="form"
+                                                        method="POST">
+                                                        @csrf
+                                                        <div class="form-notes mb--20">
+                                                            <p>Your email address will not be published. Required fields are
+                                                                marked <span class="required">*</span></p>
+                                                        </div>
+                                                        <div class="form__group mb--30 mb-sm--20">
+                                                            <div class="flex revew__rating">
+                                                                <p class="stars selected">
+                                                                    <input type="radio" name="star" value="1">
+                                                                    <span class="star-1">1</span>
+                                                                </p>
+                                                                <p class="stars selected">
+                                                                    <input type="radio" name="star" value="2">
+                                                                    <span class="star-2">2</span>
+                                                                </p>
+                                                                <p class="stars selected">
+                                                                    <input type="radio" name="star" value="3">
+                                                                    <span class="star-3">3</span>
+                                                                </p>
+                                                                <p class="stars selected">
+                                                                    <input type="radio" name="star" value="4">
+                                                                    <span class="star-4">4</span>
+                                                                </p>
+                                                                <p class="stars selected">
+                                                                    <input type="radio" name="star" value="5">
+                                                                    <span class="star-5">5</span>
+                                                                </p>
+
+                                                                @error('star')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="form__group mb--30 mb-sm--20">
+                                                            <div class="row">
+                                                                <div class="col-sm-6 mb-sm--20">
+                                                                    <label class="form__label" for="name">Name<span
+                                                                            class="required">*</span></label>
+                                                                    <input type="text" name="" id="name"
+                                                                        class="form__input"
+                                                                        value="{{ Auth::guard('customer')->user()->name }}"
+                                                                        disabled>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="form__label" for="email">email<span
+                                                                            class="required">*</span></label>
+                                                                    <input type="email" name="" id="email"
+                                                                        class="form__input"
+                                                                        value="{{ Auth::guard('customer')->user()->email }}"
+                                                                        disabled>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form__group mb--30 mb-sm--20">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <label class="form__label" for="email">Your Review<span
+                                                                            class="required">*</span></label>
+                                                                    <textarea name="review" id="" class="form__input form__input--textarea"></textarea>
+                                                                    @error('review')
+                                                                        <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form__group">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <button type="submit"
+                                                                        class="btn btn-style-1 btn-submit">Submit
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                            </div>
-                                            <div class="form__group mb--30 mb-sm--20">
-                                                <div class="row">
-                                                    <div class="col-sm-6 mb-sm--20">
-                                                        <label class="form__label" for="name">Name<span
-                                                                class="required">*</span></label>
-                                                        <input type="text" name="name" id="name"
-                                                            class="form__input">
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label class="form__label" for="email">email<span
-                                                                class="required">*</span></label>
-                                                        <input type="email" name="email" id="email"
-                                                            class="form__input">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form__group mb--30 mb-sm--20">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <label class="form__label" for="email">Your Review<span
-                                                                class="required">*</span></label>
-                                                        <textarea name="review" id="review" class="form__input form__input--textarea"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form__group">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <input type="submit" value="Submit"
-                                                            class="btn btn-style-1 btn-submit">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                                            @else
+                                                <h3 class="alert alert-warning">You Already Review this Product</h3>
+                                            @endif
+                                        @else
+                                            <h3 class="alert alert-warning">You did not purchase this product yet</h3>
+                                        @endif
+                                    @endauth
                                 </div>
                             </div>
                         </div>
@@ -355,198 +444,64 @@
                                         {"breakpoint":991, "settings": {"slidesToShow": 2} },
                                         {"breakpoint":450, "settings": {"slidesToShow": 1} }
                                     ]'>
-                                <div class="airi-product">
-                                    <div class="product-inner">
-                                        <figure class="product-image">
-                                            <div class="product-image--holder">
-                                                <a href="product-details.html">
-                                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-12-1.jpg"
-                                                        alt="Product Image" class="primary-image">
-                                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-12-4.jpg"
-                                                        alt="Product Image" class="secondary-image">
-                                                </a>
-                                            </div>
-                                            <div class="airi-product-action">
-                                                <div class="product-action">
-                                                    <a class="quickview-btn action-btn" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Quick Shop">
-                                                        <span data-bs-toggle="modal" data-bs-target="#productModal">
-                                                            <i class="dl-icon-view"></i>
-                                                        </span>
-                                                    </a>
-                                                    <a class="add_to_cart_btn action-btn" href="cart.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Cart">
-                                                        <i class="dl-icon-cart29"></i>
-                                                    </a>
-                                                    <a class="add_wishlist action-btn" href="wishlist.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Wishlist">
-                                                        <i class="dl-icon-heart4"></i>
-                                                    </a>
-                                                    <a class="add_compare action-btn" href="compare.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare">
-                                                        <i class="dl-icon-compare"></i>
+                                @forelse ($related_products as $related_product)
+                                    <div class="airi-product">
+                                        <div class="product-inner">
+                                            <figure class="product-image">
+                                                <div class="product-image--holder">
+                                                    <a href="{{ route('product.details', $related_product->slug) }}">
+                                                        <img src="{{ asset('uploads/product') }}/{{ $related_product->preview }}"
+                                                            alt="Product Image" class="primary-image">
+                                                        <img src="{{ asset('uploads/product') }}/{{ $related_product->preview }}"
+                                                            alt="Product Image" class="secondary-image">
                                                     </a>
                                                 </div>
-                                            </div>
-                                        </figure>
-                                        <div class="text-center product-info">
-                                            <h3 class="product-title">
-                                                <a href="product-details.html">Open sweatshirt</a>
-                                            </h3>
-                                            <span class="product-price-wrapper">
-                                                <span class="money">$49.00</span>
-                                                <span class="product-price-old">
-                                                    <span class="money">$60.00</span>
+                                                <div class="airi-product-action">
+                                                    <div class="product-action">
+                                                        <a class="quickview-btn action-btn" data-bs-toggle="tooltip"
+                                                            data-bs-placement="left" title="Quick Shop">
+                                                            <span data-bs-toggle="modal" data-bs-target="#productModal">
+                                                                <i class="dl-icon-view"></i>
+                                                            </span>
+                                                        </a>
+                                                        <a class="add_to_cart_btn action-btn" href="cart.html"
+                                                            data-bs-toggle="tooltip" data-bs-placement="left"
+                                                            title="Add to Cart">
+                                                            <i class="dl-icon-cart29"></i>
+                                                        </a>
+                                                        <a class="add_wishlist action-btn" href="wishlist.html"
+                                                            data-bs-toggle="tooltip" data-bs-placement="left"
+                                                            title="Add to Wishlist">
+                                                            <i class="dl-icon-heart4"></i>
+                                                        </a>
+                                                        <a class="add_compare action-btn" href="compare.html"
+                                                            data-bs-toggle="tooltip" data-bs-placement="left"
+                                                            title="Add to Compare">
+                                                            <i class="dl-icon-compare"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </figure>
+                                            <div class="text-center product-info">
+                                                <h3 class="product-title">
+                                                    <a
+                                                        href="{{ route('product.details', $related_product->slug) }}">{{ $related_product->product_name }}</a>
+                                                </h3>
+                                                <span class="product-price-wrapper">
+                                                    <span class="money">{{ $related_product->after_discount }}
+                                                        Taka</span>
+                                                    @if ($related_product->after_discount)
+                                                        <span class="product-price-old">
+                                                            <span class="money">{{ $related_product->product_price }}
+                                                                Taka</span>
+                                                    @endif
                                                 </span>
-                                            </span>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="airi-product">
-                                    <div class="product-inner">
-                                        <figure class="product-image">
-                                            <div class="product-image--holder">
-                                                <a href="product-details.html">
-                                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-5-3.jpg"
-                                                        alt="Product Image" class="primary-image">
-                                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-5-4.jpg"
-                                                        alt="Product Image" class="secondary-image">
-                                                </a>
-                                            </div>
-                                            <div class="airi-product-action">
-                                                <div class="product-action">
-                                                    <a class="quickview-btn action-btn" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Quick Shop">
-                                                        <span data-bs-toggle="modal" data-bs-target="#productModal">
-                                                            <i class="dl-icon-view"></i>
-                                                        </span>
-                                                    </a>
-                                                    <a class="add_to_cart_btn action-btn" href="cart.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Cart">
-                                                        <i class="dl-icon-cart29"></i>
-                                                    </a>
-                                                    <a class="add_wishlist action-btn" href="wishlist.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Wishlist">
-                                                        <i class="dl-icon-heart4"></i>
-                                                    </a>
-                                                    <a class="add_compare action-btn" href="compare.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare">
-                                                        <i class="dl-icon-compare"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </figure>
-                                        <div class="text-center product-info">
-                                            <h3 class="product-title">
-                                                <a href="product-details.html">Split suede handbag</a>
-                                            </h3>
-                                            <span class="product-price-wrapper">
-                                                <span class="money">$49.00</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="airi-product">
-                                    <div class="product-inner">
-                                        <figure class="product-image">
-                                            <div class="product-image--holder">
-                                                <a href="product-details.html">
-                                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-14-2.jpg"
-                                                        alt="Product Image" class="primary-image">
-                                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-14-1.jpg"
-                                                        alt="Product Image" class="secondary-image">
-                                                </a>
-                                            </div>
-                                            <div class="airi-product-action">
-                                                <div class="product-action">
-                                                    <a class="quickview-btn action-btn" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Quick Shop">
-                                                        <span data-bs-toggle="modal" data-bs-target="#productModal">
-                                                            <i class="dl-icon-view"></i>
-                                                        </span>
-                                                    </a>
-                                                    <a class="add_to_cart_btn action-btn" href="cart.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Cart">
-                                                        <i class="dl-icon-cart29"></i>
-                                                    </a>
-                                                    <a class="add_wishlist action-btn" href="wishlist.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Wishlist">
-                                                        <i class="dl-icon-heart4"></i>
-                                                    </a>
-                                                    <a class="add_compare action-btn" href="compare.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare">
-                                                        <i class="dl-icon-compare"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </figure>
-                                        <div class="text-center product-info">
-                                            <h3 class="product-title">
-                                                <a href="product-details.html">Super skinny blazer</a>
-                                            </h3>
-                                            <span class="product-price-wrapper">
-                                                <span class="money">$49.00</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="airi-product">
-                                    <div class="product-inner">
-                                        <figure class="product-image">
-                                            <div class="product-image--holder">
-                                                <a href="product-details.html">
-                                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-7-2.jpg"
-                                                        alt="Product Image" class="primary-image">
-                                                    <img src="{{ asset('frontend/assets') }}/img/products/prod-7-1.jpg"
-                                                        alt="Product Image" class="secondary-image">
-                                                </a>
-                                            </div>
-                                            <div class="airi-product-action">
-                                                <div class="product-action">
-                                                    <a class="quickview-btn action-btn" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Quick Shop">
-                                                        <span data-bs-toggle="modal" data-bs-target="#productModal">
-                                                            <i class="dl-icon-view"></i>
-                                                        </span>
-                                                    </a>
-                                                    <a class="add_to_cart_btn action-btn" href="cart.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Cart">
-                                                        <i class="dl-icon-cart29"></i>
-                                                    </a>
-                                                    <a class="add_wishlist action-btn" href="wishlist.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Wishlist">
-                                                        <i class="dl-icon-heart4"></i>
-                                                    </a>
-                                                    <a class="add_compare action-btn" href="compare.html"
-                                                        data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare">
-                                                        <i class="dl-icon-compare"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <span class="product-badge sale">Sale</span>
-                                        </figure>
-                                        <div class="text-center product-info">
-                                            <h3 class="product-title">
-                                                <a href="product-details.html">Leopard print satin shirt</a>
-                                            </h3>
-                                            <span class="product-price-wrapper">
-                                                <span class="money">$49.00</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                                @empty
+                                @endforelse
                             </div>
                         </div>
                     </div>

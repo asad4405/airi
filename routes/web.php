@@ -125,8 +125,9 @@ Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
 
-
-require __DIR__ . '/auth.php';
+// Socialite
+Route::get('/google/redirect', [SocialiteController::class, 'google_redirect'])->name('google.redirect');
+Route::get('/google/callback', [SocialiteController::class, 'google_callback'])->name('google.callback');
 
 // Customer
 Route::prefix('customer')->controller(CustomerController::class)->name('customer.')->group(function () {
@@ -156,7 +157,9 @@ Route::prefix('email')->controller(CustomerController::class)->name('email.')->g
     Route::post('/verify/resend/link', 'email_verify_resend_link')->name('verify.resend.link');
 });
 
-// Socialite
-Route::get('/google/redirect',[SocialiteController::class,'google_redirect'])->name('google.redirect');
-Route::get('/google/callback',[SocialiteController::class,'google_callback'])->name('google.callback');
+// review
+Route::post('review/store/{id}',[FrontendController::class,'review_store'])->name('review.store');
 
+
+
+require __DIR__ . '/auth.php';
