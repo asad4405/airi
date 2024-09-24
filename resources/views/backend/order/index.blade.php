@@ -38,36 +38,38 @@
                                 @elseif ($order->status == 5)
                                     <td class="badge bg-danger">Canceled</td>
                                 @endif
-                                <td>
-                                    <form action="{{ route('order.status.update',$order->id) }}" method="POST">
-                                        @csrf
-                                        <div class="dropdown">
-                                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"
-                                                aria-expanded="false">
-                                                Change Status </button>
-                                            <div class="dropdown-menu">
-                                                <button name="status" value="0"
-                                                    style="background: #{{ $order->status == 0 ? 'ddd' : '' }}"
-                                                    class="dropdown-item">Placed</button>
-                                                <button name="status" value="1"
-                                                    style="background: #{{ $order->status == 1 ? 'ddd' : '' }}"
-                                                    class="dropdown-item">Processing</button>
-                                                <button name="status" value="2"
-                                                    style="background: #{{ $order->status == 2 ? 'ddd' : '' }}"
-                                                    class="dropdown-item">Shipping</button>
-                                                <button name="status" value="3"
-                                                    style="background: #{{ $order->status == 3 ? 'ddd' : '' }}"
-                                                    class="dropdown-item">Ready For Deliver</button>
-                                                <button name="status" value="4"
-                                                    style="background: #{{ $order->status == 4 ? 'ddd' : '' }}"
-                                                    class="dropdown-item">Delivered</button>
-                                                <button name="status" value="5"
-                                                    style="background: #{{ $order->status == 5 ? 'ddd' : '' }}"
-                                                    class="dropdown-item">Cancel</button>
+                                @can('Order Edit Permission')
+                                    <td>
+                                        <form action="{{ route('order.status.update', $order->id) }}" method="POST">
+                                            @csrf
+                                            <div class="dropdown">
+                                                <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    Change Status </button>
+                                                <div class="dropdown-menu">
+                                                    <button name="status" value="0"
+                                                        style="background: #{{ $order->status == 0 ? 'ddd' : '' }}"
+                                                        class="dropdown-item">Placed</button>
+                                                    <button name="status" value="1"
+                                                        style="background: #{{ $order->status == 1 ? 'ddd' : '' }}"
+                                                        class="dropdown-item">Processing</button>
+                                                    <button name="status" value="2"
+                                                        style="background: #{{ $order->status == 2 ? 'ddd' : '' }}"
+                                                        class="dropdown-item">Shipping</button>
+                                                    <button name="status" value="3"
+                                                        style="background: #{{ $order->status == 3 ? 'ddd' : '' }}"
+                                                        class="dropdown-item">Ready For Deliver</button>
+                                                    <button name="status" value="4"
+                                                        style="background: #{{ $order->status == 4 ? 'ddd' : '' }}"
+                                                        class="dropdown-item">Delivered</button>
+                                                    <button name="status" value="5"
+                                                        style="background: #{{ $order->status == 5 ? 'ddd' : '' }}"
+                                                        class="dropdown-item">Cancel</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                </td>
+                                        </form>
+                                    </td>
+                                @endcan
                             </tr>
                         @empty
                         @endforelse

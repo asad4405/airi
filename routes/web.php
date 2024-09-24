@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\SubcategoryController;
@@ -94,6 +95,17 @@ Route::middleware('auth')->group(function () {
     Route::prefix('order')->controller(OrderController::class)->name('order.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/status/update/{id}', 'status_update')->name('status.update');
+    });
+
+    // Role Manager
+    Route::prefix('role')->controller(RoleController::class)->name('role.')->group(function () {
+        Route::get('/','index')->name('index');
+        Route::post('/permission/store', 'permission_store')->name('permission.store');
+        Route::post('/store', 'role_store')->name('store');
+        Route::post('/assign', 'role_assign')->name('assign');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/delete/{id}', 'delete')->name('delete');
     });
 });
 

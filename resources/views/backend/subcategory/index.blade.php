@@ -30,13 +30,18 @@
                                                 <tr>
                                                     <td>{{ $subcategory->subcategory_name }}</td>
                                                     <td>
-                                                        <a href="{{ route('subcategory.edit', $subcategory->id) }}"
-                                                            class="btn btn-info">Edit</a>
-                                                        <form action="{{ route('subcategory.destroy',$subcategory->id) }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </form>
+                                                        @can('Subcategory Edit Permission')
+                                                            <a href="{{ route('subcategory.edit', $subcategory->id) }}"
+                                                                class="btn btn-info">Edit</a>
+                                                        @endcan
+                                                        @can('Subcategory Delete Permission')
+                                                            <form action="{{ route('subcategory.destroy', $subcategory->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                            </form>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                             @empty

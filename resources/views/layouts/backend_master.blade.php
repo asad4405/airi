@@ -47,21 +47,23 @@
                         </a>
                     </li>
                     <li class="nav-item nav-category">web apps</li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#user" role="button" aria-expanded="false"
-                            aria-controls="user">
-                            <i class="link-icon" data-feather="mail"></i>
-                            <span class="link-title">Users</span>
-                            <i class="link-arrow" data-feather="chevron-down"></i>
-                        </a>
-                        <div class="collapse" id="user">
-                            <ul class="nav sub-menu">
-                                <li class="nav-item">
-                                    <a href="{{ route('user.index') }}" class="nav-link">User</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                    @can('User Access Permission')
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#user" role="button" aria-expanded="false"
+                                aria-controls="user">
+                                <i class="link-icon" data-feather="mail"></i>
+                                <span class="link-title">Users</span>
+                                <i class="link-arrow" data-feather="chevron-down"></i>
+                            </a>
+                            <div class="collapse" id="user">
+                                <ul class="nav sub-menu">
+                                    <li class="nav-item">
+                                        <a href="{{ route('user.index') }}" class="nav-link">User</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endcan
                     <li class="nav-item">
                         <a href="pages/apps/chat.html" class="nav-link">
                             <i class="link-icon" data-feather="message-square"></i>
@@ -84,84 +86,93 @@
                         </a>
                         <div class="collapse" id="uiComponents">
                             <ul class="nav sub-menu">
-                                <li class="nav-item">
-                                    <a href="{{ route('category.index') }}" class="nav-link">Category</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('subcategory.index') }}" class="nav-link">Sub Category</a>
-                                </li>
+                                @can('Category Access Permission')
+                                    <li class="nav-item">
+                                        <a href="{{ route('category.index') }}" class="nav-link">Category</a>
+                                    </li>
+                                @endcan
+                                @can('Subcategory Access Permission')
+                                    <li class="nav-item">
+                                        <a href="{{ route('subcategory.index') }}" class="nav-link">Sub Category</a>
+                                    </li>
+                                @endcan
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#product" role="button"
-                            aria-expanded="false" aria-controls="product">
-                            <i class="link-icon" data-feather="anchor"></i>
-                            <span class="link-title">Product</span>
-                            <i class="link-arrow" data-feather="chevron-down"></i>
-                        </a>
-                        <div class="collapse" id="product">
-                            <ul class="nav sub-menu">
-                                <li class="nav-item">
-                                    <a href="{{ route('product.create') }}" class="nav-link">Add Product</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('product.index') }}" class="nav-link">Products</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('tag.index') }}" class="nav-link">Tag</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#coupons" role="button"
-                            aria-expanded="false" aria-controls="coupons">
-                            <i class="link-icon" data-feather="inbox"></i>
-                            <span class="link-title">Coupons</span>
-                            <i class="link-arrow" data-feather="chevron-down"></i>
-                        </a>
-                        <div class="collapse" id="coupons">
-                            <ul class="nav sub-menu">
-                                <li class="nav-item">
-                                    <a href="{{ route('coupon.index') }}" class="nav-link">Coupon</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#orders" role="button"
-                            aria-expanded="false" aria-controls="orders">
-                            <i class="link-icon" data-feather="pie-chart"></i>
-                            <span class="link-title">Orders</span>
-                            <i class="link-arrow" data-feather="chevron-down"></i>
-                        </a>
-                        <div class="collapse" id="orders">
-                            <ul class="nav sub-menu">
-                                <li class="nav-item">
-                                    <a href="{{ route('order.index') }}" class="nav-link">Orders</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#tables" role="button"
-                            aria-expanded="false" aria-controls="tables">
-                            <i class="link-icon" data-feather="layout"></i>
-                            <span class="link-title">Table</span>
-                            <i class="link-arrow" data-feather="chevron-down"></i>
-                        </a>
-                        <div class="collapse" id="tables">
-                            <ul class="nav sub-menu">
-                                <li class="nav-item">
-                                    <a href="pages/tables/basic-table.html" class="nav-link">Basic Tables</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/tables/data-table.html" class="nav-link">Data Table</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                    @can('Product Access Permission')
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#product" role="button" aria-expanded="false"
+                                aria-controls="product">
+                                <i class="link-icon" data-feather="anchor"></i>
+                                <span class="link-title">Product</span>
+                                <i class="link-arrow" data-feather="chevron-down"></i>
+                            </a>
+                            <div class="collapse" id="product">
+                                <ul class="nav sub-menu">
+                                    <li class="nav-item">
+                                        <a href="{{ route('product.create') }}" class="nav-link">Add Product</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('product.index') }}" class="nav-link">Products</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('tag.index') }}" class="nav-link">Tag</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endcan
+                    @can('Coupon Access Permission')
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#coupons" role="button"
+                                aria-expanded="false" aria-controls="coupons">
+                                <i class="link-icon" data-feather="inbox"></i>
+                                <span class="link-title">Coupons</span>
+                                <i class="link-arrow" data-feather="chevron-down"></i>
+                            </a>
+                            <div class="collapse" id="coupons">
+                                <ul class="nav sub-menu">
+                                    <li class="nav-item">
+                                        <a href="{{ route('coupon.index') }}" class="nav-link">Coupon</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endcan
+                    @can('Order Access Permission')
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#orders" role="button"
+                                aria-expanded="false" aria-controls="orders">
+                                <i class="link-icon" data-feather="pie-chart"></i>
+                                <span class="link-title">Orders</span>
+                                <i class="link-arrow" data-feather="chevron-down"></i>
+                            </a>
+                            <div class="collapse" id="orders">
+                                <ul class="nav sub-menu">
+                                    <li class="nav-item">
+                                        <a href="{{ route('order.index') }}" class="nav-link">Orders</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endcan
+                    @can('Role Access Permission')
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#role_manager" role="button"
+                                aria-expanded="false" aria-controls="role_manager">
+                                <i class="link-icon" data-feather="layout"></i>
+                                <span class="link-title">Role Manager</span>
+                                <i class="link-arrow" data-feather="chevron-down"></i>
+                            </a>
+                            <div class="collapse" id="role_manager">
+                                <ul class="nav sub-menu">
+                                    <li class="nav-item">
+                                        <a href="{{ route('role.index') }}" class="nav-link">Role Manager</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endcan
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#icons" role="button"
                             aria-expanded="false" aria-controls="icons">

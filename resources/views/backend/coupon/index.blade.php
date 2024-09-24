@@ -32,71 +32,77 @@
                                 <td>{{ $coupon->limit }}</td>
                                 <td>{{ $coupon->highest_amount }}</td>
                                 <td>
-                                    <a href="{{ route('coupon.edit', $coupon->id) }}" class="btn btn-info">Edit</a>
-                                    <a href="{{ route('coupon.delete', $coupon->id) }}" class="btn btn-danger">Delete</a>
+                                    @can('Coupon Edit Permission')
+                                        <a href="{{ route('coupon.edit', $coupon->id) }}" class="btn btn-info">Edit</a>
+                                    @endcan
+                                    @can('Coupon Delete Permission')
+                                        <a href="{{ route('coupon.delete', $coupon->id) }}" class="btn btn-danger">Delete</a>
+                                    @endcan
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-danger text-center">No Coupon Available!</td>
+                                <td colspan="7" class="text-center text-danger">No Coupon Available!</td>
                             </tr>
                         @endforelse
                     </table>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Add Coupon</h3>
-                </div>
-                <div class="card-body">
-                    @if (session('coupon_add'))
-                        <div class="alert alert-success">{{ session('coupon_add') }}</div>
-                    @endif
-                    <form action="{{ route('coupon.store') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="" class="form-label">Coupon Name</label>
-                            <input type="text" class="form-control" name="name">
-                            @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Coupon Amount (%)</label>
-                            <input type="text" class="form-control" name="amount">
-                            @error('amount')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Coupon Validity</label>
-                            <input type="date" class="form-control" name="validity">
-                            @error('validity')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Coupon Limit</label>
-                            <input type="text" class="form-control" name="limit">
-                            @error('limit')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Highest Amount</label>
-                            <input type="text" class="form-control" name="highest_amount">
-                            @error('highest_amount')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-primary">Add Coupon</button>
-                        </div>
-                    </form>
+        @can('Coupon Add Permission')
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Add Coupon</h3>
+                    </div>
+                    <div class="card-body">
+                        @if (session('coupon_add'))
+                            <div class="alert alert-success">{{ session('coupon_add') }}</div>
+                        @endif
+                        <form action="{{ route('coupon.store') }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="" class="form-label">Coupon Name</label>
+                                <input type="text" class="form-control" name="name">
+                                @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Coupon Amount (%)</label>
+                                <input type="text" class="form-control" name="amount">
+                                @error('amount')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Coupon Validity</label>
+                                <input type="date" class="form-control" name="validity">
+                                @error('validity')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Coupon Limit</label>
+                                <input type="text" class="form-control" name="limit">
+                                @error('limit')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Highest Amount</label>
+                                <input type="text" class="form-control" name="highest_amount">
+                                @error('highest_amount')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">Add Coupon</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endcan
     </div>
 @endsection
