@@ -97,21 +97,23 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-// Cart
-Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(function () {
-    Route::post('/add', 'add')->name('add');
-    Route::get('/remove/{id}', 'remove')->name('remove');
-    Route::get('/', 'index')->name('index');
-    Route::get('/clear', 'clear')->name('clear');
-    Route::post('/update', 'update')->name('update');
-});
+Route::middleware('auth.customer')->group(function () {
+    // Cart
+    Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(function () {
+        Route::post('/add', 'add')->name('add');
+        Route::get('/remove/{id}', 'remove')->name('remove');
+        Route::get('/', 'index')->name('index');
+        Route::get('/clear', 'clear')->name('clear');
+        Route::post('/update', 'update')->name('update');
+    });
 
-// Checkout
-Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout.')->group(function () {
-    Route::get('/', 'checkout')->name('index');
-    Route::post('/getcity', 'getcity');
-    Route::post('/order/store', 'order_store')->name('order.store');
-    Route::get('/order/success', 'order_success')->name('order.success');
+    // Checkout
+    Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout.')->group(function () {
+        Route::get('/', 'checkout')->name('index')->middleware('auth.customer');
+        Route::post('/getcity', 'getcity')->middleware('auth.customer');
+        Route::post('/order/store', 'order_store')->name('order.store')->middleware('auth.customer');
+        Route::get('/order/success', 'order_success')->name('order.success')->middleware('auth.customer');
+    });
 });
 
 // SSLCOMMERZ Start
@@ -158,7 +160,7 @@ Route::prefix('email')->controller(CustomerController::class)->name('email.')->g
 });
 
 // review
-Route::post('review/store/{id}',[FrontendController::class,'review_store'])->name('review.store');
+Route::post('review/store/{id}', [FrontendController::class, 'review_store'])->middleware('auth.customer')->name('review.store');
 
 
 
