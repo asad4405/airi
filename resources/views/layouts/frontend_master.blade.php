@@ -71,7 +71,7 @@
                                             </a>
                                         </li>
                                         <li class="mainmenu__item menu-item-has-children">
-                                            <a href="shop-sidebar.html" class="mainmenu__link">
+                                            <a href="{{ route('shop') }}" class="mainmenu__link">
                                                 <span class="mm-text">Shop</span>
                                                 <span class="tip">Hot</span>
                                             </a>

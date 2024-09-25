@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/product/details/{slug}', [FrontendController::class, 'product_details'])->name('product.details');
-Route::get('/cart');
+Route::get('/shop',[FrontendController::class,'shop'])->name('shop');
 
 
 // Dashboard

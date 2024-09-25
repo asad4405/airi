@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use Carbon\Carbon;
@@ -22,16 +23,16 @@ class FrontendController extends Controller
     {
         $product_id = Product::where('slug', $slug)->first()->id;
         $product = Product::find($product_id);
-        $reviews = OrderProduct::where('product_id',$product_id)->whereNotNull('review')->get();
+        $reviews = OrderProduct::where('product_id', $product_id)->whereNotNull('review')->get();
         $related_products = Product::where('id', '!=', $product_id)->where('category_id', $product->category_id)->get();
-        return view('frontend.product_details',[
+        return view('frontend.product_details', [
             'product' => $product,
             'reviews' => $reviews,
             'related_products' => $related_products,
         ]);
     }
 
-    function review_store(Request $request,$id)
+    function review_store(Request $request, $id)
     {
         $request->validate([
             'star' => 'required',
@@ -45,6 +46,14 @@ class FrontendController extends Controller
             'review' => $request->review,
             'updated_at' => Carbon::now(),
         ]);
-        return back()->with('review','Review Added Successfully!');
+        return back()->with('review', 'Review Added Successfully!');
+    }
+
+    function shop(Request $request)
+    {
+        $data = $request->all();
+        $products = Product::all();
+        $categories = Category::all();
+        return view('frontend.shop', compact('products', 'categories'));
     }
 }
