@@ -77,8 +77,8 @@
                                             </a>
                                         </li>
                                         <li class="mainmenu__item">
-                                            <a href="shop-collections.html" class="mainmenu__link">
-                                                <span class="mm-text">Collections</span>
+                                            <a href="{{ route('contact') }}" class="mainmenu__link">
+                                                <span class="mm-text">Contact</span>
                                             </a>
                                         </li>
                                         <li class="mainmenu__item menu-item-has-children has-children">

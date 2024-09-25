@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FrontendController;
@@ -24,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/product/details/{slug}', [FrontendController::class, 'product_details'])->name('product.details');
 Route::get('/shop',[FrontendController::class,'shop'])->name('shop');
+Route::get('/contact',[FrontendController::class,'contact'])->name('contact');
+Route::post('/contact/post',[FrontendController::class,'contact_post'])->name('contact.post');
 
 
 // Dashboard
@@ -50,6 +53,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [UserController::class, 'user_store'])->name('store');
         Route::get('/delete/{id}', [UserController::class, 'user_delete'])->name('delete');
     });
+
+    // Contacts
+    Route::get('/contact/list',[ContactController::class,'index'])->name('contact.list');
 
     // Category
     Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function () {

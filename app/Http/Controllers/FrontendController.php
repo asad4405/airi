@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\Tag;
@@ -90,5 +91,24 @@ class FrontendController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         return view('frontend.shop', compact('products', 'categories', 'tags'));
+    }
+
+    function contact()
+    {
+        return view('frontend.contact');
+    }
+
+    function contact_post(Request $request)
+    {
+        $request->validate([
+            '*' => 'required',
+        ]);
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->message,
+        ]);
+        return back()->with('success','Message send Successfully!');
     }
 }

@@ -196,31 +196,16 @@
                     </li>
                     <li class="nav-item nav-category">Pages</li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#general-pages" role="button"
-                            aria-expanded="false" aria-controls="general-pages">
+                        <a class="nav-link" data-toggle="collapse" href="#contacts" role="button"
+                            aria-expanded="false" aria-controls="contacts">
                             <i class="link-icon" data-feather="book"></i>
-                            <span class="link-title">Special pages</span>
+                            <span class="link-title">Contacts</span>
                             <i class="link-arrow" data-feather="chevron-down"></i>
                         </a>
-                        <div class="collapse" id="general-pages">
+                        <div class="collapse" id="contacts">
                             <ul class="nav sub-menu">
                                 <li class="nav-item">
-                                    <a href="pages/general/blank-page.html" class="nav-link">Blank page</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/general/faq.html" class="nav-link">Faq</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/general/invoice.html" class="nav-link">Invoice</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/general/profile.html" class="nav-link">Profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/general/pricing.html" class="nav-link">Pricing</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/general/timeline.html" class="nav-link">Timeline</a>
+                                    <a href="{{ route('contact.list') }}" class="nav-link">Contact Lists</a>
                                 </li>
                             </ul>
                         </div>
