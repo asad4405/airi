@@ -434,7 +434,8 @@
                 <form class="searchform">
                     <input type="text" name="" id="search" class="searchform__input"
                         placeholder="Search Entire Store...">
-                    <button type="button" class="searchform__submit search_btn"><i class="dl-icon-search10"></i></button>
+                    <button type="button" class="searchform__submit search_btn"><i
+                            class="dl-icon-search10"></i></button>
                 </form>
             </div>
         </div>
@@ -764,6 +765,40 @@
 
     @yield('footer_script')
 
+    <script>
+        $('.search_btn').click(function() {
+            var search = $('#search').val();
+            var category_id = $("input[type='radio'][name='category_id']:checked").val();
+            var sort = $('.sort').val();
+            var link = "{{ route('shop') }}" + "?search=" + search + "&category_id=" + category_id + "&sort=" +
+                sort;
+            window.location.href = link;
+        });
+
+        $('.category').change(function() {
+            var search = $('#search').val();
+            var category_id = $("input[type='radio'][name='category_id']:checked").val();
+            var sort = $('.sort').val();
+            var link = "{{ route('shop') }}" + "?search=" + search + "&category_id=" + category_id + "&sort=" +
+                sort;
+            window.location.href = link;
+        });
+
+        $('.sort').change(function() {
+            var search = $('#search').val();
+            var category_id = $("input[type='radio'][name='category_id']:checked").val();
+            var sort = $('.sort').val();
+            var link = "{{ route('shop') }}" + "?search=" + search + "&category_id=" + category_id + "&sort=" +
+                sort;
+            window.location.href = link;
+        });
+
+        $('.tag').click(function() {
+            var tag = $(this).val();
+            var link = "{{ route('shop') }}" + "?tag=" + tag;
+            window.location.href = link;
+        });
+    </script>
 </body>
 
 </html>

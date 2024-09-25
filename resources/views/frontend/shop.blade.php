@@ -34,9 +34,9 @@
                                             <div class="product-view-count">
                                                 <p>Show</p>
                                                 <ul>
-                                                    <li><a href="shop-sidebar.html">6</a></li>
-                                                    <li class="active"><a href="shop-sidebar.html">12</a></li>
-                                                    <li><a href="shop-sidebar.html">15</a></li>
+                                                    <li><a href="{{ route('shop') }}">6</a></li>
+                                                    <li class="active"><a href="{{ route('shop') }}">12</a></li>
+                                                    <li><a href="{{ route('shop') }}">15</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -48,7 +48,7 @@
                                                 <i></i>
                                             </a>
                                             <div class="product-ordering">
-                                                <a href="" class="product-ordering__btn shop-toolbar__btn">
+                                                {{-- <a href="" class="product-ordering__btn shop-toolbar__btn">
                                                     <span>Short By</span>
                                                     <i></i>
                                                 </a>
@@ -58,7 +58,20 @@
                                                     <li><a href="#">Sort by newness</a></li>
                                                     <li><a href="#">Sort by price: low to high</a></li>
                                                     <li><a href="#">Sort by price: high to low</a></li>
-                                                </ul>
+                                                </ul> --}}
+                                                <select class="product-ordering__btn shop-toolbar__btn sort">
+                                                    <option value="">Sort by </option>
+                                                    <option {{ @$_GET['sort'] == 1 ? 'selected' : '' }} value="1">Price
+                                                        Low To
+                                                        High</option>
+                                                    <option {{ @$_GET['sort'] == 2 ? 'selected' : '' }} value="2">Price
+                                                        High To
+                                                        Low</option>
+                                                    <option {{ @$_GET['sort'] == 3 ? 'selected' : '' }} value="3">A To
+                                                        Z</option>
+                                                    <option {{ @$_GET['sort'] == 4 ? 'selected' : '' }} value="4">Z To
+                                                        A</option>n>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -133,7 +146,7 @@
                                                                 alt="Product Image" class="primary-image">
                                                             <img src="{{ asset('uploads/product') }}/{{ $product->preview }}"
                                                                 alt="Product Image" class="secondary-image">
-                                                        </a>
+                                                            </select>
                                                     </div>
                                                     <div class="airi-product-action">
                                                         <div class="product-action">
@@ -197,15 +210,22 @@
                                 <h3 class="widget-title">Categories</h3>
                                 <ul class="prouduct-categories product-widget__list">
                                     @foreach ($categories as $category)
-                                        <li><a href="">{{ $category->category_name }}</a><span
-                                                class="count">({{ $category->count() }})</span></li>
+                                        <li>
+                                            <label class="topcoat-radio-button__label">
+                                                <input type="radio" class="category" name="category_id"
+                                                    value="{{ $category->id }}" {{ $category->id == @$_GET['category_id'] ? 'checked' : '' }}>
+                                                {{ $category->category_name }}
+                                                <span>({{ App\Models\Product::where('category_id', $category->id)->count() }})</span>
+                                                <span class="topcoat-radio-button"></span>
+                                            </label>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>
                             <!-- Category Widget Start -->
 
                             <!-- Price Filter Widget Start -->
-                            <div class="product-widget product-price-widget mb--40 mb-md--35">
+                            {{-- <div class="product-widget product-price-widget mb--40 mb-md--35">
                                 <h3 class="widget-title">Price</h3>
                                 <div class="widget_content">
                                     <form action="#" method="post">
@@ -229,7 +249,7 @@
                                                 <div class="filter-price__input-group mb--20">
                                                     <span>Price: </span>
                                                     <input type="text" id="amount" class="amount-range"
-                                                        readonly="">
+                                                        readonly="" name="price">
                                                 </div>
                                                 <button type="submit" class="btn btn-style-1 sidebar-btn">
                                                     filter
@@ -238,38 +258,20 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- Price Filter Widget End -->
 
-                            <!-- Product Brand Widget Start -->
-                            <div class="product-widget product-widget--brand mb--40 mb-md--30">
-                                <h3 class="widget-title">Brands</h3>
-                                <ul class="product-widget__list">
-                                    <li><a href="shop-sidebar.html">Airi</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">Mango</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">Valention</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">Zara</a><span class="count">(2)</span></li>
-                                </ul>
-                            </div>
-                            <!-- Product Brand Widget End -->
-
-                            <!-- Category Widget Start -->
+                            <!-- Tag Widget Start -->
                             <div class="product-widget tag-widget mb--35 mb-md--30">
-                                <h3 class="widget-title">Categories</h3>
+                                <h3 class="widget-title">Tags</h3>
                                 <div class="tagcloud">
-                                    <a href="shop-sidebar.html">chair</a>
-                                    <a href="shop-sidebar.html">deco</a>
-                                    <a href="shop-sidebar.html">dress</a>
-                                    <a href="shop-sidebar.html">fashion</a>
-                                    <a href="shop-sidebar.html">furniture</a>
-                                    <a href="shop-sidebar.html">light</a>
-                                    <a href="shop-sidebar.html">living</a>
-                                    <a href="shop-sidebar.html">sofa</a>
-                                    <a href="shop-sidebar.html">table</a>
-                                    <a href="shop-sidebar.html">women</a>
+                                    @foreach ($tags as $tag)
+                                        <button value="{{ $tag->id }}"
+                                            class="tag btn {{ $tag->id == @$_GET['tag'] ? 'btn-primary' : 'btn-light' }}">{{ $tag->tag_name }}</button>
+                                    @endforeach
                                 </div>
                             </div>
-                            <!-- Category Widget Start -->
+                            <!-- Tag Widget Start -->
 
                             <!-- Promo Widget Start -->
                             <div class="product-widget promo-widget">
@@ -294,13 +296,4 @@
         </div>
     </div>
     <!-- Main Content Wrapper Start -->
-@endsection
-@section('footer_script')
-    <script>
-        $('.search_btn').click(function() {
-            var search = $('#search').val();
-            var link = "{{ route('shop') }}" + "?search=" + search;
-            window.location.href = link;
-        });
-    </script>
 @endsection

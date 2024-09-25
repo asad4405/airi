@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Models\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,25 @@ class FrontendController extends Controller
     function shop(Request $request)
     {
         $data = $request->all();
+
+        $based = 'created_at';
+        $type = 'DESC';
+        if (!empty($data['sort']) && $data['sort'] != '' && $data['sort'] != 'undefined') {
+            if ($data['sort'] == 1) {
+                $based = 'after_discount';
+                $type = 'ASC';
+            } elseif ($data['sort'] == 2) {
+                $based = 'after_discount';
+                $type = 'DESC';
+            } elseif ($data['sort'] == 3) {
+                $based = 'product_name';
+                $type = 'ASC';
+            } elseif ($data['sort'] == 4) {
+                $based = 'product_name';
+                $type = 'DESC';
+            }
+        }
+
         $products = Product::where(function ($q) use ($data) {
             if (!empty($data['search']) && $data['search'] != '' && $data['search'] != 'undefind') {
                 $q->where(function ($q) use ($data) {
@@ -60,8 +80,15 @@ class FrontendController extends Controller
                     $q->orWhere('long_desp', 'like', '%' . $data['search'] . '%');
                 });
             }
-        })->get();
+
+            if (!empty($data['category_id']) && $data['category_id'] != '' && $data['category_id'] != 'undefined') {
+                $q->where(function ($q) use ($data) {
+                    $q->where('category_id', $data['category_id']);
+                });
+            }
+        })->orderBy($based, $type)->get();
         $categories = Category::all();
-        return view('frontend.shop', compact('products', 'categories'));
+        $tags = Tag::all();
+        return view('frontend.shop', compact('products', 'categories', 'tags'));
     }
 }
