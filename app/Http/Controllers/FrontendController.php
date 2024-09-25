@@ -52,7 +52,15 @@ class FrontendController extends Controller
     function shop(Request $request)
     {
         $data = $request->all();
-        $products = Product::all();
+        $products = Product::where(function ($q) use ($data) {
+            if (!empty($data['search']) && $data['search'] != '' && $data['search'] != 'undefind') {
+                $q->where(function ($q) use ($data) {
+                    $q->where('product_name', 'like', '%' . $data['search'] . '%');
+                    $q->orWhere('short_desp', 'like', '%' . $data['search'] . '%');
+                    $q->orWhere('long_desp', 'like', '%' . $data['search'] . '%');
+                });
+            }
+        })->get();
         $categories = Category::all();
         return view('frontend.shop', compact('products', 'categories'));
     }

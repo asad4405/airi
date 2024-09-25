@@ -295,3 +295,12 @@
     </div>
     <!-- Main Content Wrapper Start -->
 @endsection
+@section('footer_script')
+    <script>
+        $('.search_btn').click(function() {
+            var search = $('#search').val();
+            var link = "{{ route('shop') }}" + "?search=" + search;
+            window.location.href = link;
+        });
+    </script>
+@endsection
