@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\OrderProduct;
@@ -16,8 +17,10 @@ class FrontendController extends Controller
     function index()
     {
         $products = Product::latest()->get();
+        $banners = Banner::all();
         return view('frontend.index', [
             'products' => $products,
+            'banners' => $banners,
         ]);
     }
 

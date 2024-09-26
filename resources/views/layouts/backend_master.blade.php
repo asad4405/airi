@@ -194,7 +194,22 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item nav-category">Pages</li>
+                    <li class="nav-item nav-category">Front end</li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#banners" role="button"
+                            aria-expanded="false" aria-controls="banners">
+                            <i class="link-icon" data-feather="message-square"></i>
+                            <span class="link-title">Banners</span>
+                            <i class="link-arrow" data-feather="chevron-down"></i>
+                        </a>
+                        <div class="collapse" id="banners">
+                            <ul class="nav sub-menu">
+                                <li class="nav-item">
+                                    <a href="{{ route('banner.index') }}" class="nav-link">Banner</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#contacts" role="button"
                             aria-expanded="false" aria-controls="contacts">

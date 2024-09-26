@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
@@ -53,6 +54,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [UserController::class, 'user_store'])->name('store');
         Route::get('/delete/{id}', [UserController::class, 'user_delete'])->name('delete');
     });
+
+        // Banners
+        Route::prefix('banner')->controller(BannerController::class)->name('banner.')->group(function () {
+            Route::get('/','index')->name('index');
+            Route::post('/store','store')->name('store');
+            Route::get('/delete/{id}','delete')->name('delete');
+        });
 
     // Contacts
     Route::get('/contact/list',[ContactController::class,'index'])->name('contact.list');
