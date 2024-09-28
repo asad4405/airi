@@ -110,9 +110,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <span class="product-badge new">New</span>
-                                <span class="product-badge sale">Sale</span>
-                                <span class="product-badge hot">Hot</span>
+                                @if ($product->discount && $reviews->count() > 0)
+                                    <span class="product-badge hot">Hot</span>
+                                @elseif ($product->discount)
+                                    <span class="product-badge sale">Sale</span>
+                                @else
+                                    <span class="product-badge new">New</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6 product-main-details mt--40 mt-md--10 mt-sm--30">
@@ -195,8 +199,7 @@
                                                     </button>
                                                 @endif
                                             @else
-                                                <button type="button"
-                                                    class="btn btn-style-1 bg-info btn-large add-to-cart">
+                                                <button type="button" class="btn btn-style-1 bg-info btn-large add-to-cart">
                                                     Upcomming
                                                 </button>
                                             @endif

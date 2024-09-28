@@ -18,9 +18,11 @@ class FrontendController extends Controller
     {
         $products = Product::latest()->get();
         $banners = Banner::all();
+        $categories = Category::all();
         return view('frontend.index', [
             'products' => $products,
             'banners' => $banners,
+            'categories' => $categories,
         ]);
     }
 

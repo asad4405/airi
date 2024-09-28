@@ -169,9 +169,18 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <span class="product-badge new">New</span>
-                                        {{-- <span class="product-badge sale">Sale</span>
-                                        <span class="product-badge hot">Hot</span> --}}
+                                        @php
+                                            $reviews = App\Models\OrderProduct::where('product_id', $product->id)
+                                                ->whereNotNull('review')
+                                                ->get();
+                                        @endphp
+                                        @if ($product->discount && $reviews->count() > 0)
+                                            <span class="product-badge hot">Hot</span>
+                                        @elseif ($product->discount)
+                                            <span class="product-badge sale">Sale</span>
+                                        @else
+                                            <span class="product-badge new">New</span>
+                                        @endif
                                     </figure>
                                     <div class="product-info">
                                         <h3 class="product-title">
@@ -180,11 +189,14 @@
                                         </h3>
                                         <div class="product-rating">
                                             <span>
-                                                <i class="dl-icon-star rated"></i>
-                                                <i class="dl-icon-star rated"></i>
-                                                <i class="dl-icon-star rated"></i>
-                                                <i class="dl-icon-star"></i>
-                                                <i class="dl-icon-star"></i>
+                                                @if ($reviews->count())
+                                                    @for ($i = 1; $i <= $reviews->average('star'); $i++)
+                                                        <i class="dl-icon-star rated"></i>
+                                                    @endfor
+                                                    @for ($i = 1; $i <= 5 - $reviews->average('star'); $i++)
+                                                        <i class="dl-icon-star"></i>
+                                                    @endfor
+                                                @endif
                                             </span>
                                         </div>
                                         <span class="product-price-wrapper">
@@ -204,7 +216,7 @@
                 </div>
                 <div class="row">
                     <div class="text-center col-12">
-                        <a href="shop-sidebar.html" class="heading-button">Shop Now</a>
+                        <a href="{{ route('shop') }}" class="heading-button">Shop Now</a>
                     </div>
                 </div>
             </div>
@@ -228,78 +240,14 @@
                                     {"breakpoint":575, "settings": {"slidesToShow": 2} },
                                     {"breakpoint":380, "settings": {"slidesToShow": 1} }
                                 ]'>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner1.png"
-                                        alt="Partner">
+                            @foreach ($categories as $category)
+                                <div class="item">
+                                    <div class="single-partner">
+                                        <img src="{{ asset('uploads/category') }}/{{ $category->image }}" alt="Category"
+                                            width="50">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner2.png"
-                                        alt="Partner">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner3.png"
-                                        alt="Partner">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner4.png"
-                                        alt="Partner">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner5.png"
-                                        alt="Partner">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner6.png"
-                                        alt="Partner">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner1.png"
-                                        alt="Partner">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner2.png"
-                                        alt="Partner">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner3.png"
-                                        alt="Partner">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner4.png"
-                                        alt="Partner">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner5.png"
-                                        alt="Partner">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="single-partner">
-                                    <img src="{{ asset('frontend/assets') }}/img/partner/logo-partner6.png"
-                                        alt="Partner">
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

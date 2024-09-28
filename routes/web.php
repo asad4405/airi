@@ -25,9 +25,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/product/details/{slug}', [FrontendController::class, 'product_details'])->name('product.details');
-Route::get('/shop',[FrontendController::class,'shop'])->name('shop');
-Route::get('/contact',[FrontendController::class,'contact'])->name('contact');
-Route::post('/contact/post',[FrontendController::class,'contact_post'])->name('contact.post');
+Route::get('/shop', [FrontendController::class, 'shop'])->name('shop');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::post('/contact/post', [FrontendController::class, 'contact_post'])->name('contact.post');
 
 
 // Dashboard
@@ -55,15 +55,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/{id}', [UserController::class, 'user_delete'])->name('delete');
     });
 
-        // Banners
-        Route::prefix('banner')->controller(BannerController::class)->name('banner.')->group(function () {
-            Route::get('/','index')->name('index');
-            Route::post('/store','store')->name('store');
-            Route::get('/delete/{id}','delete')->name('delete');
-        });
+    // Banners
+    Route::prefix('banner')->controller(BannerController::class)->name('banner.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/delete/{id}', 'delete')->name('delete');
+    });
 
     // Contacts
-    Route::get('/contact/list',[ContactController::class,'index'])->name('contact.list');
+    Route::get('/contact/list', [ContactController::class, 'index'])->name('contact.list');
 
     // Category
     Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function () {
@@ -113,7 +113,7 @@ Route::middleware('auth')->group(function () {
 
     // Role Manager
     Route::prefix('role')->controller(RoleController::class)->name('role.')->group(function () {
-        Route::get('/','index')->name('index');
+        Route::get('/', 'index')->name('index');
         Route::post('/permission/store', 'permission_store')->name('permission.store');
         Route::post('/store', 'role_store')->name('store');
         Route::post('/assign', 'role_assign')->name('assign');
