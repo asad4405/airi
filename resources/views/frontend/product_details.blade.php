@@ -209,7 +209,7 @@
                                                 Loin your Account
                                             </button>
                                         @endauth
-                                        <a href="wishlist.html"><i class="dl-icon-heart2"></i></a>
+
                                     </div>
                                 </div>
                                 <div class="product-summary-footer d-flex justify-content-between flex-sm-row flex-column">
@@ -255,6 +255,14 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <form action="{{ route('wishlist.add') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <button type="submit" class="btn btn-primary">Add Wishlist</button>
                 </form>
             </div>
             <div class="row justify-content-center pt--45 pt-lg--50 pt-md--55 pt-sm--35">

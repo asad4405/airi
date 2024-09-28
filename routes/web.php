@@ -20,6 +20,7 @@ use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -139,6 +140,13 @@ Route::middleware('auth.customer')->group(function () {
         Route::post('/getcity', 'getcity')->middleware('auth.customer');
         Route::post('/order/store', 'order_store')->name('order.store')->middleware('auth.customer');
         Route::get('/order/success', 'order_success')->name('order.success')->middleware('auth.customer');
+    });
+
+    // Wishlist
+    Route::prefix('wishlist')->controller(WishlistController::class)->name('wishlist.')->group(function () {
+        Route::post('/add', 'add')->name('add');
+        Route::get('/', 'index')->name('index');
+        Route::get('/delete/{id}', 'delete')->name('delete');
     });
 });
 
