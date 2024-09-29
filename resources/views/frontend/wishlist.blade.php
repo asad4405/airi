@@ -10,8 +10,7 @@
                 <div class="text-center col-12">
                     <h1 class="page-title">Wishilist</h1>
                     <ul class="breadcrumb justify-content-center">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="current"><span>Wishilist</span></li>
+                        {{ Breadcrumbs::render('wishlist') }}
                     </ul>
                 </div>
             </div>

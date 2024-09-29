@@ -10,8 +10,7 @@
                 <div class="text-center col-12">
                     <h1 class="page-title">Checkout</h1>
                     <ul class="breadcrumb justify-content-center">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="current"><span>Checkout</span></li>
+                        {{ Breadcrumbs::render('checkout') }}
                     </ul>
                 </div>
             </div>

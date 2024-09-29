@@ -10,8 +10,7 @@
                 <div class="text-center col-12">
                     <h1 class="page-title">Contact Us</h1>
                     <ul class="breadcrumb justify-content-center">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="current"><span>Contact Us</span></li>
+                        {{ Breadcrumbs::render('contact') }}
                     </ul>
                 </div>
             </div>

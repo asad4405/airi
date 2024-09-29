@@ -7,11 +7,10 @@
     <div class="breadcrumb-area bg--white-6 breadcrumb-bg-1 pt--60 pb--70 pt-lg--40 pb-lg--50 pt-md--30 pb-md--40">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 text-center">
+                <div class="text-center col-12">
                     <h1 class="page-title">Cart</h1>
                     <ul class="breadcrumb justify-content-center">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="current"><span>Cart</span></li>
+                        {{ Breadcrumbs::render('cart') }}
                     </ul>
                 </div>
             </div>
@@ -98,7 +97,7 @@
                                                     @endphp
                                                 @empty
                                                     <tr>
-                                                        <td colspan="4" class="text-danger text-center">No Products
+                                                        <td colspan="4" class="text-center text-danger">No Products
                                                             Available!</td>
                                                     </tr>
                                                 @endforelse
