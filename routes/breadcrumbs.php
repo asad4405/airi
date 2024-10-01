@@ -20,6 +20,11 @@ Breadcrumbs::for('contact', function (BreadcrumbTrail $trail) {
     $trail->parent('index');
     $trail->push('Contact', route('contact'));
 });
+// Home > Faq
+Breadcrumbs::for('faq', function (BreadcrumbTrail $trail) {
+    $trail->parent('index');
+    $trail->push('Faq', route('faq'));
+});
 // Home > Cart
 Breadcrumbs::for('cart', function (BreadcrumbTrail $trail) {
     $trail->parent('index');

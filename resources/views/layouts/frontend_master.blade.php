@@ -98,46 +98,9 @@
                                             </a>
                                         </li>
                                         <li class="mainmenu__item menu-item-has-children has-children">
-                                            <a href="#" class="mainmenu__link">
-                                                <span class="mm-text">Pages</span>
+                                            <a href="{{ route('faq') }}" class="mainmenu__link">
+                                                <span class="mm-text">Faqs</span>
                                             </a>
-                                            <ul class="sub-menu">
-                                                <li>
-                                                    <a href="about-us.html">
-                                                        <span class="mm-text">About Us</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="team.html">
-                                                        <span class="mm-text">Our teams</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="contact-us.html">
-                                                        <span class="mm-text">Contact us 1</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="contact-us-02.html">
-                                                        <span class="mm-text">Contact us 2</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="404.html">
-                                                        <span class="mm-text">404 page</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="faqs-page.html">
-                                                        <span class="mm-text">FAQs page</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="coming-soon.html">
-                                                        <span class="mm-text">Coming Soon</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
                                         </li>
                                         <li class="mainmenu__item menu-item-has-children has-children">
                                             <a href="blog.html" class="mainmenu__link">

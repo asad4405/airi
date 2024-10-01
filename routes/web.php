@@ -7,6 +7,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
@@ -29,6 +30,7 @@ Route::get('/product/details/{slug}', [FrontendController::class, 'product_detai
 Route::get('/shop', [FrontendController::class, 'shop'])->name('shop');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('/contact/post', [FrontendController::class, 'contact_post'])->name('contact.post');
+Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
 
 
 // Dashboard
@@ -121,6 +123,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update/{id}', 'update')->name('update');
         Route::get('/delete/{id}', 'delete')->name('delete');
+    });
+
+    // Faq
+    Route::prefix('faq')->controller(FaqController::class)->name('faq')->group(function(){
+        Route::get('/index','index')->name('.index');
+        Route::post('/store','store')->name('.store');
+        Route::get('/edit/{id}','edit')->name('.edit');
+        Route::post('/update/{id}','update')->name('.update');
+        Route::get('/delete/{id}','delete')->name('.delete');
     });
 });
 

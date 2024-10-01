@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\Faq;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\Tag;
@@ -115,5 +116,11 @@ class FrontendController extends Controller
             'message' => $request->message,
         ]);
         return back()->with('success','Message send Successfully!');
+    }
+
+    function faq()
+    {
+        $faqs = Faq::all();
+        return view('frontend.faq',compact('faqs'));
     }
 }
